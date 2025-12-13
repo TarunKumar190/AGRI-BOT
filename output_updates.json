@@ -1,0 +1,75 @@
+﻿{
+    "total":  4,
+    "results":  [
+                    {
+                        "_id":  "693b181c1f61bc1b24d665f5",
+                        "scheme_id":  "debug-post-test",
+                        "change_type":  "notice",
+                        "summary":  "test",
+                        "details":  "",
+                        "effective_date":  null,
+                        "severity":  "low",
+                        "source":  {
+                                       "source_id":  "debug"
+                                   },
+                        "approved":  true,
+                        "createdAt":  "2025-12-11T19:14:36.944Z",
+                        "updatedAt":  "2025-12-11T19:14:36.944Z",
+                        "__v":  0
+                    },
+                    {
+                        "_id":  "693afe4c80e4d16620926246",
+                        "scheme_id":  "debug",
+                        "change_type":  "notice",
+                        "summary":  "debug",
+                        "details":  "d",
+                        "effective_date":  "2025-12-11T17:24:28.460Z",
+                        "severity":  "low",
+                        "source":  {
+                                       "source_id":  "x",
+                                       "source_url":  "https://x",
+                                       "fetched_at":  "2025-12-11T17:24:28.452Z"
+                                   },
+                        "approved":  true,
+                        "createdAt":  "2025-12-11T17:24:28.842Z",
+                        "updatedAt":  "2025-12-11T17:24:28.842Z",
+                        "__v":  0
+                    },
+                    {
+                        "_id":  "693afd1a80e4d16620926241",
+                        "scheme_id":  "smoke-test",
+                        "change_type":  "notice",
+                        "summary":  "smoke",
+                        "details":  "smoke",
+                        "effective_date":  "2025-12-15T00:00:00.000Z",
+                        "severity":  "low",
+                        "source":  {
+                                       "source_id":  "manual",
+                                       "source_url":  "https://example",
+                                       "fetched_at":  "2025-12-11T22:49:22+05:30"
+                                   },
+                        "approved":  true,
+                        "createdAt":  "2025-12-11T17:19:22.636Z",
+                        "updatedAt":  "2025-12-11T17:19:22.636Z",
+                        "__v":  0
+                    },
+                    {
+                        "_id":  "693af65c92fe14cd30fad608",
+                        "scheme_id":  "test:-pm-kisan-ping",
+                        "change_type":  "notice",
+                        "summary":  "Test notice",
+                        "details":  "Test details",
+                        "effective_date":  "2025-12-15T00:00:00.000Z",
+                        "severity":  "low",
+                        "source":  {
+                                       "source_id":  "manual",
+                                       "source_url":  "https://example",
+                                       "fetched_at":  "2025-12-11T22:20:35+05:30"
+                                   },
+                        "approved":  true,
+                        "createdAt":  "2025-12-11T16:50:36.414Z",
+                        "updatedAt":  "2025-12-11T16:50:36.414Z",
+                        "__v":  0
+                    }
+                ]
+}

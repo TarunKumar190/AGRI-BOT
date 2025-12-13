@@ -1,0 +1,6 @@
+﻿{
+  "name":"AgriBotAI",
+  "short_name":"AgriBot",
+  "start_url":"/",
+  "display":"standalone"
+}

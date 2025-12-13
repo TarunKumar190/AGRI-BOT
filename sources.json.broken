@@ -1,0 +1,37 @@
+﻿[
+  {
+    "id": "pib-agri",
+    "type": "rss",
+    "name": "PIB - Agriculture (RSS)",
+    "url": "https://pib.gov.in/RssMain.aspx?ModId=6&Lang=1&Regid=6",
+    "priority": 1
+  },
+  {
+    "id": "pm-kisan",
+    "type": "html",
+    "name": "PM-KISAN Notices",
+    "url": "https://pmkisan.gov.in/PressRelease.aspx",
+    "priority": 1
+  },
+  {
+    "id": "pmfby",
+    "type": "html",
+    "name": "PMFBY News",
+    "url": "https://pmfby.gov.in/news",
+    "priority": 1
+  },
+  {
+    "id": "pmksy",
+    "type": "html",
+    "name": "PMKSY Notices",
+    "url": "https://pmksy.gov.in/",
+    "priority": 2
+  },
+  {
+    "id": "schemes-central",
+    "type": "html",
+    "name": "Central Schemes - India",
+    "url": "https://www.india.gov.in/spotlight/schemes",
+    "priority": 2
+  }
+]

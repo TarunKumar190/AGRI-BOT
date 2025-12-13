@@ -1,0 +1,35 @@
+[
+  {
+    "scheme_id": "pm-kisan",
+    "scheme_name": "PM-KISAN",
+    "ministry": "Ministry of Agriculture & Farmers Welfare",
+    "sector": "Income Support",
+    "description": "Provides ₹6,000 annual income support to eligible farmer families in three equal installments.",
+    "eligibility": "Small and marginal farmers who own cultivable land.",
+    "benefits": "₹6,000 per year in 3 installments.",
+    "official_portal": "https://pmkisan.gov.in",
+    "sources": []
+  },
+  {
+    "scheme_id": "pmfby",
+    "scheme_name": "PMFBY - Pradhan Mantri Fasal Bima Yojana",
+    "ministry": "Ministry of Agriculture & Farmers Welfare",
+    "sector": "Crop Insurance",
+    "description": "Crop insurance scheme protecting farmers against crop loss due to natural calamities.",
+    "eligibility": "All farmers growing notified crops in notified areas.",
+    "benefits": "Financial support in case of crop damage; low premium rates.",
+    "official_portal": "https://pmfby.gov.in",
+    "sources": []
+  },
+  {
+    "scheme_id": "pmksy",
+    "scheme_name": "PMKSY - Pradhan Mantri Krishi Sinchayee Yojana",
+    "ministry": "Ministry of Agriculture & Farmers Welfare",
+    "sector": "Irrigation",
+    "description": "Enhances irrigation efficiency and water conservation.",
+    "eligibility": "All farmers depending on irrigation improvement.",
+    "benefits": "Support for micro-irrigation, watershed management.",
+    "official_portal": "https://pmksy.gov.in",
+    "sources": []
+  }
+]
