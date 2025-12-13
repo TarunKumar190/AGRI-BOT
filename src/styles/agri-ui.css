@@ -1,0 +1,594 @@
+/* ===============================
+   GLOBAL RESET
+================================ */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  background: #f6f8fb;
+  color: #111827;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f6f8fb;
+  overflow: hidden; /* PAGE NEVER SCROLLS */
+}
+
+/* ===============================
+   APP LAYOUT
+================================ */
+.app-root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  padding: 16px 24px;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.app-header p {
+  margin: 4px 0 0;
+  color: #6b7280;
+}
+
+/* ===============================
+   MAIN GRID
+================================ */
+.app-main {
+  display: grid;
+  grid-template-columns: 62% 38%;
+  height: calc(100vh - 64px);
+  gap: 14px;
+  padding: 14px;
+}
+
+
+/* ===============================
+   LEFT: SCHEMES
+================================ */
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%;
+}
+
+.panel-title {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* Auto scroll container */
+.scheme-ticker {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.scheme-ticker-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: scrollUp 22s linear infinite;
+}
+
+.scheme-ticker:hover .scheme-ticker-content {
+  animation-play-state: paused;
+}
+
+.scheme-card {
+  border: 1px solid #eef0f3;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.scheme-status {
+  float: right;
+  font-size: 12px;
+  padding: 2px 8px;
+  background: #dcfce7;
+  color: #166534;
+  border-radius: 999px;
+}
+
+/* ===============================
+   RIGHT PANEL
+================================ */
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%;
+}
+
+
+
+
+/* ===============================
+   LIVE UPDATES
+================================ */
+.updates-card {
+  background: white;
+  border-radius: 14px;
+  padding: 14px;
+  overflow: hidden;
+}
+
+.updates-ticker {
+  height: 140px;
+  overflow: hidden;
+}
+
+.updates-ticker-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: scrollUp 18s linear infinite;
+}
+
+.updates-ticker:hover .updates-ticker-content {
+  animation-play-state: paused;
+}
+
+.update-item {
+  border: 1px solid #eef0f3;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.update-badge {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #e0f2fe;
+  color: #075985;
+}
+
+/* ===============================
+   CHATBOT
+================================ */
+.chatbot {
+  background: white;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chat-header {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+  font-weight: 600;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-bubble {
+  max-width: 80%;
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-size: 14px;
+}
+
+.chat-bot {
+  background: #f1f5f9;
+  align-self: flex-start;
+}
+
+.chat-user {
+  background: #2563eb;
+  color: white;
+  align-self: flex-end;
+}
+
+.chat-input {
+  border-top: 1px solid #e5e7eb;
+  padding: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+}
+
+.chat-input button {
+  border: none;
+  background: #2563eb;
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+/* ===============================
+   ANIMATION
+================================ */
+@keyframes scrollUp {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+.panel {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  height: 50%;
+  overflow: hidden;
+}
+.ticker {
+  height: 100%;
+  overflow: hidden;
+}
+.ticker-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: scrollUp 18s linear infinite;
+}
+.app-main {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  height: calc(100vh - 80px);
+  gap: 16px;
+}
+
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%;
+}
+
+.panel {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 14px 16px;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ticker {
+  height: 100%;
+  overflow: hidden;
+}
+
+.ticker-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: scrollUp 18s linear infinite;
+}
+
+.item {
+  background: #f9fafb;
+  border: 1px solid #eef0f3;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.item p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+
+@keyframes scrollUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+.weather-card {
+  background: linear-gradient(135deg, #eef2ff, #ffffff);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.weather-card b {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.weather-card p {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+
+.chatbot {
+  background: #ffffff;
+  border-radius: 14px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #eef0f3;
+}
+
+.chat-header {
+  padding: 14px 16px;
+  font-size: 16px;
+  font-weight: 700;
+  border-bottom: 1px solid #eef0f3;
+}
+
+
+.chat-messages {
+  flex: 1;
+  padding: 14px;
+  overflow-y: auto;
+}
+
+.chat-bubble.bot {
+  background: #eef2ff;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  max-width: 85%;
+}
+
+
+.chat-input {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid #eef0f3;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  outline: none;
+}
+
+.chat-input button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 0 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.badge.ongoing {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge.low {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.panel h2 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.3px;
+}
+.ticker {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.ticker-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: scrollUp 22s linear infinite;
+}
+
+@keyframes scrollUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+.scheme-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ministry {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+.official-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.official-link:hover {
+  text-decoration: underline;
+}
+
+.update-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 6px;
+}
+* {
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f5f7fa;
+}
+
+.app {
+  padding: 24px;
+}
+
+header h1 {
+  font-size: 26px;
+  margin: 0;
+}
+
+header p {
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.scroll-box {
+  max-height: 260px;
+  overflow: hidden;
+}
+
+.scroll-content {
+  animation: scrollUp 20s linear infinite;
+}
+
+@keyframes scrollUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+.scheme-item,
+.update-item {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+}
+
+.scheme-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.status {
+  background: #d1fadf;
+  color: #065f46;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.badge {
+  background: #e0f2fe;
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.chatbot {
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-window {
+  flex: 1;
+  background: #f1f5f9;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.chat-input {
+  display: flex;
+  gap: 8px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+}
+
+.chat-input button {
+  padding: 10px 16px;
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+}

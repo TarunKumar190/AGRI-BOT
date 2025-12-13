@@ -1,0 +1,194 @@
+﻿import React, { useEffect, useState } from "react";
+
+/**
+ * AgriLiveInterface.jsx
+ * - Search schemes (/v1/chatbot?q=)
+ * - Show canonical schemes (/v1/schemes)
+ * - Live updates feed (/v1/updates)
+ * - Admin token pastebox to approve queued updates (POST /v1/approve/:id)
+ */
+
+const resolveApiBase = () => {
+  try {
+    if (typeof import !== "undefined" && typeof import.meta !== "undefined" && import.meta.env && import.meta.env.VITE_API_BASE) {
+      return String(import.meta.env.VITE_API_BASE).replace(/\\/$/, "");
+    }
+  } catch(e) {}
+  try {
+    if (typeof process !== "undefined" && process.env) {
+      const v = process.env.REACT_APP_API_BASE || process.env.VITE_API_BASE || process.env.API_BASE;
+      if (v) return String(v).replace(/\\/$/, "");
+    }
+  } catch(e) {}
+  try {
+    if (typeof window !== "undefined" && window.__ENV && window.__ENV.VITE_API_BASE) {
+      return String(window.__ENV.VITE_API_BASE).replace(/\\/$/, "");
+    }
+  } catch(e) {}
+  return "http://localhost:4000/v1";
+};
+
+export default function AgriLiveInterface(){
+  const API_BASE = resolveApiBase();
+
+  const [schemes, setSchemes] = useState([]);
+  const [updates, setUpdates] = useState([]);
+  const [q, setQ] = useState("");
+  const [searchResults, setSearchResults] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [adminToken, setAdminToken] = useState("");
+  const [statusMsg, setStatusMsg] = useState("");
+
+  useEffect(()=> {
+    fetchSchemes();
+    fetchUpdates();
+    const t = setInterval(fetchUpdates, 30000);
+    return ()=>clearInterval(t);
+  }, []);
+
+  async function fetchSchemes(){
+    try {
+      const res = await fetch(`${API_BASE}/schemes`);
+      if (!res.ok) throw new Error("schemes fetch " + res.status);
+      const j = await res.json();
+      setSchemes(j.results || j || []);
+    } catch (e) {
+      console.error(e);
+      setStatusMsg("Could not load schemes");
+    }
+  }
+
+  async function fetchUpdates(){
+    try {
+      const res = await fetch(`${API_BASE}/updates`);
+      if (!res.ok) throw new Error("updates fetch " + res.status);
+      const j = await res.json();
+      setUpdates(j.results || j || []);
+    } catch (e) {
+      console.error(e);
+      setStatusMsg("Could not load updates");
+    }
+  }
+
+  async function handleSearch(){
+    if (!q) return setSearchResults(null);
+    setLoading(true);
+    setStatusMsg("");
+    try {
+      const res = await fetch(`${API_BASE}/chatbot?q=${encodeURIComponent(q)}`);
+      if (!res.ok) throw new Error("search fail " + res.status);
+      const j = await res.json();
+      setSearchResults(j);
+    } catch (e) {
+      console.error(e);
+      setStatusMsg("Search failed");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function approveUpdate(id){
+    if (!adminToken) { setStatusMsg("Paste admin token to approve"); return; }
+    try {
+      const res = await fetch(`${API_BASE}/approve/${id}`, { method: "POST", headers: { Authorization: "Bearer " + adminToken } });
+      if (!res.ok) throw new Error("approve " + res.status);
+      setStatusMsg("Approved " + id);
+      fetchUpdates();
+    } catch (e) {
+      console.error(e);
+      setStatusMsg("Approve failed");
+    }
+  }
+
+  return (
+    <div className="container">
+      <header className="header">
+        <h1>AgriLive — Schemes & Live Updates</h1>
+        <div>
+          <input className="admin-input" placeholder="Admin JWT (paste to enable approve)" value={adminToken} onChange={e=>setAdminToken(e.target.value)} />
+        </div>
+      </header>
+
+      <div className="layout">
+        <aside className="left">
+          <div className="card">
+            <div className="searchRow">
+              <input className="input" placeholder="Search (e.g. PM-KISAN)" value={q} onChange={e=>setQ(e.target.value)} />
+              <button className="btn" onClick={handleSearch} disabled={loading}>{loading ? "Searching..." : "Search"}</button>
+            </div>
+            <div className="muted">Canonical schemes</div>
+            <div className="list">
+              {schemes.map(s => (
+                <div key={s._id} className="listItem">
+                  <div className="title">{s.scheme_name}</div>
+                  <div className="muted">{s.ministry}</div>
+                  <div className="desc">{s.description?.slice(0,120)}</div>
+                  <div className="small"><a href={s.official_portal} target="_blank" rel="noreferrer">Official portal</a></div>
+                </div>
+              ))}
+              {schemes.length === 0 && <div className="muted">No canonical schemes</div>}
+            </div>
+          </div>
+        </aside>
+
+        <main className="main">
+          <div className="card">
+            <h2>Search Results</h2>
+            {!searchResults && <div className="muted">Type a query and click Search</div>}
+            {searchResults && (
+              <div>
+                {searchResults.results && searchResults.results.length ? searchResults.results.map((r,i)=> (
+                  <div key={i} className="resultCard">
+                    <div className="resultHeader">
+                      <div>
+                        <div className="title">{r.scheme?.scheme_name || "—"}</div>
+                        <div className="muted">{r.scheme?.ministry}</div>
+                      </div>
+                      <div className="mutedSmall">{r.updates?.length || 0} updates</div>
+                    </div>
+                    <div className="desc">{r.scheme?.description}</div>
+
+                    <div className="muted">Latest approved updates</div>
+                    {r.updates?.length ? r.updates.map(u=> (
+                      <div key={u._id} className="updateItem">
+                        <div className="updateHead">
+                          <div className="updateTitle">{u.summary}</div>
+                          <div className="mutedSmall">{u.severity}</div>
+                        </div>
+                        <div className="descSmall">{u.details?.slice(0,300)}</div>
+                        <div className="small"><a href={u.source?.source_url} target="_blank" rel="noreferrer">Source</a></div>
+                        {!u.approved && adminToken && <div><button className="btnSmall" onClick={()=>approveUpdate(u._id)}>Approve</button></div>}
+                      </div>
+                    )) : <div className="muted">No approved updates</div>}
+                  </div>
+                )) : <div className="muted">No results</div>}
+              </div>
+            )}
+          </div>
+
+          <div className="card">
+            <div className="flexRow">
+              <h3>Live Updates Feed</h3>
+              <div className="mutedSmall">Auto-refreshes every 30s</div>
+            </div>
+            <div className="feed">
+              {updates.length ? updates.map(u=> (
+                <div key={u._id} className="feedItem">
+                  <div className="feedHead">
+                    <div className="updateTitle">{u.summary}</div>
+                    <div className="mutedSmall">{u.severity}</div>
+                  </div>
+                  <div className="descSmall">{u.details?.slice(0,300)}</div>
+                  <div className="small"><a href={u.source?.source_url} target="_blank" rel="noreferrer">Official source</a></div>
+                  {!u.approved && adminToken && <div><button className="btnSmall" onClick={()=>approveUpdate(u._id)}>Approve</button></div>}
+                </div>
+              )) : <div className="muted">No live updates</div>}
+            </div>
+          </div>
+
+          {statusMsg && <div className="status">{statusMsg}</div>}
+        </main>
+      </div>
+    </div>
+  );
+}
