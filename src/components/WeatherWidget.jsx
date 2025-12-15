@@ -1,123 +1,311 @@
-﻿import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useCallback } from 'react';
+import { useLanguage } from '../context/LanguageContext';
+import useLocation from '../hooks/useLocation';
+import './WeatherWidget.css';
 
-/**
- * WeatherWidget.jsx
- * - Uses Open-Meteo public API: no API key required.
- * - Props:
- *    lat, lon -> optional coordinates to override geolocation
- *    pollInterval -> ms between refreshes (default 300000 = 5m)
- *
- * Example: <WeatherWidget lat={28.7041} lon={77.1025} />
- */
+const MOCK_FORECAST = [
+  { day: 'Mon', icon: '☀️', high: 34, low: 22, rain: 0 },
+  { day: 'Tue', icon: '⛅', high: 32, low: 21, rain: 10 },
+  { day: 'Wed', icon: '🌦️', high: 30, low: 20, rain: 40 },
+  { day: 'Thu', icon: '🌧️', high: 28, low: 19, rain: 70 },
+  { day: 'Fri', icon: '⛈️', high: 27, low: 18, rain: 80 },
+  { day: 'Sat', icon: '🌤️', high: 29, low: 19, rain: 20 },
+  { day: 'Sun', icon: '☀️', high: 31, low: 20, rain: 5 },
+];
 
-const DEFAULT = { lat: 22.5937, lon: 78.9629 }; // center of India fallback
+const WeatherWidget = ({ expanded = false }) => {
+  const { t, language } = useLanguage();
+  const { 
+    location, 
+    state, 
+    district, 
+    loading: locationLoading, 
+    error: locationError,
+    getCurrentLocation,
+    setManualLocation,
+    getAllStates,
+    permissionStatus 
+  } = useLocation();
+  
+  const [weather, setWeather] = useState({
+    current: {
+      temp: 32,
+      feels_like: 35,
+      condition: 'Sunny',
+      icon: '☀️',
+      humidity: 65,
+      wind: 12,
+      uv: 7,
+    },
+    location: 'Detecting location...',
+    forecast: MOCK_FORECAST,
+    alerts: [],
+    advisory: {
+      farming: 'Loading farming advisory...',
+      irrigation: 'Loading irrigation advisory...',
+    },
+  });
+  
+  const [isOffline, setIsOffline] = useState(!navigator.onLine);
+  const [showLocationPicker, setShowLocationPicker] = useState(false);
+  const [selectedCrop, setSelectedCrop] = useState('wheat');
 
-function mapWeatherCode(code){
-  // simplified mapping from open-meteo codes to text
-  const sunny = [0];
-  const cloudy = [1,2];
-  const overcast = [3];
-  const fog = [45,48];
-  const drizzle = [51,53,55,56,57];
-  const rain = [61,63,65,66,67,80,81,82];
-  const snow = [71,73,75,77,85,86];
-  const thunder = [95,96,99];
-
-  if (sunny.includes(code)) return "Clear";
-  if (cloudy.includes(code)) return "Partly cloudy";
-  if (overcast.includes(code)) return "Overcast";
-  if (fog.includes(code)) return "Fog";
-  if (drizzle.includes(code)) return "Drizzle";
-  if (rain.includes(code)) return "Rain";
-  if (snow.includes(code)) return "Snow";
-  if (thunder.includes(code)) return "Thunderstorm";
-  return "Unknown";
-}
-
-export default function WeatherWidget({ lat, lon, pollInterval = 300000 }) {
-  const [coords, setCoords] = useState({ lat: lat || null, lon: lon || null });
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState("");
-
+  // Monitor online/offline status
   useEffect(() => {
-    if (coords.lat && coords.lon) fetchWeather();
-    else {
-      // try geolocation
-      if (navigator.geolocation && !lat && !lon) {
-        navigator.geolocation.getCurrentPosition(
-          (p) => { setCoords({ lat: p.coords.latitude, lon: p.coords.longitude }); },
-          (e) => { console.warn("geolocation failed", e); setCoords({ lat: DEFAULT.lat, lon: DEFAULT.lon }); },
-          { timeout: 8000 }
-        );
-      } else {
-        setCoords({ lat: lat || DEFAULT.lat, lon: lon || DEFAULT.lon });
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const handleOnline = () => setIsOffline(false);
+    const handleOffline = () => setIsOffline(true);
+    
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
   }, []);
 
-  useEffect(() => {
-    if (!coords.lat) return;
-    fetchWeather();
-    const t = setInterval(fetchWeather, pollInterval);
-    return () => clearInterval(t);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [coords.lat, coords.lon]);
-
-  async function fetchWeather(){
-    if (!coords.lat) return;
-    setLoading(true); setErr("");
+  // Fetch weather data based on location
+  const fetchWeather = useCallback(async (lat, lng, stateName) => {
     try {
-      const url = `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lon}&current_weather=true&hourly=temperature_2m,precipitation&timezone=auto`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      const j = await res.json();
-      const cur = j.current_weather || {};
-      const summary = mapWeatherCode(cur.weathercode);
-      setData({
-        temperature: cur.temperature,
-        windspeed: cur.windspeed,
-        direction: cur.winddirection,
-        weathercode: cur.weathercode,
-        summary,
-        fetchedAt: new Date().toLocaleTimeString()
+      const params = new URLSearchParams({
+        lat: lat?.toString() || '',
+        lng: lng?.toString() || '',
+        state: stateName || '',
+        crop: selectedCrop,
+        lang: language,
       });
-    } catch (e) {
-      console.error(e);
-      setErr("Weather fetch failed");
-    } finally {
-      setLoading(false);
+      
+      const response = await fetch(`http://localhost:4000/v1/weather?${params}`);
+      if (response.ok) {
+        const data = await response.json();
+        
+        // Check if response is offline fallback
+        const isOfflineResponse = response.headers.get('X-Offline') === 'true';
+        
+        setWeather(prev => ({ 
+          ...prev, 
+          ...data,
+          location: district && stateName ? `${district}, ${stateName}` : stateName || prev.location,
+          isOffline: isOfflineResponse,
+        }));
+      }
+    } catch (error) {
+      console.log('Using cached/fallback weather data');
+      setWeather(prev => ({ 
+        ...prev, 
+        location: state || 'India',
+        isOffline: true,
+      }));
     }
-  }
+  }, [selectedCrop, language, district, state]);
+
+  // Auto-detect location on mount
+  useEffect(() => {
+    const initLocation = async () => {
+      try {
+        const locData = await getCurrentLocation();
+        if (locData) {
+          fetchWeather(locData.coordinates.lat, locData.coordinates.lng, locData.state);
+        }
+      } catch (err) {
+        // If GPS fails, show location picker
+        setShowLocationPicker(true);
+      }
+    };
+    
+    initLocation();
+  }, []);
+
+  // Refetch weather when location or crop changes
+  useEffect(() => {
+    if (location && state) {
+      fetchWeather(location.lat, location.lng, state);
+    }
+  }, [location, state, selectedCrop, fetchWeather]);
+
+  // Handle manual state selection
+  const handleStateSelect = (stateName) => {
+    setManualLocation(stateName);
+    setShowLocationPicker(false);
+  };
+
+  // Retry location detection
+  const handleRetryLocation = async () => {
+    try {
+      const locData = await getCurrentLocation();
+      if (locData) {
+        fetchWeather(locData.coordinates.lat, locData.coordinates.lng, locData.state);
+        setShowLocationPicker(false);
+      }
+    } catch (err) {
+      console.log('Location retry failed');
+    }
+  };
+
+  const CROP_OPTIONS = [
+    { value: 'wheat', label: '🌾 Wheat', labelHi: '🌾 गेहूं' },
+    { value: 'rice', label: '🍚 Rice', labelHi: '🍚 चावल' },
+    { value: 'cotton', label: '☁️ Cotton', labelHi: '☁️ कपास' },
+    { value: 'sugarcane', label: '🌿 Sugarcane', labelHi: '🌿 गन्ना' },
+    { value: 'maize', label: '🌽 Maize', labelHi: '🌽 मक्का' },
+    { value: 'soybean', label: '🫘 Soybean', labelHi: '🫘 सोयाबीन' },
+  ];
 
   return (
-    <div className="card" style={{ marginBottom: 12 }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <div>
-          <div style={{ fontWeight: 700 }}>Local Weather</div>
-          <div className="small">Auto updates every {Math.round(pollInterval/60000)} min</div>
+    <div className={`weather-widget ${expanded ? 'expanded' : ''}`}>
+      {/* Offline Banner */}
+      {(isOffline || weather.isOffline) && (
+        <div className="offline-banner">
+          <span>📴</span>
+          <span>{language === 'hi' ? 'ऑफ़लाइन मोड - कैश्ड डेटा दिखा रहे हैं' : 'Offline Mode - Showing cached data'}</span>
         </div>
-        <div style={{ textAlign: "right" }}>
-          {loading ? <div className="small">Updating…</div> : data ? <div style={{ fontWeight: 700, fontSize: 18 }}>{Math.round(data.temperature)}°C</div> : <div className="small">—</div>}
+      )}
+
+      {/* Location Picker Modal */}
+      {showLocationPicker && (
+        <div className="location-picker-overlay">
+          <div className="location-picker">
+            <h3>{language === 'hi' ? '📍 अपना राज्य चुनें' : '📍 Select Your State'}</h3>
+            <p className="picker-hint">
+              {language === 'hi' 
+                ? 'स्थानीय मौसम और मंडी जानकारी के लिए'
+                : 'For local weather and mandi information'}
+            </p>
+            
+            <button className="gps-btn" onClick={handleRetryLocation} disabled={locationLoading}>
+              {locationLoading ? '...' : '🎯'} 
+              {language === 'hi' ? ' GPS से पता लगाएं' : ' Detect via GPS'}
+            </button>
+            
+            <div className="state-grid">
+              {getAllStates().map(stateName => (
+                <button 
+                  key={stateName}
+                  className="state-btn"
+                  onClick={() => handleStateSelect(stateName)}
+                >
+                  {stateName}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Current Weather */}
+      <div className="current-weather">
+        <div className="weather-location">
+          <button 
+            className="location-btn"
+            onClick={() => setShowLocationPicker(true)}
+            title={language === 'hi' ? 'स्थान बदलें' : 'Change location'}
+          >
+            <span className="location-icon">📍</span>
+            <span>{weather.location}</span>
+            <span className="edit-icon">✏️</span>
+          </button>
+        </div>
+
+        {/* Crop Selector for Advisory */}
+        <div className="crop-selector">
+          <label>{language === 'hi' ? 'फसल:' : 'Crop:'}</label>
+          <select 
+            value={selectedCrop} 
+            onChange={(e) => setSelectedCrop(e.target.value)}
+          >
+            {CROP_OPTIONS.map(crop => (
+              <option key={crop.value} value={crop.value}>
+                {language === 'hi' ? crop.labelHi : crop.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        
+        <div className="weather-main-info">
+          <span className="weather-icon-large">{weather.current.icon}</span>
+          <div className="weather-temp-info">
+            <span className="current-temp">{weather.current.temp}°C</span>
+            <span className="feels-like">
+              {language === 'hi' ? `महसूस ${weather.current.feels_like}°C` : `Feels like ${weather.current.feels_like}°C`}
+            </span>
+            <span className="condition">{weather.current.condition}</span>
+          </div>
+        </div>
+
+        <div className="weather-stats">
+          <div className="stat">
+            <span className="stat-icon">💧</span>
+            <span className="stat-value">{weather.current.humidity}%</span>
+            <span className="stat-label">{t('weather.humidity')}</span>
+          </div>
+          <div className="stat">
+            <span className="stat-icon">💨</span>
+            <span className="stat-value">{weather.current.wind} km/h</span>
+            <span className="stat-label">{t('weather.wind')}</span>
+          </div>
+          <div className="stat">
+            <span className="stat-icon">☀️</span>
+            <span className="stat-value">{weather.current.uv}</span>
+            <span className="stat-label">UV Index</span>
+          </div>
         </div>
       </div>
 
-      <div style={{ marginTop: 10 }}>
-        {err && <div className="small" style={{ color: "var(--danger)" }}>{err}</div>}
+      {/* Weather Alerts */}
+      {weather.alerts && weather.alerts.length > 0 && (
+        <div className="weather-alerts">
+          <h3>⚠️ {t('weather.alerts')}</h3>
+          {weather.alerts.map((alert, index) => (
+            <div key={index} className={`alert-item alert-${alert.type}`}>
+              <span className="alert-text">{alert.message}</span>
+            </div>
+          ))}
+        </div>
+      )}
 
-        {data && (
-          <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-            <div style={{ fontSize: 36 }}>{data.weathercode === 0 ? "☀️" : data.weathercode >= 95 ? "⛈️" : data.weathercode >= 61 ? "🌧️" : "☁️"}</div>
-            <div>
-              <div style={{ fontWeight: 700 }}>{data.summary}</div>
-              <div className="small">Wind {Math.round(data.windspeed || 0)} km/h • Updated {data.fetchedAt}</div>
+      {/* 7-Day Forecast */}
+      <div className="forecast-section">
+        <h3>{t('weather.weekly')}</h3>
+        <div className="forecast-grid">
+          {weather.forecast.map((day, index) => (
+            <div key={index} className="forecast-day">
+              <span className="day-name">{day.day}</span>
+              <span className="day-icon">{day.icon}</span>
+              <div className="day-temps">
+                <span className="high">{day.high}°</span>
+                <span className="low">{day.low}°</span>
+              </div>
+              <div className="rain-chance">
+                <span className="rain-icon">💧</span>
+                <span>{day.rain}%</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Farm Advisory */}
+      <div className="advisory-section">
+        <h3>🌾 {t('weather.advisory')}</h3>
+        <div className="advisory-cards">
+          <div className="advisory-card">
+            <span className="advisory-icon">🚜</span>
+            <div className="advisory-content">
+              <h4>Farming</h4>
+              <p>{weather.advisory.farming}</p>
             </div>
           </div>
-        )}
-
-        {!data && !loading && <div className="small" style={{ marginTop: 8 }}>No weather data yet — allow location access or set coordinates.</div>}
+          <div className="advisory-card">
+            <span className="advisory-icon">💧</span>
+            <div className="advisory-content">
+              <h4>Irrigation</h4>
+              <p>{weather.advisory.irrigation}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default WeatherWidget;

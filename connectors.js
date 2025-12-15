@@ -2,21 +2,27 @@
  * connectors.js - robust connector runner (Windows-ready)
  * - axios retries, browser-like headers
  * - safeGet with header/url variants
- * - uses p-limit@2 (const pLimit = require('p-limit'))
+ * - uses p-limit@2
  * - special handling for PIB 'pib-agri' source
  * - auto-approves items (severity: 'low') for demo
  *
  * Save: connectors.js
  */
 
-const fs = require('fs-extra');
-const Parser = require('rss-parser');
-const axios = require('axios');
-const axiosRetry = require('axios-retry').default;
-const cheerio = require('cheerio');
-const pLimit = require('p-limit'); // p-limit@2 is required
-const path = require('path');
-require('dotenv').config();
+import fs from 'fs-extra';
+import Parser from 'rss-parser';
+import axios from 'axios';
+import axiosRetry from 'axios-retry';
+import * as cheerio from 'cheerio';
+import pLimit from 'p-limit';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const parser = new Parser();
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN;

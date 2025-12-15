@@ -1,6 +1,9 @@
-// fetcher-mini.js (CommonJS)
-const Parser = require('rss-parser');
-const axios = require('axios');
+// fetcher-mini.js (ES Module)
+import Parser from 'rss-parser';
+import axios from 'axios';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const parser = new Parser();
 const API_INGEST = process.env.API_INGEST || 'http://localhost:4000/v1/ingest';

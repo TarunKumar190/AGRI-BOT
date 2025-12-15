@@ -1,9 +1,11 @@
 // debug_connectors.js
-const fs = require('fs');
-const Parser = require('rss-parser');
-const axios = require('axios');
-const cheerio = require('cheerio');
-require('dotenv').config();
+import fs from 'fs';
+import Parser from 'rss-parser';
+import axios from 'axios';
+import * as cheerio from 'cheerio';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const parser = new Parser();
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || '';
