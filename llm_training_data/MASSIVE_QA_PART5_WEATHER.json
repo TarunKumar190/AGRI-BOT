@@ -1,0 +1,166 @@
+{
+  "metadata": {
+    "name": "Massive Q&A Training Dataset - Part 5 (Weather & Climate Advisory)",
+    "total_examples": 400,
+    "languages": ["en", "hi"],
+    "category": "weather_advisory"
+  },
+
+  "weather_queries": [
+    {
+      "variations": [
+        "weather forecast",
+        "mausam ka haal",
+        "मौसम का हाल",
+        "aaj ka mausam",
+        "आज का मौसम",
+        "today weather",
+        "kal ka mausam kaisa rahega",
+        "कल का मौसम कैसा रहेगा"
+      ],
+      "response": {
+        "en": "🌤️ **Weather Information**\n\nI can provide weather forecasts for your location. Please share:\n• Your village/city name\n• Or district name\n\n📱 **For Real-time Weather:**\n• IMD Website: mausam.imd.gov.in\n• Meghdoot App (farmer-specific forecasts)\n• Kisan Suvidha App\n\n☎️ **IMD Helpline:** 1800-180-1717\n\n💡 **Weather Alerts Available:**\n• Current conditions\n• 5-day forecast\n• Rainfall prediction\n• Temperature trends\n• Wind speed & humidity\n• Extreme weather warnings",
+        "hi": "🌤️ **मौसम जानकारी**\n\nमैं आपके क्षेत्र का मौसम पूर्वानुमान दे सकता हूं। कृपया बताएं:\n• आपका गांव/शहर का नाम\n• या जिले का नाम\n\n📱 **रियल-टाइम मौसम के लिए:**\n• IMD वेबसाइट: mausam.imd.gov.in\n• मेघदूत ऐप (किसानों के लिए)\n• किसान सुविधा ऐप\n\n☎️ **IMD हेल्पलाइन:** 1800-180-1717\n\n💡 **उपलब्ध मौसम चेतावनी:**\n• वर्तमान स्थिति\n• 5 दिन का पूर्वानुमान\n• बारिश की भविष्यवाणी\n• तापमान रुझान\n• हवा की गति और नमी\n• चरम मौसम चेतावनी"
+      }
+    },
+    {
+      "variations": [
+        "rain forecast",
+        "baarish kab hogi",
+        "बारिश कब होगी?",
+        "rainfall prediction",
+        "when will it rain",
+        "varsha ka purvanuwan",
+        "monsoon forecast"
+      ],
+      "response": {
+        "en": "🌧️ **Rainfall Forecast Information**\n\n**How to Check Rainfall Forecast:**\n\n📱 **Apps:**\n• Meghdoot App (Best for farmers)\n• IMD Weather App\n• Kisan Suvidha\n\n🌐 **Websites:**\n• mausam.imd.gov.in\n• mausam.imd.gov.in/imd_latest/contents/rainfall_forecast.php\n\n📡 **SMS Service:**\n• Register mobile on mKisan portal\n• Get weather alerts via SMS\n\n**Monsoon Information:**\n• Southwest Monsoon: June 1 (Kerala) - September\n• Northeast Monsoon: October - December (Tamil Nadu)\n• IMD issues Long Range Forecast in April\n\n⚠️ **Farmer Advisory:**\n• Check forecast before irrigation\n• Don't spray pesticides if rain expected\n• Plan sowing based on monsoon onset\n• Store harvested grain properly",
+        "hi": "🌧️ **वर्षा पूर्वानुमान जानकारी**\n\n**वर्षा पूर्वानुमान कैसे जांचें:**\n\n📱 **ऐप्स:**\n• मेघदूत ऐप (किसानों के लिए सबसे अच्छा)\n• IMD वेदर ऐप\n• किसान सुविधा\n\n🌐 **वेबसाइट:**\n• mausam.imd.gov.in\n\n📡 **SMS सेवा:**\n• mKisan पोर्टल पर मोबाइल पंजीकृत करें\n• SMS द्वारा मौसम चेतावनी पाएं\n\n**मानसून जानकारी:**\n• दक्षिण-पश्चिम मानसून: 1 जून (केरल) - सितंबर\n• उत्तर-पूर्व मानसून: अक्टूबर - दिसंबर (तमिलनाडु)\n• IMD अप्रैल में दीर्घकालिक पूर्वानुमान जारी करता है\n\n⚠️ **किसान सलाह:**\n• सिंचाई से पहले पूर्वानुमान देखें\n• बारिश की संभावना हो तो कीटनाशक न छिड़कें\n• मानसून आगमन के आधार पर बुवाई करें"
+      }
+    }
+  ],
+
+  "weather_based_crop_advisory": [
+    {
+      "condition": "heavy_rain",
+      "variations": [
+        "heavy rain expected what to do",
+        "bhari baarish mein kya kare",
+        "भारी बारिश में क्या करें?",
+        "crop protection from rain",
+        "baarish se fasal kaise bachaye"
+      ],
+      "response": {
+        "en": "🌧️⚠️ **Heavy Rain Advisory for Farmers**\n\n**Immediate Actions:**\n\n🌾 **Standing Crops:**\n• Create drainage channels to remove excess water\n• Prop up lodged/fallen plants\n• Don't enter waterlogged fields (spread diseases)\n• Avoid any spray operations\n\n🥬 **Vegetables:**\n• Harvest mature vegetables immediately\n• Raise bed height for new plantings\n• Apply lime to prevent fungal diseases\n\n🌱 **Nursery:**\n• Cover with plastic sheet\n• Provide drainage\n• Spray fungicide after rain stops\n\n📦 **Harvested Produce:**\n• Store in dry, elevated place\n• Cover properly\n• Check for moisture regularly\n\n**Post-Rain Actions:**\n• Spray fungicide (Mancozeb 2g/L) after 24 hours\n• Apply urea if yellowing occurs\n• Check for pest buildup\n\n📞 **Report crop damage to agriculture office for insurance**",
+        "hi": "🌧️⚠️ **भारी बारिश - किसान सलाह**\n\n**तुरंत कार्रवाई:**\n\n🌾 **खड़ी फसलें:**\n• अतिरिक्त पानी निकालने के लिए नालियां बनाएं\n• गिरे/लुढ़के पौधों को सहारा दें\n• जलभराव वाले खेत में न जाएं (रोग फैलता है)\n• कोई छिड़काव न करें\n\n🥬 **सब्जियां:**\n• पकी सब्जियां तुरंत तोड़ लें\n• नई रोपाई के लिए क्यारी ऊंची करें\n• चूना डालें (फफूंद रोकने के लिए)\n\n🌱 **नर्सरी:**\n• प्लास्टिक शीट से ढकें\n• पानी निकास का प्रबंध करें\n• बारिश रुकने के बाद फफूंदनाशक छिड़कें\n\n**बारिश के बाद:**\n• 24 घंटे बाद फफूंदनाशक (मैंकोजेब 2g/L) छिड़कें\n• पीलापन हो तो यूरिया डालें\n• कीटों की जांच करें\n\n📞 **बीमा के लिए कृषि कार्यालय को फसल नुकसान की सूचना दें**"
+      }
+    },
+    {
+      "condition": "drought",
+      "variations": [
+        "drought situation what to do",
+        "sukha padne par kya kare",
+        "सूखा पड़ने पर क्या करें?",
+        "no rain water management",
+        "baarish nahi ho rahi",
+        "बारिश नहीं हो रही"
+      ],
+      "response": {
+        "en": "☀️🏜️ **Drought/Water Scarcity Advisory**\n\n**Immediate Water Conservation:**\n\n💧 **Irrigation Management:**\n• Switch to drip/sprinkler irrigation\n• Irrigate in evening/early morning (less evaporation)\n• Use mulching (straw, plastic) to retain moisture\n• Skip irrigation rows (alternate furrow irrigation)\n\n🌱 **Crop Management:**\n• Spray Potassium Chloride (KCl) 1% to reduce water loss\n• Apply organic mulch 5-7 cm thick\n• Remove weeds (compete for water)\n• Spray anti-transpirant (Kaolin 6%)\n\n🌾 **Crop Selection:**\n• Prefer drought-tolerant varieties\n• Short-duration crops\n• Millets, Sorghum, Bajra for kharif\n• Gram, Mustard for rabi (low water need)\n\n📊 **Contingency Crops:**\n• If delayed monsoon: Short-duration rice, Maize\n• If early drought: Sorghum, Cowpea, Castor\n\n💰 **Government Support:**\n• Contact agriculture office for drought relief\n• PMFBY claim if insured\n• Input subsidy schemes",
+        "hi": "☀️🏜️ **सूखा/जल संकट सलाह**\n\n**तुरंत जल संरक्षण:**\n\n💧 **सिंचाई प्रबंधन:**\n• ड्रिप/स्प्रिंकलर सिंचाई अपनाएं\n• शाम/सुबह जल्दी सिंचाई करें\n• मल्चिंग करें (भूसा, प्लास्टिक)\n• एकांतर कूंड़ सिंचाई करें\n\n🌱 **फसल प्रबंधन:**\n• पोटेशियम क्लोराइड 1% छिड़काव\n• जैविक मल्च 5-7 सेमी मोटा\n• खरपतवार हटाएं (पानी की प्रतिस्पर्धा)\n• एंटी-ट्रांसपिरेंट (कैओलिन 6%) छिड़कें\n\n🌾 **फसल चयन:**\n• सूखा सहनशील किस्में\n• कम अवधि की फसलें\n• खरीफ में: ज्वार, बाजरा\n• रबी में: चना, सरसों (कम पानी)\n\n💰 **सरकारी सहायता:**\n• सूखा राहत के लिए कृषि कार्यालय संपर्क करें\n• PMFBY क्लेम (यदि बीमित)\n• इनपुट सब्सिडी योजनाएं"
+      }
+    },
+    {
+      "condition": "frost",
+      "variations": [
+        "frost protection",
+        "pala se bachav",
+        "पाले से बचाव",
+        "frost damage crops",
+        "pala gir raha hai",
+        "पाला गिर रहा है",
+        "how to protect crops from frost"
+      ],
+      "response": {
+        "en": "❄️ **Frost/Pala Protection Advisory**\n\n**When Frost Expected (Temp < 4°C):**\n\n🌙 **Night Before Frost:**\n• Light irrigation in evening (releases heat)\n• Cover nursery/vegetables with straw/plastic\n• Create smoke (burn waste) around field perimeter\n• Keep ventilators/heaters in polyhouse\n\n🌅 **During Frost:**\n• Don't enter field early morning\n• Wait for ice to melt naturally\n\n☀️ **After Frost:**\n• Light irrigation immediately after sun rises\n• Spray Sulphuric Acid 0.1% to recover damaged plants\n• Apply Urea 1% spray for quick recovery\n• Remove severely damaged plant parts\n\n🌾 **Crop-wise Protection:**\n• **Potato/Tomato:** Cover with plastic/straw\n• **Mustard:** Irrigate before frost\n• **Wheat:** CRI irrigation helps\n• **Peas/Gram:** Spray water at dawn\n\n⚠️ **Susceptible Crops:**\n• Potato, Tomato, Chilli\n• Papaya, Banana\n• Young seedlings of all crops\n\n💡 **Tip:** IMD issues frost warnings - stay updated",
+        "hi": "❄️ **पाला संरक्षण सलाह**\n\n**जब पाला अपेक्षित हो (तापमान < 4°C):**\n\n🌙 **पाले से पहली रात:**\n• शाम को हल्की सिंचाई करें (गर्मी निकलती है)\n• नर्सरी/सब्जियों को भूसा/प्लास्टिक से ढकें\n• खेत के किनारे धुआं करें (कचरा जलाएं)\n• पॉलीहाउस में हीटर रखें\n\n🌅 **पाले के दौरान:**\n• सुबह जल्दी खेत में न जाएं\n• बर्फ को प्राकृतिक रूप से पिघलने दें\n\n☀️ **पाले के बाद:**\n• सूर्योदय के तुरंत बाद हल्की सिंचाई\n• सल्फ्यूरिक एसिड 0.1% छिड़काव (क्षतिग्रस्त पौधों के लिए)\n• यूरिया 1% स्प्रे (जल्दी रिकवरी)\n• गंभीर रूप से क्षतिग्रस्त भाग हटाएं\n\n🌾 **फसलवार संरक्षण:**\n• **आलू/टमाटर:** प्लास्टिक/भूसे से ढकें\n• **सरसों:** पाले से पहले सिंचाई\n• **गेहूं:** CRI सिंचाई मददगार\n\n⚠️ **संवेदनशील फसलें:**\n• आलू, टमाटर, मिर्च\n• पपीता, केला\n• सभी फसलों की छोटी पौध\n\n💡 **सुझाव:** IMD पाला चेतावनी जारी करता है - अपडेट रहें"
+      }
+    },
+    {
+      "condition": "heatwave",
+      "variations": [
+        "heatwave protection",
+        "garmi se bachav",
+        "गर्मी से बचाव",
+        "summer crop care",
+        "loo se fasal bachaye",
+        "लू से फसल बचाएं",
+        "high temperature crop damage"
+      ],
+      "response": {
+        "en": "🔥 **Heatwave Advisory for Crops**\n\n**When Temperature > 40°C:**\n\n💧 **Irrigation:**\n• Irrigate frequently (every 3-4 days)\n• Irrigate in evening/early morning only\n• Use drip irrigation to reduce water loss\n\n🌿 **Mulching:**\n• Apply 5-7 cm mulch (straw, dry leaves)\n• Use plastic mulch for vegetables\n• Reduces soil temperature by 5-7°C\n\n🧴 **Sprays:**\n• Kaolin 6% (white clay) - reflects sunlight\n• Potassium Chloride 1% - reduces transpiration\n• Water spray during extreme heat (2-3 PM)\n\n🏠 **Shade:**\n• Use shade net (35-50%) for vegetables\n• Create temporary shade for nursery\n\n🌱 **Crop Management:**\n• Harvest ripe vegetables early morning\n• Avoid mid-day farm operations\n• Don't apply fertilizer in extreme heat\n\n🐄 **Livestock:**\n• Provide shade and water\n• Reduce working hours\n• Add electrolytes to drinking water",
+        "hi": "🔥 **लू/गर्मी - फसल सलाह**\n\n**जब तापमान > 40°C:**\n\n💧 **सिंचाई:**\n• बार-बार सिंचाई करें (हर 3-4 दिन)\n• केवल शाम/सुबह जल्दी सिंचाई करें\n• पानी बचाने के लिए ड्रिप सिंचाई\n\n🌿 **मल्चिंग:**\n• 5-7 सेमी मल्च लगाएं (भूसा, सूखी पत्तियां)\n• सब्जियों के लिए प्लास्टिक मल्च\n• मिट्टी का तापमान 5-7°C कम करता है\n\n🧴 **छिड़काव:**\n• कैओलिन 6% (सफेद मिट्टी) - सूर्य प्रकाश परावर्तित\n• पोटेशियम क्लोराइड 1% - वाष्पोत्सर्जन कम\n• चरम गर्मी में पानी का छिड़काव (2-3 बजे)\n\n🏠 **छाया:**\n• सब्जियों के लिए शेड नेट (35-50%)\n• नर्सरी के लिए अस्थायी छाया\n\n🌱 **फसल प्रबंधन:**\n• पकी सब्जियां सुबह जल्दी तोड़ें\n• दोपहर में खेत का काम न करें\n• चरम गर्मी में खाद न डालें\n\n🐄 **पशुधन:**\n• छाया और पानी दें\n• काम के घंटे कम करें"
+      }
+    },
+    {
+      "condition": "hailstorm",
+      "variations": [
+        "hailstorm damage",
+        "ole se fasal kharab",
+        "ओले से फसल खराब",
+        "hail protection",
+        "ole gire kya kare",
+        "ओले गिरे क्या करें"
+      ],
+      "response": {
+        "en": "🧊 **Hailstorm Damage Advisory**\n\n**Immediately After Hailstorm:**\n\n📸 **Document Damage:**\n• Take photos of damaged crops\n• Note date, time, extent of damage\n• Keep photos with geo-tag\n\n📞 **Report to Authorities:**\n• Call insurance company within 72 hours\n• Report to agriculture department\n• Contact Patwari for damage assessment\n\n🌱 **Crop Recovery:**\n\n**Light Damage (<25%):**\n• Apply Urea 1% spray for recovery\n• Light irrigation next day\n• Spray Potassium nitrate 1%\n\n**Moderate Damage (25-50%):**\n• Remove severely damaged parts\n• Spray fungicide (Mancozeb 2g/L) to prevent infection\n• Apply half dose nitrogen\n\n**Severe Damage (>50%):**\n• Assess if crop can recover\n• Consider re-sowing short-duration varieties\n• Claim insurance\n\n🌾 **Crop-wise:**\n• **Wheat:** If at flowering - major loss, apply spray\n• **Vegetables:** Remove damaged fruits, spray fungicide\n• **Fruits:** Prune damaged branches, apply bordeaux paste\n\n💰 **Insurance Claim:** Must report within 72 hours",
+        "hi": "🧊 **ओला वृष्टि नुकसान सलाह**\n\n**ओले गिरने के तुरंत बाद:**\n\n📸 **नुकसान दर्ज करें:**\n• क्षतिग्रस्त फसलों की फोटो लें\n• तारीख, समय, नुकसान की मात्रा नोट करें\n• जियो-टैग के साथ फोटो रखें\n\n📞 **अधिकारियों को सूचित करें:**\n• 72 घंटे में बीमा कंपनी को कॉल करें\n• कृषि विभाग को रिपोर्ट करें\n• नुकसान आकलन के लिए पटवारी से संपर्क\n\n🌱 **फसल रिकवरी:**\n\n**हल्का नुकसान (<25%):**\n• रिकवरी के लिए यूरिया 1% स्प्रे\n• अगले दिन हल्की सिंचाई\n• पोटेशियम नाइट्रेट 1% छिड़काव\n\n**मध्यम नुकसान (25-50%):**\n• गंभीर रूप से क्षतिग्रस्त भाग हटाएं\n• संक्रमण रोकने के लिए फफूंदनाशक (मैंकोजेब 2g/L)\n• आधी खुराक नाइट्रोजन\n\n**गंभीर नुकसान (>50%):**\n• आकलन करें कि फसल बच सकती है या नहीं\n• कम अवधि की किस्मों की दोबारा बुवाई\n• बीमा क्लेम करें\n\n💰 **बीमा क्लेम:** 72 घंटे में रिपोर्ट करना जरूरी"
+      }
+    }
+  ],
+
+  "seasonal_advisory": [
+    {
+      "season": "monsoon",
+      "variations": [
+        "monsoon farming tips",
+        "barsat mein kheti",
+        "बरसात में खेती",
+        "kharif season tips",
+        "monsoon crop advice"
+      ],
+      "response": {
+        "en": "🌧️ **Monsoon/Kharif Season Farming Guide**\n\n📅 **Timeline:** June - October\n\n🌱 **Pre-Monsoon Preparation:**\n• Repair bunds and drainage channels\n• Prepare seedbeds for rice nursery\n• Arrange quality seeds and inputs\n• Service farm machinery\n• Plan crop rotation\n\n🌾 **Sowing Tips:**\n• Wait for adequate soil moisture (75-100mm rain)\n• Treat seeds with fungicide + insecticide\n• Maintain recommended seed rate\n• Use line sowing for better management\n\n💊 **Disease Prevention:**\n• Use resistant varieties\n• Maintain proper plant population\n• Spray preventive fungicides during prolonged wet spell\n• Watch for pest buildup after rain\n\n💧 **Water Management:**\n• Ensure proper drainage\n• Don't allow waterlogging for more than 24-48 hours\n• Create field bunds to retain rainwater (for rice)\n\n⚠️ **Weather Watch:**\n• Monitor IMD forecasts daily\n• Avoid spraying if rain expected within 4-6 hours\n• Harvest ripe crops before heavy rain",
+        "hi": "🌧️ **मानसून/खरीफ मौसम खेती गाइड**\n\n📅 **समय:** जून - अक्टूबर\n\n🌱 **मानसून पूर्व तैयारी:**\n• मेड़ और जल निकासी चैनल ठीक करें\n• धान नर्सरी के लिए क्यारियां तैयार करें\n• गुणवत्ता वाले बीज और इनपुट की व्यवस्था\n• कृषि मशीनरी की सर्विस\n• फसल चक्र की योजना\n\n🌾 **बुवाई सुझाव:**\n• पर्याप्त मिट्टी नमी का इंतजार करें (75-100mm बारिश)\n• बीज उपचार करें (फफूंदनाशक + कीटनाशक)\n• अनुशंसित बीज दर रखें\n• लाइन में बुवाई करें\n\n💊 **रोग रोकथाम:**\n• प्रतिरोधी किस्में उपयोग करें\n• सही पौधा आबादी रखें\n• लंबी बारिश में फफूंदनाशक छिड़कें\n• बारिश बाद कीटों की निगरानी\n\n💧 **जल प्रबंधन:**\n• उचित जल निकासी सुनिश्चित करें\n• 24-48 घंटे से ज्यादा जलभराव न होने दें\n\n⚠️ **मौसम निगरानी:**\n• रोजाना IMD पूर्वानुमान देखें\n• 4-6 घंटे में बारिश की संभावना हो तो छिड़काव न करें"
+      }
+    },
+    {
+      "season": "winter",
+      "variations": [
+        "winter farming tips",
+        "sardi mein kheti",
+        "सर्दी में खेती",
+        "rabi season guide",
+        "winter crop care"
+      ],
+      "response": {
+        "en": "❄️ **Winter/Rabi Season Farming Guide**\n\n📅 **Timeline:** October - March\n\n🌾 **Major Rabi Crops:**\n• Wheat, Barley, Oats\n• Gram, Lentil, Peas\n• Mustard, Sunflower\n• Potato, Onion, Garlic\n\n📆 **Sowing Calendar:**\n• Wheat: Oct 15 - Nov 15\n• Mustard: Oct 10 - Oct 25\n• Gram: Oct 15 - Nov 10\n• Potato: Oct 1 - Oct 25\n\n❄️ **Frost Protection:**\n• Monitor minimum temperature\n• Irrigate before frost event\n• Cover nursery and vegetables\n• Create smoke barrier\n\n💧 **Irrigation Management:**\n• Less water needed than kharif\n• Follow critical stage irrigation\n• Avoid over-irrigation (causes lodging)\n\n🐜 **Pest Watch:**\n• Aphids in mustard, wheat\n• Army worm in late-sown crops\n• Termites in dry conditions\n\n📊 **Fertilizer:**\n• Split nitrogen application\n• Apply at critical growth stages",
+        "hi": "❄️ **सर्दी/रबी मौसम खेती गाइड**\n\n📅 **समय:** अक्टूबर - मार्च\n\n🌾 **प्रमुख रबी फसलें:**\n• गेहूं, जौ, जई\n• चना, मसूर, मटर\n• सरसों, सूरजमुखी\n• आलू, प्याज, लहसुन\n\n📆 **बुवाई कैलेंडर:**\n• गेहूं: 15 अक्टूबर - 15 नवंबर\n• सरसों: 10 अक्टूबर - 25 अक्टूबर\n• चना: 15 अक्टूबर - 10 नवंबर\n• आलू: 1 अक्टूबर - 25 अक्टूबर\n\n❄️ **पाला संरक्षण:**\n• न्यूनतम तापमान की निगरानी\n• पाले से पहले सिंचाई\n• नर्सरी और सब्जियां ढकें\n• धुआं बाधा बनाएं\n\n💧 **सिंचाई प्रबंधन:**\n• खरीफ से कम पानी चाहिए\n• महत्वपूर्ण अवस्थाओं पर सिंचाई\n• अधिक सिंचाई से बचें\n\n🐜 **कीट निगरानी:**\n• सरसों, गेहूं में माहू\n• देर से बोई फसल में आर्मी वर्म\n• सूखी स्थिति में दीमक"
+      }
+    },
+    {
+      "season": "summer",
+      "variations": [
+        "summer farming tips",
+        "garmi mein kheti",
+        "गर्मी में खेती",
+        "zaid season guide",
+        "summer crop care"
+      ],
+      "response": {
+        "en": "☀️ **Summer/Zaid Season Farming Guide**\n\n📅 **Timeline:** March - June\n\n🌾 **Summer Crops:**\n• Moong, Urad (pulses)\n• Cucumber, Bottle gourd, Bitter gourd\n• Watermelon, Muskmelon\n• Okra, Ridge gourd\n• Maize (fodder/grain)\n• Sunflower\n\n🔥 **Heat Management:**\n• Mulching is essential (reduces temperature 5-7°C)\n• Irrigate frequently (every 3-4 days)\n• Irrigate in evening/early morning only\n• Use shade nets for vegetables\n\n💧 **Water Conservation:**\n• Drip irrigation saves 40-60% water\n• Raised bed planting\n• Alternate furrow irrigation\n• Plastic mulch\n\n🌱 **Crop Care:**\n• Use heat-tolerant varieties\n• Spray Kaolin 6% to reduce heat stress\n• Harvest in morning (better quality)\n• Proper storage of produce\n\n⚠️ **Challenges:**\n• Water scarcity\n• Extreme heat\n• Pest pressure (mites, thrips)\n• Quick fruit maturity",
+        "hi": "☀️ **गर्मी/जायद मौसम खेती गाइड**\n\n📅 **समय:** मार्च - जून\n\n🌾 **गर्मी की फसलें:**\n• मूंग, उड़द (दालें)\n• खीरा, लौकी, करेला\n• तरबूज, खरबूजा\n• भिंडी, तोरई\n• मक्का (चारा/दाना)\n• सूरजमुखी\n\n🔥 **गर्मी प्रबंधन:**\n• मल्चिंग जरूरी (तापमान 5-7°C कम)\n• बार-बार सिंचाई (हर 3-4 दिन)\n• केवल शाम/सुबह सिंचाई\n• सब्जियों के लिए शेड नेट\n\n💧 **जल संरक्षण:**\n• ड्रिप सिंचाई 40-60% पानी बचाए\n• उठी हुई क्यारी में रोपाई\n• एकांतर कूंड़ सिंचाई\n• प्लास्टिक मल्च\n\n🌱 **फसल देखभाल:**\n• गर्मी सहनशील किस्में उपयोग करें\n• कैओलिन 6% छिड़काव\n• सुबह में फल तोड़ें (बेहतर गुणवत्ता)\n\n⚠️ **चुनौतियां:**\n• पानी की कमी\n• चरम गर्मी\n• कीट दबाव (माइट, थ्रिप्स)"
+      }
+    }
+  ]
+}

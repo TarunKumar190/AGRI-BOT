@@ -1,0 +1,196 @@
+{
+  "metadata": {
+    "name": "Massive Q&A Training Dataset - Part 4 (Government Schemes)",
+    "total_examples": 400,
+    "languages": ["en", "hi"],
+    "category": "government_schemes"
+  },
+
+  "pm_kisan_queries": [
+    {
+      "variations": [
+        "What is PM Kisan?",
+        "PM Kisan kya hai",
+        "पीएम किसान क्या है?",
+        "PM Kisan scheme",
+        "PM Kisan yojana",
+        "पीएम किसान योजना",
+        "tell me about PM Kisan",
+        "PM Kisan ka labh kaise le"
+      ],
+      "response": {
+        "en": "💰 **PM-KISAN (Pradhan Mantri Kisan Samman Nidhi)**\n\n📋 **About:**\nDirect income support scheme providing ₹6,000/year to farmer families in 3 installments of ₹2,000 each.\n\n✅ **Eligibility:**\n• All land-holding farmer families\n• Land should be in farmer's name\n• Operational landholding up to 2 hectares (small & marginal farmers)\n\n❌ **Not Eligible:**\n• Institutional land holders\n• Income tax payers\n• Govt employees/pensioners\n• Professionals (doctors, engineers, lawyers)\n• Constitutional post holders\n\n📄 **Documents Required:**\n• Aadhaar card\n• Land records (Khata/Khasra)\n• Bank account with IFSC\n• Mobile number\n\n📝 **How to Apply:**\n1. Visit: https://pmkisan.gov.in\n2. Click 'New Farmer Registration'\n3. Enter Aadhaar, State, enter OTP\n4. Fill land and bank details\n5. Submit\n\n📞 **Helpline:** 155261, 011-24300606\n\n💡 **Check Status:** pmkisan.gov.in → Beneficiary Status",
+        "hi": "💰 **पीएम-किसान (प्रधानमंत्री किसान सम्मान निधि)**\n\n📋 **जानकारी:**\nकिसान परिवारों को ₹6,000/वर्ष सीधे आय सहायता - 3 किश्तों में ₹2,000 प्रत्येक।\n\n✅ **पात्रता:**\n• सभी भूमिधारी किसान परिवार\n• जमीन किसान के नाम हो\n• 2 हेक्टेयर तक जमीन (छोटे व सीमांत किसान)\n\n❌ **अपात्र:**\n• संस्थागत भूमिधारक\n• आयकर दाता\n• सरकारी कर्मचारी/पेंशनभोगी\n• डॉक्टर, इंजीनियर, वकील\n\n📄 **जरूरी दस्तावेज:**\n• आधार कार्ड\n• खाता/खसरा\n• बैंक खाता व IFSC\n• मोबाइल नंबर\n\n📝 **आवेदन कैसे करें:**\n1. pmkisan.gov.in पर जाएं\n2. 'नया किसान पंजीकरण' क्लिक करें\n3. आधार, राज्य, OTP दर्ज करें\n4. जमीन व बैंक विवरण भरें\n\n📞 **हेल्पलाइन:** 155261, 011-24300606"
+      }
+    },
+    {
+      "variations": [
+        "PM Kisan status check",
+        "PM Kisan ka paisa kab aayega",
+        "पीएम किसान का पैसा कब आएगा",
+        "how to check PM Kisan payment",
+        "PM Kisan beneficiary status",
+        "mera PM Kisan ka paisa nahi aaya"
+      ],
+      "response": {
+        "en": "📊 **How to Check PM-KISAN Payment Status**\n\n**Method 1: Online Portal**\n1. Visit https://pmkisan.gov.in\n2. Click 'Beneficiary Status'\n3. Enter Aadhaar OR Mobile OR Account Number\n4. Click 'Get Data'\n5. View all installment details\n\n**Method 2: Mobile App**\n• Download PM-KISAN mobile app\n• Enter Aadhaar/Mobile\n• Check payment history\n\n**Method 3: Helpline**\n📞 155261 or 011-24300606\n\n💸 **Installment Schedule:**\n• 1st: April - July\n• 2nd: August - November\n• 3rd: December - March\n\n⚠️ **If Payment Not Received:**\n• Check if e-KYC completed\n• Verify Aadhaar-bank seeding\n• Check for any rejection reason\n• Contact local agriculture office\n\n🔴 **e-KYC Mandatory:** Complete OTP-based e-KYC on portal",
+        "hi": "📊 **पीएम-किसान पेमेंट स्टेटस कैसे चेक करें**\n\n**तरीका 1: ऑनलाइन पोर्टल**\n1. pmkisan.gov.in पर जाएं\n2. 'Beneficiary Status' क्लिक करें\n3. आधार/मोबाइल/खाता नंबर डालें\n4. 'Get Data' क्लिक करें\n5. सभी किश्तों की जानकारी देखें\n\n**तरीका 2: मोबाइल ऐप**\n• PM-KISAN ऐप डाउनलोड करें\n• आधार/मोबाइल डालें\n\n**तरीका 3: हेल्पलाइन**\n📞 155261 या 011-24300606\n\n💸 **किश्त समय:**\n• पहली: अप्रैल - जुलाई\n• दूसरी: अगस्त - नवंबर\n• तीसरी: दिसंबर - मार्च\n\n⚠️ **पैसा न आने पर:**\n• e-KYC पूरा हुआ या नहीं चेक करें\n• आधार-बैंक सीडिंग जांचें\n• रिजेक्शन कारण देखें\n• स्थानीय कृषि कार्यालय संपर्क करें"
+      }
+    },
+    {
+      "variations": [
+        "PM Kisan e-KYC",
+        "PM Kisan eKYC kaise kare",
+        "पीएम किसान e-KYC कैसे करें",
+        "PM Kisan Aadhaar verification",
+        "PM Kisan OTP verification"
+      ],
+      "response": {
+        "en": "🔐 **PM-KISAN e-KYC Guide**\n\n📱 **Online e-KYC (OTP Based):**\n1. Visit https://pmkisan.gov.in\n2. Click 'eKYC'\n3. Enter Aadhaar number\n4. Click 'Search'\n5. Enter OTP received on Aadhaar-linked mobile\n6. Submit - e-KYC complete!\n\n🏢 **Offline e-KYC (Biometric):**\n• Visit nearest CSC center\n• Carry Aadhaar card\n• Biometric verification done\n• Fee: ₹15-25\n\n⚠️ **Important:**\n• e-KYC mandatory for all beneficiaries\n• Without e-KYC, installment will be held\n• Valid for 1 year (re-verification needed)\n• Mobile must be linked with Aadhaar\n\n📞 **Help:** If mobile not linked with Aadhaar, visit Aadhaar Seva Kendra first",
+        "hi": "🔐 **पीएम-किसान e-KYC गाइड**\n\n📱 **ऑनलाइन e-KYC (OTP आधारित):**\n1. pmkisan.gov.in पर जाएं\n2. 'eKYC' क्लिक करें\n3. आधार नंबर डालें\n4. 'Search' क्लिक करें\n5. आधार से जुड़े मोबाइल पर आया OTP डालें\n6. सबमिट - e-KYC पूर्ण!\n\n🏢 **ऑफलाइन e-KYC (बायोमेट्रिक):**\n• नजदीकी CSC केंद्र जाएं\n• आधार कार्ड साथ लाएं\n• बायोमेट्रिक वेरिफिकेशन\n• शुल्क: ₹15-25\n\n⚠️ **जरूरी:**\n• सभी लाभार्थियों के लिए e-KYC अनिवार्य\n• e-KYC बिना किश्त रुकेगी\n• 1 साल के लिए वैध\n• मोबाइल आधार से जुड़ा होना चाहिए"
+      }
+    }
+  ],
+
+  "kcc_queries": [
+    {
+      "variations": [
+        "What is Kisan Credit Card?",
+        "KCC kya hai",
+        "किसान क्रेडिट कार्ड क्या है?",
+        "Kisan Credit Card scheme",
+        "KCC loan",
+        "KCC ke fayde"
+      ],
+      "response": {
+        "en": "💳 **Kisan Credit Card (KCC) Scheme**\n\n📋 **About:**\nCredit facility for farmers for cultivation, post-harvest, consumption needs and allied activities at low interest rates.\n\n💰 **Credit Limit:**\n• Up to ₹3 lakhs @ 7% interest\n• With Interest Subvention: Effective 4% (if paid on time)\n• Above ₹3 lakhs: Normal interest rates apply\n\n✅ **Eligible For:**\n• Crop cultivation\n• Post-harvest expenses\n• Farm machinery\n• Animal husbandry\n• Fisheries\n• Allied activities\n\n📄 **Documents:**\n• Application form\n• Identity proof (Aadhaar)\n• Address proof\n• Land ownership documents\n• Passport photos\n• Crop/farming details\n\n🏦 **Where to Apply:**\n• Nationalized banks\n• Regional Rural Banks\n• Cooperative banks\n• Small Finance Banks\n\n⏱️ **Validity:** 5 years (annual review)\n\n📞 **Contact:** Visit nearest bank branch",
+        "hi": "💳 **किसान क्रेडिट कार्ड (KCC) योजना**\n\n📋 **जानकारी:**\nखेती, कटाई के बाद, उपभोग और सहायक गतिविधियों के लिए कम ब्याज पर ऋण सुविधा।\n\n💰 **क्रेडिट सीमा:**\n• ₹3 लाख तक @ 7% ब्याज\n• ब्याज छूट के साथ: प्रभावी 4% (समय पर भुगतान पर)\n• ₹3 लाख से ऊपर: सामान्य ब्याज दर\n\n✅ **किसके लिए:**\n• फसल उत्पादन\n• कटाई के बाद खर्च\n• कृषि मशीनरी\n• पशुपालन\n• मछली पालन\n\n📄 **दस्तावेज:**\n• आवेदन पत्र\n• आधार कार्ड\n• पता प्रमाण\n• जमीन के कागजात\n• पासपोर्ट फोटो\n\n🏦 **कहां आवेदन करें:**\n• राष्ट्रीयकृत बैंक\n• ग्रामीण क्षेत्रीय बैंक\n• सहकारी बैंक\n\n⏱️ **वैधता:** 5 वर्ष"
+      }
+    },
+    {
+      "variations": [
+        "KCC interest rate",
+        "KCC ka byaj kitna hai",
+        "KCC पर ब्याज कितना है",
+        "KCC loan interest",
+        "KCC interest subvention"
+      ],
+      "response": {
+        "en": "💵 **KCC Interest Rates**\n\n**For Loans up to ₹3 Lakhs:**\n• Base Rate: 7% per annum\n• Interest Subvention: 3% (Govt. subsidy)\n• Prompt Repayment Bonus: Additional 3%\n• **Effective Rate: 4% only!** (if repaid on time)\n\n**For Loans above ₹3 Lakhs:**\n• Normal bank lending rates apply\n• No interest subvention\n\n**Interest Subvention Conditions:**\n• Loan up to ₹3 lakhs\n• Used for short-term crop cultivation\n• Repaid within 1 year\n\n📅 **Example:**\n• Loan: ₹1,00,000\n• Interest @7%: ₹7,000\n• Govt. Subsidy: ₹3,000\n• Prompt Payment Bonus: ₹3,000\n• **Net Interest: ₹4,000 only (4%)**\n\n⚠️ **Note:** Interest subvention for crop loans only, not for allied activities",
+        "hi": "💵 **KCC ब्याज दरें**\n\n**₹3 लाख तक के ऋण के लिए:**\n• मूल दर: 7% वार्षिक\n• ब्याज छूट: 3% (सरकारी सब्सिडी)\n• समय पर भुगतान बोनस: अतिरिक्त 3%\n• **प्रभावी दर: केवल 4%!** (समय पर भुगतान पर)\n\n**₹3 लाख से ऊपर के ऋण के लिए:**\n• सामान्य बैंक दर लागू\n• कोई ब्याज छूट नहीं\n\n📅 **उदाहरण:**\n• ऋण: ₹1,00,000\n• ब्याज @7%: ₹7,000\n• सरकारी सब्सिडी: ₹3,000\n• समय पर भुगतान बोनस: ₹3,000\n• **शुद्ध ब्याज: केवल ₹4,000 (4%)**\n\n⚠️ **नोट:** ब्याज छूट केवल फसल ऋण के लिए"
+      }
+    }
+  ],
+
+  "crop_insurance_queries": [
+    {
+      "variations": [
+        "What is PMFBY?",
+        "PMFBY kya hai",
+        "पीएमएफबीवाई क्या है?",
+        "Pradhan Mantri Fasal Bima Yojana",
+        "crop insurance",
+        "fasal bima yojana",
+        "फसल बीमा योजना"
+      ],
+      "response": {
+        "en": "🛡️ **PMFBY (Pradhan Mantri Fasal Bima Yojana)**\n\n📋 **About:**\nComprehensive crop insurance scheme to provide financial support to farmers in case of crop loss/damage due to natural calamities.\n\n💰 **Premium Rates (Farmer Share):**\n• Kharif crops: 2% of sum insured\n• Rabi crops: 1.5% of sum insured\n• Horticulture/Commercial: 5% of sum insured\n\n🛡️ **Coverage:**\n• Pre-sowing losses (prevented sowing)\n• Standing crop losses (drought, flood, hail, etc.)\n• Post-harvest losses (up to 14 days)\n• Localized calamities (landslide, hailstorm)\n• Add-on: Wild animal attack coverage\n\n📅 **Enrollment Deadline:**\n• Kharif: July 31\n• Rabi: December 31\n\n📝 **How to Enroll:**\n• Visit bank (if loan taken)\n• CSC centers\n• Insurance company offices\n• Online: pmfby.gov.in\n\n📄 **Documents:**\n• Aadhaar card\n• Land records\n• Bank account\n• Sowing certificate\n\n📞 **Helpline:** 1800-180-1551",
+        "hi": "🛡️ **पीएमएफबीवाई (प्रधानमंत्री फसल बीमा योजना)**\n\n📋 **जानकारी:**\nप्राकृतिक आपदाओं से फसल नुकसान पर किसानों को वित्तीय सहायता देने वाली व्यापक बीमा योजना।\n\n💰 **प्रीमियम दर (किसान हिस्सा):**\n• खरीफ फसलें: बीमित राशि का 2%\n• रबी फसलें: बीमित राशि का 1.5%\n• बागवानी/वाणिज्यिक: बीमित राशि का 5%\n\n🛡️ **कवरेज:**\n• बुवाई पूर्व नुकसान\n• खड़ी फसल नुकसान (सूखा, बाढ़, ओला)\n• कटाई बाद नुकसान (14 दिन तक)\n• स्थानीय आपदाएं (भूस्खलन, ओलावृष्टि)\n• अतिरिक्त: जंगली जानवर हमला कवर\n\n📅 **नामांकन अंतिम तिथि:**\n• खरीफ: 31 जुलाई\n• रबी: 31 दिसंबर\n\n📝 **कैसे नामांकन करें:**\n• बैंक जाएं (यदि ऋण लिया है)\n• CSC केंद्र\n• बीमा कंपनी कार्यालय\n• ऑनलाइन: pmfby.gov.in\n\n📞 **हेल्पलाइन:** 1800-180-1551"
+      }
+    },
+    {
+      "variations": [
+        "How to claim crop insurance?",
+        "fasal bima claim kaise kare",
+        "फसल बीमा क्लेम कैसे करें",
+        "PMFBY claim process",
+        "crop loss complaint"
+      ],
+      "response": {
+        "en": "📝 **How to Claim PMFBY Crop Insurance**\n\n**Step 1: Report Crop Loss**\n• Within 72 hours of crop damage\n• Call: 1800-180-1551 (toll-free)\n• SMS to insurance company\n• Crop Insurance App\n• Visit bank/agriculture office\n\n**Step 2: Information Required**\n• Policy number\n• Name and contact\n• Location (village, survey number)\n• Crop name and sowing date\n• Nature of damage\n• Extent of loss (%)\n\n**Step 3: Damage Assessment**\n• Insurance surveyor visits field\n• Conducts crop cutting experiment\n• Assesses actual yield vs threshold\n\n**Step 4: Claim Settlement**\n• Claim processed by insurance company\n• Amount credited to bank account\n• Timeline: Within 2 months of harvest\n\n📱 **Crop Insurance App:**\n• Download 'Crop Insurance' app\n• Report damage with geo-tagged photos\n• Track claim status\n\n⚠️ **Important:**\n• Report within 72 hours\n• Keep crop photos as evidence\n• Don't harvest damaged crop before survey",
+        "hi": "📝 **पीएमएफबीवाई फसल बीमा क्लेम कैसे करें**\n\n**चरण 1: फसल नुकसान की सूचना दें**\n• नुकसान के 72 घंटे के भीतर\n• कॉल: 1800-180-1551 (टोल-फ्री)\n• बीमा कंपनी को SMS\n• क्रॉप इंश्योरेंस ऐप\n• बैंक/कृषि कार्यालय जाएं\n\n**चरण 2: आवश्यक जानकारी**\n• पॉलिसी नंबर\n• नाम और संपर्क\n• स्थान (गांव, सर्वे नंबर)\n• फसल का नाम और बुवाई तिथि\n• नुकसान का प्रकार\n• नुकसान का प्रतिशत\n\n**चरण 3: नुकसान आकलन**\n• बीमा सर्वेयर खेत आता है\n• फसल कटाई प्रयोग करता है\n\n**चरण 4: क्लेम निपटान**\n• बीमा कंपनी द्वारा प्रक्रिया\n• बैंक खाते में राशि जमा\n• समय: कटाई के 2 महीने में\n\n⚠️ **जरूरी:**\n• 72 घंटे में सूचना दें\n• फसल की फोटो रखें\n• सर्वे से पहले फसल न काटें"
+      }
+    }
+  ],
+
+  "soil_health_queries": [
+    {
+      "variations": [
+        "What is Soil Health Card?",
+        "Soil Health Card kya hai",
+        "मृदा स्वास्थ्य कार्ड क्या है?",
+        "mitti ki janch",
+        "soil testing",
+        "SHC scheme"
+      ],
+      "response": {
+        "en": "🌱 **Soil Health Card (SHC) Scheme**\n\n📋 **About:**\nGovernment initiative to provide farmers with soil health cards containing information about soil nutrient status and fertilizer recommendations.\n\n📊 **Card Contains:**\n• Soil nutrient status (N, P, K, S, Zn, etc.)\n• Soil type and pH\n• Organic carbon content\n• Crop-wise fertilizer recommendations\n• Soil amendment suggestions\n\n✅ **Benefits:**\n• Know exact fertilizer requirement\n• Reduce input costs\n• Improve crop yield\n• Maintain soil health\n• FREE service for farmers\n\n📝 **How to Get:**\n1. Contact agriculture department\n2. Soil sample collected from your field\n3. Tested in government lab\n4. Card issued with recommendations\n5. Valid for 3 years\n\n🌐 **Check Online:**\n• Visit: soilhealth.dac.gov.in\n• Enter Sample ID to view report\n\n📞 **Contact:** Block/District Agriculture Office",
+        "hi": "🌱 **मृदा स्वास्थ्य कार्ड (SHC) योजना**\n\n📋 **जानकारी:**\nकिसानों को मिट्टी की पोषक स्थिति और खाद सिफारिशों की जानकारी वाले कार्ड प्रदान करने की सरकारी पहल।\n\n📊 **कार्ड में जानकारी:**\n• मिट्टी पोषक स्थिति (N, P, K, S, Zn आदि)\n• मिट्टी का प्रकार और pH\n• जैविक कार्बन मात्रा\n• फसलवार खाद सिफारिश\n• मृदा सुधार सुझाव\n\n✅ **फायदे:**\n• सही खाद मात्रा पता चले\n• इनपुट लागत कम हो\n• उपज बढ़े\n• मिट्टी स्वस्थ रहे\n• किसानों के लिए मुफ्त\n\n📝 **कैसे प्राप्त करें:**\n1. कृषि विभाग से संपर्क करें\n2. खेत से मिट्टी का नमूना लिया जाता है\n3. सरकारी लैब में जांच\n4. सिफारिशों के साथ कार्ड जारी\n5. 3 साल के लिए वैध\n\n🌐 **ऑनलाइन देखें:**\n• soilhealth.dac.gov.in\n\n📞 **संपर्क:** ब्लॉक/जिला कृषि कार्यालय"
+      }
+    }
+  ],
+
+  "agricultural_machinery_queries": [
+    {
+      "variations": [
+        "subsidy on tractor",
+        "tractor par subsidy",
+        "ट्रैक्टर पर सब्सिडी",
+        "farm machinery subsidy",
+        "krishi yantra subsidy",
+        "कृषि यंत्र सब्सिडी"
+      ],
+      "response": {
+        "en": "🚜 **Farm Machinery Subsidy Schemes**\n\n**1. SMAM (Sub-Mission on Agricultural Mechanization)**\n\n💰 **Subsidy Rates:**\n• Tractor: 25-50% (max ₹1-1.5 lakh)\n• Rotavator: 40-50% (max ₹60,000-80,000)\n• Cultivator: 40-50%\n• Power tiller: 40-50%\n• Harvester (self-propelled): 40%\n• Thresher: 40-50%\n\n📊 **Category-wise:**\n• SC/ST/Women: 50% subsidy\n• Small/Marginal farmers: 50%\n• Other farmers: 40%\n\n📝 **How to Apply:**\n1. Visit: agrimachinery.nic.in\n2. Register with Aadhaar\n3. Select equipment and apply\n4. Upload documents\n5. Selection through lottery (if applications exceed budget)\n\n📄 **Documents:**\n• Aadhaar card\n• Land ownership proof\n• Bank account\n• Caste certificate (if applicable)\n• Quotation from dealer\n\n📞 **Contact:** District Agriculture Officer",
+        "hi": "🚜 **कृषि यंत्र सब्सिडी योजनाएं**\n\n**1. SMAM (कृषि मशीनीकरण उप-मिशन)**\n\n💰 **सब्सिडी दर:**\n• ट्रैक्टर: 25-50% (अधिकतम ₹1-1.5 लाख)\n• रोटावेटर: 40-50% (अधिकतम ₹60,000-80,000)\n• कल्टीवेटर: 40-50%\n• पावर टिलर: 40-50%\n• हार्वेस्टर: 40%\n• थ्रेशर: 40-50%\n\n📊 **श्रेणीवार:**\n• SC/ST/महिला: 50% सब्सिडी\n• छोटे/सीमांत किसान: 50%\n• अन्य किसान: 40%\n\n📝 **आवेदन कैसे करें:**\n1. agrimachinery.nic.in पर जाएं\n2. आधार से पंजीकरण करें\n3. यंत्र चुनें और आवेदन करें\n4. दस्तावेज अपलोड करें\n5. लॉटरी से चयन\n\n📄 **दस्तावेज:**\n• आधार कार्ड\n• जमीन के कागजात\n• बैंक खाता\n• जाति प्रमाण (यदि लागू)\n• डीलर से कोटेशन\n\n📞 **संपर्क:** जिला कृषि अधिकारी"
+      }
+    }
+  ],
+
+  "drip_irrigation_queries": [
+    {
+      "variations": [
+        "drip irrigation subsidy",
+        "drip irrigation par subsidy",
+        "ड्रिप सिंचाई पर सब्सिडी",
+        "PMKSY scheme",
+        "Per Drop More Crop",
+        "micro irrigation subsidy"
+      ],
+      "response": {
+        "en": "💧 **Drip/Micro Irrigation Subsidy (PMKSY)**\n\n📋 **About:**\nPradhan Mantri Krishi Sinchayee Yojana - Per Drop More Crop promotes micro irrigation for water conservation.\n\n💰 **Subsidy Rates:**\n• Small/Marginal farmers: 55%\n• Other farmers: 45%\n• Additional state subsidy in some states\n\n🔧 **Covered Equipment:**\n• Drip irrigation system\n• Sprinkler system\n• Micro sprinklers\n• Rain gun\n• Fertigation unit\n\n📊 **Approximate Cost & Subsidy:**\n• Drip (per hectare): ₹1-1.5 lakh, Subsidy: ₹50,000-80,000\n• Sprinkler (per hectare): ₹40,000-60,000, Subsidy: ₹20,000-30,000\n\n📝 **How to Apply:**\n1. Contact District Agriculture/Horticulture office\n2. Submit application with land documents\n3. Technical survey of land\n4. Approval and work order\n5. Installation by empanelled company\n6. Subsidy released after inspection\n\n📄 **Documents:**\n• Aadhaar card\n• Land documents (7/12)\n• Bank account\n• Water source proof\n\n📞 **Helpline:** State-specific",
+        "hi": "💧 **ड्रिप/सूक्ष्म सिंचाई सब्सिडी (PMKSY)**\n\n📋 **जानकारी:**\nप्रधानमंत्री कृषि सिंचायी योजना - प्रति बूंद अधिक फसल\n\n💰 **सब्सिडी दर:**\n• छोटे/सीमांत किसान: 55%\n• अन्य किसान: 45%\n• कुछ राज्यों में अतिरिक्त राज्य सब्सिडी\n\n🔧 **शामिल उपकरण:**\n• ड्रिप सिंचाई प्रणाली\n• स्प्रिंकलर प्रणाली\n• माइक्रो स्प्रिंकलर\n• रेन गन\n• फर्टीगेशन यूनिट\n\n📊 **अनुमानित लागत व सब्सिडी:**\n• ड्रिप (प्रति हेक्टेयर): ₹1-1.5 लाख, सब्सिडी: ₹50,000-80,000\n• स्प्रिंकलर (प्रति हेक्टेयर): ₹40,000-60,000, सब्सिडी: ₹20,000-30,000\n\n📝 **आवेदन कैसे करें:**\n1. जिला कृषि/बागवानी कार्यालय संपर्क करें\n2. जमीन दस्तावेजों सहित आवेदन\n3. जमीन का तकनीकी सर्वे\n4. अनुमोदन और कार्य आदेश\n5. पैनल कंपनी द्वारा स्थापना\n6. निरीक्षण बाद सब्सिडी जारी\n\n📄 **दस्तावेज:**\n• आधार कार्ड\n• जमीन के कागजात (7/12)\n• बैंक खाता\n• पानी स्रोत प्रमाण"
+      }
+    }
+  ],
+
+  "general_scheme_queries": [
+    {
+      "variations": [
+        "List of government schemes for farmers",
+        "kisan ke liye sarkari yojana",
+        "किसानों के लिए सरकारी योजनाएं",
+        "agriculture schemes",
+        "krishi yojana list",
+        "farmer welfare schemes"
+      ],
+      "response": {
+        "en": "📋 **Major Government Schemes for Farmers**\n\n**💰 Income Support:**\n1. PM-KISAN: ₹6,000/year direct transfer\n2. PM-KISAN Maan Dhan: Pension ₹3,000/month after 60\n\n**💳 Credit:**\n3. Kisan Credit Card (KCC): Loan @ 4% effective interest\n4. Agriculture Infrastructure Fund (AIF)\n\n**🛡️ Insurance:**\n5. PMFBY: Crop insurance @ 1.5-2% premium\n6. RWBCIS: Weather-based insurance\n\n**🌱 Soil & Irrigation:**\n7. Soil Health Card: Free soil testing\n8. PMKSY: Drip/sprinkler subsidy 45-55%\n\n**🚜 Machinery:**\n9. SMAM: Farm machinery subsidy 40-50%\n10. Custom Hiring Centers\n\n**🌾 Marketing:**\n11. e-NAM: Online mandi platform\n12. PM-AASHA: MSP assurance\n\n**🐄 Allied Activities:**\n13. RKVY: State agriculture development\n14. National Mission on Oilseeds\n15. National Horticulture Mission\n\n💡 **Tip:** Visit agriculture department or use UMANG app for all schemes",
+        "hi": "📋 **किसानों के लिए प्रमुख सरकारी योजनाएं**\n\n**💰 आय सहायता:**\n1. PM-KISAN: ₹6,000/वर्ष सीधे खाते में\n2. PM-KISAN मान धन: 60 के बाद ₹3,000/माह पेंशन\n\n**💳 ऋण:**\n3. किसान क्रेडिट कार्ड (KCC): 4% प्रभावी ब्याज पर ऋण\n4. कृषि अवसंरचना कोष (AIF)\n\n**🛡️ बीमा:**\n5. PMFBY: 1.5-2% प्रीमियम पर फसल बीमा\n6. RWBCIS: मौसम आधारित बीमा\n\n**🌱 मिट्टी व सिंचाई:**\n7. मृदा स्वास्थ्य कार्ड: मुफ्त मिट्टी जांच\n8. PMKSY: ड्रिप/स्प्रिंकलर पर 45-55% सब्सिडी\n\n**🚜 मशीनरी:**\n9. SMAM: कृषि यंत्रों पर 40-50% सब्सिडी\n10. कस्टम हायरिंग सेंटर\n\n**🌾 विपणन:**\n11. e-NAM: ऑनलाइन मंडी प्लेटफॉर्म\n12. PM-AASHA: MSP गारंटी\n\n💡 **सुझाव:** कृषि विभाग जाएं या UMANG ऐप इस्तेमाल करें"
+      }
+    },
+    {
+      "variations": [
+        "How to apply for government schemes?",
+        "sarkari yojana ke liye avedan kaise kare",
+        "सरकारी योजना के लिए आवेदन कैसे करें",
+        "government scheme application",
+        "yojana ka labh kaise le"
+      ],
+      "response": {
+        "en": "📝 **How to Apply for Government Schemes**\n\n**Online Application Methods:**\n\n🌐 **1. Scheme-specific Portals:**\n• PM-KISAN: pmkisan.gov.in\n• PMFBY: pmfby.gov.in\n• e-NAM: enam.gov.in\n• Farm Machinery: agrimachinery.nic.in\n\n📱 **2. Mobile Apps:**\n• UMANG App (all govt services)\n• KISAN Suvidha App\n• PM-KISAN Mobile App\n• mKisan App\n\n🏢 **3. Offline Methods:**\n• Common Service Centers (CSC)\n• District Agriculture Office\n• Block Development Office\n• Tehsil/Taluka Office\n• Bank branches (for KCC, loan schemes)\n\n📄 **General Documents Needed:**\n• Aadhaar card\n• Land records (Khasra/Khata/7-12)\n• Bank passbook\n• Mobile number linked with Aadhaar\n• Passport photos\n• Caste certificate (if applicable)\n\n💡 **Tips:**\n• Keep all documents ready before applying\n• Ensure Aadhaar-bank linking\n• Check eligibility criteria carefully\n• Keep application receipt/acknowledgment\n\n📞 **Help:** Contact local agriculture officer or call state helpline",
+        "hi": "📝 **सरकारी योजनाओं के लिए आवेदन कैसे करें**\n\n**ऑनलाइन आवेदन तरीके:**\n\n🌐 **1. योजना-विशेष पोर्टल:**\n• PM-KISAN: pmkisan.gov.in\n• PMFBY: pmfby.gov.in\n• e-NAM: enam.gov.in\n• कृषि यंत्र: agrimachinery.nic.in\n\n📱 **2. मोबाइल ऐप:**\n• UMANG ऐप (सभी सरकारी सेवाएं)\n• किसान सुविधा ऐप\n• PM-KISAN मोबाइल ऐप\n\n🏢 **3. ऑफलाइन तरीके:**\n• जन सेवा केंद्र (CSC)\n• जिला कृषि कार्यालय\n• ब्लॉक विकास कार्यालय\n• तहसील/तालुका कार्यालय\n• बैंक शाखा (KCC, ऋण योजनाओं के लिए)\n\n📄 **सामान्य दस्तावेज:**\n• आधार कार्ड\n• जमीन के कागजात (खसरा/खाता/7-12)\n• बैंक पासबुक\n• आधार से जुड़ा मोबाइल\n• पासपोर्ट फोटो\n• जाति प्रमाण (यदि लागू)\n\n💡 **सुझाव:**\n• आवेदन से पहले सभी दस्तावेज तैयार रखें\n• आधार-बैंक लिंकिंग सुनिश्चित करें\n• पात्रता मानदंड ध्यान से जांचें\n\n📞 **सहायता:** स्थानीय कृषि अधिकारी से संपर्क करें"
+      }
+    }
+  ]
+}

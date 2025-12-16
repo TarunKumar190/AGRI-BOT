@@ -1,0 +1,318 @@
+{
+  "metadata": {
+    "name": "Massive Q&A Training Dataset - Part 3 (Disease Detection & Treatment)",
+    "total_examples": 500,
+    "languages": ["en", "hi"],
+    "category": "disease_detection"
+  },
+
+  "wheat_diseases": [
+    {
+      "disease": "Yellow Rust / Stripe Rust",
+      "name_hi": "पीला रतुआ",
+      "variations": [
+        "wheat yellow rust",
+        "gehun mein peela ratua",
+        "गेहूं में पीला रतुआ",
+        "wheat leaves turning yellow",
+        "yellow stripes on wheat",
+        "गेहूं की पत्तियों पर पीली धारियां",
+        "stripe rust in wheat"
+      ],
+      "symptoms": {
+        "en": "Yellow-orange pustules in linear stripes along leaf veins, leaves turn yellow and dry",
+        "hi": "पत्तियों की नसों के साथ पीले-नारंगी फफोले धारियों में, पत्तियां पीली होकर सूख जाती हैं"
+      },
+      "response": {
+        "en": "🦠 **Yellow Rust (Stripe Rust) in Wheat**\n\n🔍 **Symptoms:**\n• Yellow-orange pustules in linear stripes\n• Stripes run parallel to leaf veins\n• Leaves turn yellow and dry up\n• Occurs in cool, humid weather (10-15°C)\n\n💊 **Treatment:**\n\n**Chemical Control:**\n• Propiconazole 25% EC @ 500ml/ha\n• Tebuconazole 25% EC @ 500ml/ha\n• Mancozeb 75% WP @ 2kg/ha\n• Spray at first appearance of pustules\n• Repeat after 15 days if needed\n\n**Resistant Varieties:**\n• HD-3086, PBW-725, WH-1105\n• DBW-187, DBW-222\n\n⚠️ **Prevention:**\n• Avoid late sowing\n• Use certified disease-free seed\n• Spray water-soluble sulphur 3g/L\n• Destroy wheat stubble after harvest\n\n📞 **Report to Agriculture Department if outbreak severe**",
+        "hi": "🦠 **गेहूं में पीला रतुआ**\n\n🔍 **लक्षण:**\n• पीले-नारंगी फफोले धारियों में\n• धारियां पत्ती की नसों के समानांतर\n• पत्तियां पीली होकर सूख जाती हैं\n• ठंडे, नम मौसम (10-15°C) में होता है\n\n💊 **इलाज:**\n\n**रासायनिक नियंत्रण:**\n• प्रोपिकोनाजोल 25% EC @ 500ml/हेक्टेयर\n• टेबुकोनाजोल 25% EC @ 500ml/हेक्टेयर\n• मैंकोजेब 75% WP @ 2kg/हेक्टेयर\n• फफोले दिखते ही छिड़काव करें\n• 15 दिन बाद दोहराएं\n\n**प्रतिरोधी किस्में:**\n• HD-3086, PBW-725, WH-1105\n\n⚠️ **बचाव:**\n• देर से बुवाई न करें\n• प्रमाणित बीज उपयोग करें"
+      }
+    },
+    {
+      "disease": "Brown Rust / Leaf Rust",
+      "name_hi": "भूरा रतुआ",
+      "variations": [
+        "wheat brown rust",
+        "gehun mein bhura ratua",
+        "गेहूं में भूरा रतुआ",
+        "brown spots on wheat leaves",
+        "leaf rust wheat",
+        "गेहूं की पत्तियों पर भूरे धब्बे"
+      ],
+      "response": {
+        "en": "🦠 **Brown Rust (Leaf Rust) in Wheat**\n\n🔍 **Symptoms:**\n• Small, round brown-orange pustules\n• Scattered randomly on leaves (not in stripes)\n• More common in warm, humid weather (15-25°C)\n• Lower leaves affected first\n\n💊 **Treatment:**\n• Propiconazole 25% EC @ 500ml/ha\n• Tebuconazole 25% EC @ 500ml/ha\n• Triademefon 25% WP @ 500g/ha\n\n**Resistant Varieties:** HD-3086, WH-1105\n\n⚠️ **Prevention:**\n• Use resistant varieties\n• Avoid excess nitrogen\n• Destroy volunteer wheat plants",
+        "hi": "🦠 **गेहूं में भूरा रतुआ**\n\n🔍 **लक्षण:**\n• छोटे, गोल भूरे-नारंगी फफोले\n• पत्तियों पर बिखरे हुए (धारियों में नहीं)\n• गर्म, नम मौसम (15-25°C) में ज्यादा\n\n💊 **इलाज:**\n• प्रोपिकोनाजोल 25% EC @ 500ml/हेक्टेयर\n• टेबुकोनाजोल 25% EC @ 500ml/हेक्टेयर"
+      }
+    },
+    {
+      "disease": "Loose Smut",
+      "name_hi": "खुला कंड / अनावृत कंड",
+      "variations": [
+        "wheat loose smut",
+        "gehun mein khula kand",
+        "गेहूं में खुला कंड",
+        "black powder in wheat ear",
+        "गेहूं की बालियों में काला पाउडर"
+      ],
+      "response": {
+        "en": "🦠 **Loose Smut in Wheat**\n\n🔍 **Symptoms:**\n• Entire ear replaced by black powdery mass\n• Black spores blow away with wind\n• Only rachis (stem) remains\n• Infected ears emerge earlier\n\n💊 **Treatment:**\n\n**Seed Treatment (Most Important):**\n• Carboxin 75% WP @ 2.5g/kg seed\n• Vitavax Power @ 2g/kg seed\n• Thiram + Carboxin\n\n**Hot Water Treatment:**\n• Soak seeds in water at 52°C for 10 minutes\n\n⚠️ **Prevention:**\n• Use disease-free certified seed\n• Rogue out infected plants before spore release\n• Don't save seed from infected fields",
+        "hi": "🦠 **गेहूं में खुला कंड**\n\n🔍 **लक्षण:**\n• पूरी बाली काले पाउडर में बदल जाती है\n• काले बीजाणु हवा से उड़ जाते हैं\n• केवल डंठल बचता है\n\n💊 **इलाज:**\n\n**बीज उपचार (सबसे जरूरी):**\n• कार्बोक्सिन 75% WP @ 2.5 ग्राम/किलो बीज\n• वाइटावैक्स पावर @ 2 ग्राम/किलो बीज\n\n**गर्म पानी उपचार:**\n• बीजों को 52°C पानी में 10 मिनट भिगोएं\n\n⚠️ **बचाव:**\n• प्रमाणित बीज उपयोग करें"
+      }
+    }
+  ],
+
+  "rice_diseases": [
+    {
+      "disease": "Blast / Rice Blast",
+      "name_hi": "ब्लास्ट / झोंका",
+      "variations": [
+        "rice blast disease",
+        "dhan mein blast",
+        "धान में ब्लास्ट",
+        "rice leaves brown spots",
+        "धान की पत्तियों पर धब्बे",
+        "jhonka rog",
+        "rice neck blast"
+      ],
+      "response": {
+        "en": "🦠 **Rice Blast Disease**\n\n🔍 **Symptoms:**\n• Diamond/eye-shaped spots on leaves\n• Spots with grey center, brown margin\n• Neck blast: Black/brown at panicle base (most damaging)\n• Node blast: Black nodes\n\n💊 **Treatment:**\n\n**Chemical Control:**\n• Tricyclazole 75% WP @ 300g/ha\n• Carbendazim 50% WP @ 500g/ha\n• Isoprothiolane 40% EC @ 750ml/ha\n• Spray at first symptom + 15 days later\n\n**Neck Blast Prevention:**\n• Spray Tricyclazole at booting stage\n• Repeat at 50% flowering\n\n**Resistant Varieties:** Pusa-1612, Swarna\n\n⚠️ **Prevention:**\n• Avoid excess nitrogen\n• Maintain proper spacing\n• Avoid water stress",
+        "hi": "🦠 **धान में ब्लास्ट रोग**\n\n🔍 **लक्षण:**\n• पत्तियों पर हीरे/आंख के आकार के धब्बे\n• धब्बे के बीच में सफेद, किनारे भूरे\n• गर्दन ब्लास्ट: बाली के आधार पर काला/भूरा (सबसे हानिकारक)\n\n💊 **इलाज:**\n\n**रासायनिक नियंत्रण:**\n• ट्राइसाइक्लाजोल 75% WP @ 300 ग्राम/हेक्टेयर\n• कार्बेन्डाजिम 50% WP @ 500 ग्राम/हेक्टेयर\n• पहले लक्षण पर + 15 दिन बाद छिड़काव\n\n⚠️ **बचाव:**\n• ज्यादा नाइट्रोजन न डालें\n• सही दूरी रखें"
+      }
+    },
+    {
+      "disease": "Bacterial Leaf Blight (BLB)",
+      "name_hi": "जीवाणु झुलसा",
+      "variations": [
+        "rice bacterial blight",
+        "dhan mein jhulsa",
+        "धान में झुलसा",
+        "rice leaves drying from tip",
+        "धान की पत्तियां सिरे से सूख रही हैं",
+        "BLB disease rice"
+      ],
+      "response": {
+        "en": "🦠 **Bacterial Leaf Blight (BLB) in Rice**\n\n🔍 **Symptoms:**\n• Water-soaked lesions at leaf tips/margins\n• Lesions turn yellow, then straw-colored\n• Leaves dry from tip downward\n• Bacterial ooze (milky drops) in morning\n\n💊 **Treatment:**\n\n**Chemical Control:**\n• Streptocycline 150ppm + Copper oxychloride 0.25%\n• Copper hydroxide 77% WP @ 1kg/ha\n• Spray 2-3 times at 10-day intervals\n\n**Seed Treatment:**\n• Streptocycline 40ppm for 12 hours\n\n**Resistant Varieties:** Swarna-Sub1, Sahbhagi\n\n⚠️ **Prevention:**\n• Avoid clipping seedling tips\n• Reduce nitrogen\n• Ensure proper drainage\n• Destroy crop residue",
+        "hi": "🦠 **धान में जीवाणु झुलसा (BLB)**\n\n🔍 **लक्षण:**\n• पत्ती के सिरे/किनारों पर पानी जैसे धब्बे\n• धब्बे पीले, फिर पुआल रंग के\n• पत्तियां सिरे से नीचे सूखती हैं\n• सुबह जीवाणु रिसाव (दूधिया बूंदें)\n\n💊 **इलाज:**\n• स्ट्रेप्टोसाइक्लिन 150ppm + कॉपर ऑक्सीक्लोराइड 0.25%\n• 10 दिन के अंतराल पर 2-3 बार छिड़काव\n\n⚠️ **बचाव:**\n• पौध की पत्तियां न काटें\n• नाइट्रोजन कम करें\n• पानी निकास अच्छा रखें"
+      }
+    },
+    {
+      "disease": "Sheath Blight",
+      "name_hi": "आच्छद झुलसा",
+      "variations": [
+        "rice sheath blight",
+        "dhan mein achchhad jhulsa",
+        "धान में आच्छद झुलसा",
+        "rice stem rotting",
+        "धान का तना सड़ रहा है"
+      ],
+      "response": {
+        "en": "🦠 **Sheath Blight in Rice**\n\n🔍 **Symptoms:**\n• Oval/irregular greenish-grey spots on leaf sheath\n• Spots enlarge and coalesce\n• Affected tillers may lodge\n• White fungal growth visible in humid conditions\n\n💊 **Treatment:**\n• Hexaconazole 5% EC @ 500ml/ha\n• Propiconazole 25% EC @ 500ml/ha\n• Validamycin 3% SL @ 500ml/ha\n• Spray at boot leaf stage\n\n⚠️ **Prevention:**\n• Avoid dense planting\n• Balanced fertilization\n• Remove and burn crop debris",
+        "hi": "🦠 **धान में आच्छद झुलसा**\n\n🔍 **लक्षण:**\n• पत्ती के आवरण पर हरे-भूरे अंडाकार धब्बे\n• धब्बे बड़े होकर मिल जाते हैं\n• प्रभावित कल्ले गिर सकते हैं\n\n💊 **इलाज:**\n• हेक्साकोनाजोल 5% EC @ 500ml/हेक्टेयर\n• प्रोपिकोनाजोल 25% EC @ 500ml/हेक्टेयर"
+      }
+    }
+  ],
+
+  "vegetable_diseases": [
+    {
+      "crop": "tomato",
+      "disease": "Early Blight",
+      "name_hi": "अगेती झुलसा",
+      "variations": [
+        "tomato early blight",
+        "tamatar mein jhulsa",
+        "टमाटर में झुलसा",
+        "tomato leaves brown spots",
+        "टमाटर की पत्तियों पर भूरे धब्बे",
+        "tamatar ke patte sukh rahe hain"
+      ],
+      "response": {
+        "en": "🦠 **Early Blight in Tomato**\n\n🔍 **Symptoms:**\n• Dark brown circular spots with concentric rings (target board pattern)\n• Spots on lower, older leaves first\n• Yellowing around spots\n• Defoliation in severe cases\n• Fruit: Dark sunken spots near stem\n\n💊 **Treatment:**\n\n**Chemical Control:**\n• Mancozeb 75% WP @ 2.5g/L\n• Chlorothalonil 75% WP @ 2g/L\n• Azoxystrobin 23% SC @ 1ml/L\n• Spray every 10-14 days\n\n**Biological:**\n• Trichoderma viride @ 4g/L\n\n⚠️ **Prevention:**\n• Remove lower infected leaves\n• Avoid overhead irrigation\n• Maintain proper spacing\n• Crop rotation (3 years)",
+        "hi": "🦠 **टमाटर में अगेती झुलसा**\n\n🔍 **लक्षण:**\n• गहरे भूरे गोल धब्बे, गाढ़े छल्लों वाले (निशाना पैटर्न)\n• पहले निचली, पुरानी पत्तियों पर\n• धब्बों के आसपास पीलापन\n• गंभीर मामलों में पत्तियां झड़ जाती हैं\n\n💊 **इलाज:**\n• मैंकोजेब 75% WP @ 2.5 ग्राम/लीटर\n• क्लोरोथालोनिल 75% WP @ 2 ग्राम/लीटर\n• हर 10-14 दिन छिड़काव\n\n⚠️ **बचाव:**\n• संक्रमित निचली पत्तियां हटाएं\n• ऊपर से पानी न दें"
+      }
+    },
+    {
+      "crop": "tomato",
+      "disease": "Late Blight",
+      "name_hi": "पछेती झुलसा",
+      "variations": [
+        "tomato late blight",
+        "tamatar mein pachteti jhulsa",
+        "टमाटर में पछेती झुलसा",
+        "tomato plants dying rapidly",
+        "टमाटर के पौधे तेजी से मर रहे हैं"
+      ],
+      "response": {
+        "en": "🦠 **Late Blight in Tomato (Phytophthora)**\n\n🔍 **Symptoms:**\n• Large, water-soaked, irregular dark patches\n• White fungal growth on leaf underside (humid mornings)\n• Rapid plant death in wet weather\n• Fruit: Brown, firm rot\n\n💊 **Treatment:**\n• Metalaxyl + Mancozeb @ 2.5g/L (RIDOMIL GOLD)\n• Cymoxanil + Mancozeb @ 3g/L (CURZATE)\n• Dimethomorph 50% WP @ 1g/L\n• Spray immediately when detected\n• Repeat every 5-7 days in wet weather\n\n⚠️ **Emergency Action:**\n• Very destructive, spreads rapidly\n• Remove and destroy infected plants immediately\n• Don't compost infected material\n• Spray preventively in rainy season",
+        "hi": "🦠 **टमाटर में पछेती झुलसा**\n\n🔍 **लक्षण:**\n• बड़े, पानी जैसे, अनियमित काले धब्बे\n• पत्ती के नीचे सफेद फफूंद (नम सुबह)\n• गीले मौसम में तेजी से पौधा मरना\n\n💊 **इलाज:**\n• मेटालैक्सिल + मैंकोजेब @ 2.5 ग्राम/लीटर (रिडोमिल गोल्ड)\n• साइमोक्सैनिल + मैंकोजेब @ 3 ग्राम/लीटर\n• तुरंत छिड़काव करें\n• गीले मौसम में हर 5-7 दिन दोहराएं\n\n⚠️ **आपातकालीन:**\n• बहुत विनाशकारी, तेजी से फैलता है\n• संक्रमित पौधे तुरंत हटाकर नष्ट करें"
+      }
+    },
+    {
+      "crop": "potato",
+      "disease": "Late Blight",
+      "name_hi": "पछेती झुलसा",
+      "variations": [
+        "potato late blight",
+        "aloo mein jhulsa",
+        "आलू में झुलसा",
+        "potato leaves dying",
+        "आलू की पत्तियां मर रही हैं"
+      ],
+      "response": {
+        "en": "🦠 **Late Blight in Potato**\n\n🔍 **Symptoms:**\n• Water-soaked dark spots on leaf tips/margins\n• White mold on leaf underside\n• Rapid plant death in 3-4 days\n• Tuber: Irregular brown patches extending inside\n\n💊 **Treatment:**\n• Metalaxyl + Mancozeb @ 2.5g/L\n• Cymoxanil + Mancozeb @ 3g/L\n• Fenamidone + Mancozeb @ 3g/L\n• First spray: 45 days after planting\n• Repeat every 7-10 days\n\n⚠️ **Prevention:**\n• Use certified disease-free seed tubers\n• Ridge planting helps drain water\n• Cut foliage 10-15 days before harvest\n• Don't harvest wet tubers",
+        "hi": "🦠 **आलू में पछेती झुलसा**\n\n🔍 **लक्षण:**\n• पत्ती के सिरे/किनारों पर पानी जैसे काले धब्बे\n• पत्ती के नीचे सफेद फफूंद\n• 3-4 दिन में तेजी से पौधा मरना\n• आलू: अनियमित भूरे धब्बे अंदर तक\n\n💊 **इलाज:**\n• मेटालैक्सिल + मैंकोजेब @ 2.5 ग्राम/लीटर\n• पहला छिड़काव: बुवाई के 45 दिन बाद\n• हर 7-10 दिन दोहराएं"
+      }
+    },
+    {
+      "crop": "onion",
+      "disease": "Purple Blotch",
+      "name_hi": "बैंगनी धब्बा",
+      "variations": [
+        "onion purple blotch",
+        "pyaz mein bainagni dhabbba",
+        "प्याज में बैंगनी धब्बा",
+        "onion leaves purple spots",
+        "प्याज की पत्तियों पर बैंगनी धब्बे"
+      ],
+      "response": {
+        "en": "🦠 **Purple Blotch in Onion**\n\n🔍 **Symptoms:**\n• Small white spots that enlarge to purple-brown\n• Sunken lesions with concentric rings\n• Leaves may break at lesion\n• Neck infection leads to storage rot\n\n💊 **Treatment:**\n• Mancozeb 75% WP @ 2.5g/L\n• Chlorothalonil 75% WP @ 2g/L\n• Copper Hydroxide @ 2g/L\n• Add sticker @ 1ml/L\n• Spray every 10-15 days\n\n⚠️ **Prevention:**\n• Proper spacing for air circulation\n• Avoid evening irrigation\n• Crop rotation",
+        "hi": "🦠 **प्याज में बैंगनी धब्बा**\n\n🔍 **लक्षण:**\n• छोटे सफेद धब्बे जो बैंगनी-भूरे हो जाते हैं\n• गाढ़े छल्लों वाले धंसे धब्बे\n• पत्तियां धब्बे पर टूट सकती हैं\n\n💊 **इलाज:**\n• मैंकोजेब 75% WP @ 2.5 ग्राम/लीटर\n• क्लोरोथालोनिल 75% WP @ 2 ग्राम/लीटर\n• स्टिकर @ 1ml/लीटर मिलाएं"
+      }
+    }
+  ],
+
+  "cotton_diseases": [
+    {
+      "disease": "Cotton Leaf Curl Virus (CLCuV)",
+      "name_hi": "पत्ता मरोड़ विषाणु",
+      "variations": [
+        "cotton leaf curl",
+        "kapas mein patta marod",
+        "कपास में पत्ता मरोड़",
+        "cotton leaves curling",
+        "कपास की पत्तियां मुड़ रही हैं",
+        "CLCuV cotton"
+      ],
+      "response": {
+        "en": "🦠 **Cotton Leaf Curl Virus (CLCuV)**\n\n🔍 **Symptoms:**\n• Upward/downward curling of leaves\n• Thickened, leathery leaves\n• Leaf veins thickened (enation)\n• Stunted growth, reduced bolls\n• Spread by whiteflies\n\n💊 **Treatment:**\n\n**Vector Control (Whitefly):**\n• Imidacloprid 17.8% SL @ 0.5ml/L\n• Acetamiprid 20% SP @ 0.3g/L\n• Thiamethoxam 25% WG @ 0.3g/L\n• Diafenthiuron 50% WP @ 1g/L\n\n**Resistant Varieties:**\n• MRC-7918, Ankur-3028\n\n⚠️ **Prevention:**\n• Uproot infected plants immediately\n• Control whitefly with yellow sticky traps\n• Avoid late sowing\n• Maintain field hygiene",
+        "hi": "🦠 **कपास में पत्ता मरोड़ विषाणु (CLCuV)**\n\n🔍 **लक्षण:**\n• पत्तियों का ऊपर/नीचे मुड़ना\n• मोटी, चमड़े जैसी पत्तियां\n• पत्ती की नसें मोटी\n• बौना विकास, कम टिंडे\n• सफेद मक्खी से फैलता है\n\n💊 **इलाज:**\n\n**सफेद मक्खी नियंत्रण:**\n• इमिडाक्लोप्रिड 17.8% SL @ 0.5ml/लीटर\n• एसिटामिप्रिड 20% SP @ 0.3 ग्राम/लीटर\n• थायामेथोक्साम 25% WG @ 0.3 ग्राम/लीटर\n\n⚠️ **बचाव:**\n• संक्रमित पौधे तुरंत उखाड़ें\n• पीले चिपचिपे ट्रैप लगाएं\n• देर से बुवाई न करें"
+      }
+    }
+  ],
+
+  "pest_queries": [
+    {
+      "pest": "Stem Borer",
+      "name_hi": "तना छेदक",
+      "crops": ["rice", "maize", "sugarcane"],
+      "variations": [
+        "stem borer control",
+        "tana chhedak ka ilaj",
+        "तना छेदक का इलाज",
+        "dead heart in rice",
+        "rice plant heart drying",
+        "धान में सूखी गिद्ध"
+      ],
+      "response": {
+        "en": "🐛 **Stem Borer Control**\n\n🔍 **Symptoms:**\n• Dead heart (central leaf dries) in vegetative stage\n• White ear (empty panicle) in reproductive stage\n• Caterpillar inside stem\n\n💊 **Treatment:**\n\n**Chemical Control:**\n• Cartap Hydrochloride 4G @ 25kg/ha (granules in water)\n• Chlorantraniliprole 0.4% GR @ 10kg/ha\n• Carbofuran 3G @ 25kg/ha\n• Spray: Chlorantraniliprole 18.5% SC @ 150ml/ha\n\n**Biological:**\n• Trichogramma parasitoid @ 1 lakh eggs/ha (3-4 releases)\n• Light traps to catch adult moths\n\n⚠️ **Prevention:**\n• Clip nursery leaf tips before transplanting\n• Balanced nitrogen use\n• Remove and destroy stubbles",
+        "hi": "🐛 **तना छेदक नियंत्रण**\n\n🔍 **लक्षण:**\n• सूखी गिद्ध (बीच की पत्ती सूखना) - वृद्धि अवस्था में\n• सफेद बाली (खाली बाली) - फूल अवस्था में\n• तने के अंदर सुंडी\n\n💊 **इलाज:**\n• कार्टाप हाइड्रोक्लोराइड 4G @ 25kg/हेक्टेयर (पानी में दानेदार)\n• क्लोरैंट्रानिलिप्रोल 0.4% GR @ 10kg/हेक्टेयर\n• ट्राइकोग्रामा @ 1 लाख अंडे/हेक्टेयर (3-4 बार)\n\n⚠️ **बचाव:**\n• रोपाई से पहले पौध की पत्तियां काटें\n• संतुलित नाइट्रोजन"
+      }
+    },
+    {
+      "pest": "Fall Armyworm",
+      "name_hi": "सैनिक कीट",
+      "crops": ["maize"],
+      "variations": [
+        "fall armyworm maize",
+        "makka mein sainik keet",
+        "मक्का में सैनिक कीट",
+        "caterpillars eating maize leaves",
+        "मक्के की पत्तियां कट रही हैं",
+        "army worm control"
+      ],
+      "response": {
+        "en": "🐛 **Fall Armyworm Control in Maize**\n\n🔍 **Symptoms:**\n• Ragged holes in leaves\n• Sawdust-like frass in whorl\n• Caterpillar with inverted Y on head\n• Severe damage to young plants\n\n💊 **Treatment:**\n\n**Chemical (for severe attack):**\n• Spinetoram 11.7% SC @ 0.5ml/L\n• Chlorantraniliprole 18.5% SC @ 0.4ml/L\n• Emamectin Benzoate 5% SG @ 0.4g/L\n\n**Biological:**\n• Beauveria bassiana @ 5g/L\n• Neem oil 5%\n• Trichogramma releases\n\n**Application:**\n• Direct spray into whorl in evening\n• Add sand+insecticide in whorl\n\n⚠️ **Monitoring:**\n• Install pheromone traps\n• Scout fields weekly\n• Early detection crucial",
+        "hi": "🐛 **मक्का में सैनिक कीट नियंत्रण**\n\n🔍 **लक्षण:**\n• पत्तियों में अनियमित छेद\n• गोभ में भूसे जैसा मल\n• सिर पर उल्टा Y वाली सुंडी\n• छोटे पौधों को गंभीर नुकसान\n\n💊 **इलाज:**\n• स्पाइनेटोरम 11.7% SC @ 0.5ml/लीटर\n• क्लोरैंट्रानिलिप्रोल 18.5% SC @ 0.4ml/लीटर\n• इमामेक्टिन बेंजोएट 5% SG @ 0.4 ग्राम/लीटर\n\n**छिड़काव:**\n• शाम को सीधे गोभ में छिड़काव\n• रेत+कीटनाशक गोभ में डालें\n\n⚠️ **निगरानी:**\n• फेरोमोन ट्रैप लगाएं\n• साप्ताहिक निरीक्षण"
+      }
+    },
+    {
+      "pest": "Pink Bollworm",
+      "name_hi": "गुलाबी सुंडी",
+      "crops": ["cotton"],
+      "variations": [
+        "pink bollworm cotton",
+        "kapas mein gulabi sundi",
+        "कपास में गुलाबी सुंडी",
+        "cotton bolls damaged",
+        "कपास के टिंडे खराब"
+      ],
+      "response": {
+        "en": "🐛 **Pink Bollworm Control in Cotton**\n\n🔍 **Symptoms:**\n• Rosetted/flared squares\n• Double seed in bolls\n• Pink larvae inside bolls\n• Damaged lint quality\n\n💊 **Treatment:**\n\n**Pheromone Traps (Essential):**\n• Install @ 5 traps/hectare\n• Replace lures every 21 days\n\n**Chemical (When ETL exceeded):**\n• Profenofos 50% EC @ 2ml/L\n• Quinalphos 25% EC @ 2ml/L\n• Cypermethrin 10% EC @ 1ml/L\n\n**Mass Trapping:**\n• 40-50 traps/hectare for mass trapping\n\n⚠️ **Prevention:**\n• Early and uniform picking\n• Destroy crop residue immediately\n• Deep ploughing after harvest\n• Don't carry over cotton seed",
+        "hi": "🐛 **कपास में गुलाबी सुंडी नियंत्रण**\n\n🔍 **लक्षण:**\n• गुलाबी/फूले हुए कली\n• टिंडों में दोहरे बीज\n• टिंडों के अंदर गुलाबी लार्वा\n\n💊 **इलाज:**\n\n**फेरोमोन ट्रैप (जरूरी):**\n• 5 ट्रैप/हेक्टेयर\n• हर 21 दिन ल्यूर बदलें\n\n**रासायनिक:**\n• प्रोफेनोफॉस 50% EC @ 2ml/लीटर\n• क्विनालफॉस 25% EC @ 2ml/लीटर\n\n⚠️ **बचाव:**\n• जल्दी और एकसाथ चुनाई\n• फसल अवशेष तुरंत नष्ट करें\n• कटाई बाद गहरी जुताई"
+      }
+    },
+    {
+      "pest": "Aphids",
+      "name_hi": "मोयला / माहू",
+      "crops": ["mustard", "wheat", "vegetables"],
+      "variations": [
+        "aphid control",
+        "moyala ka ilaj",
+        "मोयला का इलाज",
+        "small green insects on plants",
+        "पौधों पर छोटे हरे कीड़े",
+        "sarson mein mahu",
+        "सरसों में माहू"
+      ],
+      "response": {
+        "en": "🐛 **Aphid Control**\n\n🔍 **Symptoms:**\n• Clusters of soft-bodied insects (green/black/grey)\n• Curling/yellowing of leaves\n• Honeydew secretion (sticky leaves)\n• Sooty mold growth\n• Stunted growth\n\n💊 **Treatment:**\n\n**Chemical:**\n• Imidacloprid 17.8% SL @ 0.3ml/L\n• Thiamethoxam 25% WG @ 0.3g/L\n• Dimethoate 30% EC @ 2ml/L\n• Acetamiprid 20% SP @ 0.3g/L\n\n**Biological/Organic:**\n• Neem oil 3-5% spray\n• Soap solution spray\n• Release ladybird beetles\n\n⚠️ **For Mustard:**\n• First spray at 10% infestation\n• Spray in evening when bees not foraging",
+        "hi": "🐛 **मोयला/माहू नियंत्रण**\n\n🔍 **लक्षण:**\n• नरम शरीर वाले कीड़ों के समूह (हरे/काले)\n• पत्तियों का मुड़ना/पीला होना\n• चिपचिपा स्राव\n• बौना विकास\n\n💊 **इलाज:**\n• इमिडाक्लोप्रिड 17.8% SL @ 0.3ml/लीटर\n• थायामेथोक्साम 25% WG @ 0.3 ग्राम/लीटर\n• डाइमेथोएट 30% EC @ 2ml/लीटर\n\n**जैविक:**\n• नीम तेल 3-5% छिड़काव\n• साबुन घोल छिड़काव\n\n⚠️ **सरसों के लिए:**\n• 10% प्रकोप पर पहला छिड़काव\n• शाम को छिड़काव करें (मधुमक्खी बचाव)"
+      }
+    },
+    {
+      "pest": "Whitefly",
+      "name_hi": "सफेद मक्खी",
+      "crops": ["cotton", "vegetables", "soybean"],
+      "variations": [
+        "whitefly control",
+        "safed makhi ka ilaj",
+        "सफेद मक्खी का इलाज",
+        "white flies on leaves",
+        "पत्तियों पर सफेद मक्खियां",
+        "kapas mein safed makhi"
+      ],
+      "response": {
+        "en": "🐛 **Whitefly Control**\n\n🔍 **Symptoms:**\n• Tiny white flying insects under leaves\n• Yellowing of leaves\n• Honeydew/sooty mold\n• Virus transmission (CLCuV in cotton)\n\n💊 **Treatment:**\n\n**Chemical:**\n• Diafenthiuron 50% WP @ 1g/L\n• Pyriproxyfen 10% EC @ 1ml/L\n• Spiromesifen 22.9% SC @ 0.5ml/L\n• Buprofezin 25% SC @ 1ml/L\n\n**Biological:**\n• Neem oil 3% + garlic extract\n• Yellow sticky traps @ 20/acre\n• Verticillium lecanii spray\n\n⚠️ **Important:**\n• Rotate insecticides (different MOA)\n• Spray on leaf underside\n• Early morning or evening spray\n• Don't mix with alkaline pesticides",
+        "hi": "🐛 **सफेद मक्खी नियंत्रण**\n\n🔍 **लक्षण:**\n• पत्तियों के नीचे छोटी सफेद उड़ने वाली मक्खियां\n• पत्तियों का पीला होना\n• चिपचिपापन/काली फफूंद\n• विषाणु रोग फैलाती है\n\n💊 **इलाज:**\n• डायफेंथ्युरॉन 50% WP @ 1 ग्राम/लीटर\n• पाइरीप्रॉक्सीफेन 10% EC @ 1ml/लीटर\n• स्पाइरोमेसिफेन 22.9% SC @ 0.5ml/लीटर\n\n**जैविक:**\n• नीम तेल 3% + लहसुन अर्क\n• पीले चिपचिपे ट्रैप @ 20/एकड़\n\n⚠️ **जरूरी:**\n• कीटनाशक बदल-बदल कर प्रयोग करें\n• पत्ती के नीचे छिड़काव करें"
+      }
+    }
+  ],
+
+  "general_disease_queries": [
+    {
+      "variations": [
+        "plant leaves turning yellow",
+        "patte peele ho rahe hain",
+        "पत्ते पीले हो रहे हैं",
+        "why are leaves yellow",
+        "पत्तियां क्यों पीली हो रही हैं"
+      ],
+      "response": {
+        "en": "🟡 **Why Leaves Turn Yellow - Diagnosis Guide**\n\n**1. Nutrient Deficiency:**\n• **Nitrogen:** Older leaves yellow first, overall pale\n  - Apply urea or DAP\n• **Iron:** Young leaves yellow, veins green (chlorosis)\n  - Spray ferrous sulphate 0.5%\n• **Magnesium:** Older leaves, interveinal yellowing\n  - Apply MgSO4\n• **Zinc:** Stunted, bronze-yellow young leaves\n  - Spray ZnSO4 0.5%\n\n**2. Overwatering:**\n• Waterlogged roots can't absorb nutrients\n• Reduce irrigation, improve drainage\n\n**3. Pest/Disease:**\n• Check for aphids, whiteflies (suck sap)\n• Check for fungal spots\n\n**4. Root Problems:**\n• Root rot due to fungi\n• Check root health\n\n**Quick Check:**\n• Where is yellowing? (Old vs new leaves)\n• Pattern? (Uniform vs patches vs veins)\n• Any pests visible?\n• Recent heavy rain/irrigation?",
+        "hi": "🟡 **पत्ते पीले क्यों होते हैं - निदान गाइड**\n\n**1. पोषक तत्वों की कमी:**\n• **नाइट्रोजन:** पुरानी पत्तियां पहले पीली\n  - यूरिया या DAP डालें\n• **लोहा:** नई पत्तियां पीली, नसें हरी\n  - फेरस सल्फेट 0.5% छिड़काव\n• **जिंक:** बौनापन, कांस्य-पीली नई पत्तियां\n  - ZnSO4 0.5% छिड़काव\n\n**2. ज्यादा पानी:**\n• जलभराव से जड़ें पोषक नहीं ले पातीं\n• सिंचाई कम करें, निकास सुधारें\n\n**3. कीट/रोग:**\n• माहू, सफेद मक्खी की जांच करें\n• फफूंद धब्बे देखें\n\n**त्वरित जांच:**\n• पीलापन कहां? (पुरानी vs नई पत्तियां)\n• कोई कीट दिखते हैं?\n• हाल में भारी बारिश/सिंचाई?"
+      }
+    },
+    {
+      "variations": [
+        "how to identify plant disease",
+        "plant disease kaise pahchane",
+        "पौधे की बीमारी कैसे पहचानें",
+        "crop disease symptoms",
+        "फसल रोग के लक्षण"
+      ],
+      "response": {
+        "en": "🔍 **How to Identify Plant Diseases**\n\n**Step 1: Observe Symptoms**\n• **Spots:** Shape, color, pattern (round, angular, rings)\n• **Wilting:** Whole plant vs one side\n• **Yellowing:** Pattern (interveinal, edges, uniform)\n• **Lesions:** Sunken, raised, watery\n• **Growth:** Stunted, distorted, galls\n\n**Step 2: Check Pattern**\n• **Fungal:** Spots with defined margins, fuzzy growth\n• **Bacterial:** Water-soaked, slimy, ooze\n• **Viral:** Mosaic patterns, curling, stunting\n• **Nutrient:** Uniform, predictable patterns\n\n**Step 3: Environmental Conditions**\n• Recent weather (rain, humidity, temperature)\n• Irrigation method\n• Field history\n\n**Step 4: Take Photo & Consult**\n• Clear photos of symptoms\n• Include healthy part for comparison\n• Consult agriculture officer or use disease detection app\n\n📞 **Contact local KVK or Agriculture Department for confirmation**",
+        "hi": "🔍 **पौधे की बीमारी कैसे पहचानें**\n\n**चरण 1: लक्षण देखें**\n• **धब्बे:** आकार, रंग, पैटर्न\n• **मुरझाना:** पूरा पौधा vs एक तरफ\n• **पीलापन:** पैटर्न (नसों के बीच, किनारे)\n• **घाव:** धंसे, उभरे, पानी जैसे\n\n**चरण 2: पैटर्न जांचें**\n• **फफूंद:** स्पष्ट किनारों वाले धब्बे, रोएंदार वृद्धि\n• **जीवाणु:** पानी जैसे, चिपचिपे\n• **विषाणु:** मोज़ेक पैटर्न, मुड़ना\n\n**चरण 3: फोटो लें और परामर्श करें**\n• लक्षणों की स्पष्ट फोटो\n• स्वस्थ भाग भी शामिल करें\n• कृषि अधिकारी या ऐप से परामर्श\n\n📞 **स्थानीय KVK या कृषि विभाग से संपर्क करें**"
+      }
+    }
+  ]
+}

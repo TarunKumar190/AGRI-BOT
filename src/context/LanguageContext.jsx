@@ -8,10 +8,6 @@ export const SUPPORTED_LANGUAGES = [
   { code: 'hi', name: 'Hindi', native: 'हिन्दी', flag: '🇮🇳' },
   { code: 'te', name: 'Telugu', native: 'తెలుగు', flag: '🇮🇳' },
   { code: 'mr', name: 'Marathi', native: 'मराठी', flag: '🇮🇳' },
-  { code: 'ta', name: 'Tamil', native: 'தமிழ்', flag: '🇮🇳' },
-  { code: 'kn', name: 'Kannada', native: 'ಕನ್ನಡ', flag: '🇮🇳' },
-  { code: 'pa', name: 'Punjabi', native: 'ਪੰਜਾਬੀ', flag: '🇮🇳' },
-  { code: 'bn', name: 'Bengali', native: 'বাংলা', flag: '🇮🇳' },
 ];
 
 export function LanguageProvider({ children }) {

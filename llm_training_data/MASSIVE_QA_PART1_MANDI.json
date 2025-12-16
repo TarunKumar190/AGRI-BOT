@@ -1,0 +1,748 @@
+{
+  "metadata": {
+    "name": "Massive Q&A Training Dataset - Part 1 (Mandi Prices)",
+    "total_examples": 500,
+    "languages": ["en", "hi", "te", "mr"],
+    "category": "mandi_prices"
+  },
+
+  "mandi_price_queries": [
+    {
+      "variations": [
+        "What is wheat price today?",
+        "wheat ka bhav kya hai?",
+        "गेहूं का भाव क्या है?",
+        "गेहूं का रेट बताओ",
+        "wheat rate today",
+        "aaj gehun ka daam",
+        "wheat mandi price",
+        "गेहूं मंडी भाव",
+        "wheat ki kimat",
+        "gehun ka mandi bhav",
+        "गेहूं कितने का है?",
+        "wheat selling price",
+        "गेहूं बेचने का भाव",
+        "current wheat rate",
+        "आज गेहूं का क्या भाव चल रहा है?"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "wheat" },
+      "response_template": {
+        "en": "🌾 **Wheat (गेहूं) Price Today**\n\n📍 Major Mandis:\n• Khanna (Punjab): ₹{price}/quintal\n• Karnal (Haryana): ₹{price}/quintal\n• Agra (UP): ₹{price}/quintal\n\n📋 MSP 2024-25: ₹2,275/quintal\n📈 Trend: {trend}\n\n💡 *Prices vary by variety and quality*",
+        "hi": "🌾 **गेहूं का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• खन्ना (पंजाब): ₹{price}/क्विंटल\n• करनाल (हरियाणा): ₹{price}/क्विंटल\n• आगरा (UP): ₹{price}/क्विंटल\n\n📋 MSP 2024-25: ₹2,275/क्विंटल\n📈 रुझान: {trend}\n\n💡 *भाव किस्म और गुणवत्ता पर निर्भर*"
+      }
+    },
+    {
+      "variations": [
+        "rice price in punjab",
+        "punjab mein chawal ka bhav",
+        "पंजाब में धान का भाव",
+        "paddy rate punjab",
+        "धान का रेट पंजाब",
+        "rice mandi price punjab",
+        "punjab rice market rate",
+        "पंजाब धान मंडी भाव",
+        "chawal ki kimat punjab",
+        "punjab me dhan kitne ka hai"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "rice", "location": "punjab" },
+      "response_template": {
+        "en": "🍚 **Rice/Paddy Price in Punjab**\n\n📍 Punjab Mandis:\n• Khanna: ₹{price}/quintal\n• Amritsar: ₹{price}/quintal\n• Ludhiana: ₹{price}/quintal\n\n📋 MSP 2024-25: ₹2,300/quintal\n\n🌾 Basmati: ₹3,500-4,500/quintal\n🌾 PR varieties: ₹2,200-2,400/quintal",
+        "hi": "🍚 **पंजाब में धान/चावल का भाव**\n\n📍 पंजाब मंडियां:\n• खन्ना: ₹{price}/क्विंटल\n• अमृतसर: ₹{price}/क्विंटल\n• लुधियाना: ₹{price}/क्विंटल\n\n📋 MSP 2024-25: ₹2,300/क्विंटल\n\n🌾 बासमती: ₹3,500-4,500/क्विंटल\n🌾 PR किस्में: ₹2,200-2,400/क्विंटल"
+      }
+    },
+    {
+      "variations": [
+        "onion price today",
+        "pyaz ka bhav",
+        "प्याज का भाव",
+        "onion rate",
+        "प्याज का दाम",
+        "aaj pyaz kitne ka hai",
+        "onion mandi price",
+        "प्याज मंडी रेट",
+        "pyaz ki kimat",
+        "onion wholesale price",
+        "प्याज थोक भाव",
+        "lasalgaon onion rate"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "onion" },
+      "response_template": {
+        "en": "🧅 **Onion Price Today**\n\n📍 Major Mandis:\n• Lasalgaon (Maharashtra): ₹{price}/quintal\n• Nashik: ₹{price}/quintal\n• Azadpur (Delhi): ₹{price}/quintal\n\n📈 Trend: {trend}\n⚠️ *Onion prices are highly volatile*\n\n💡 Best selling time: March-April (storage onion)",
+        "hi": "🧅 **प्याज का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• लासलगांव (महाराष्ट्र): ₹{price}/क्विंटल\n• नासिक: ₹{price}/क्विंटल\n• आजादपुर (दिल्ली): ₹{price}/क्विंटल\n\n📈 रुझान: {trend}\n⚠️ *प्याज के भाव में उतार-चढ़ाव होता है*\n\n💡 बेचने का सही समय: मार्च-अप्रैल"
+      }
+    },
+    {
+      "variations": [
+        "tomato price",
+        "tamatar ka bhav",
+        "टमाटर का भाव",
+        "tomato rate today",
+        "टमाटर का दाम",
+        "tamatar kitne ka hai",
+        "tomato mandi price",
+        "टमाटर मंडी रेट",
+        "tomato wholesale rate",
+        "टमाटर थोक भाव"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "tomato" },
+      "response_template": {
+        "en": "🍅 **Tomato Price Today**\n\n📍 Major Mandis:\n• Kolar (Karnataka): ₹{price}/quintal\n• Azadpur (Delhi): ₹{price}/quintal\n• Nashik: ₹{price}/quintal\n\n📈 Trend: {trend}\n⚠️ *Highly seasonal - prices vary greatly*\n\n💡 Peak production: Dec-Feb (low prices)\n📉 Scarcity: July-Sept (high prices)",
+        "hi": "🍅 **टमाटर का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• कोलार (कर्नाटक): ₹{price}/क्विंटल\n• आजादपुर (दिल्ली): ₹{price}/क्विंटल\n• नासिक: ₹{price}/क्विंटल\n\n📈 रुझान: {trend}\n⚠️ *मौसमी उतार-चढ़ाव होता है*"
+      }
+    },
+    {
+      "variations": [
+        "potato price",
+        "aloo ka bhav",
+        "आलू का भाव",
+        "potato rate",
+        "आलू का दाम",
+        "aloo kitne ka hai",
+        "potato mandi price",
+        "आलू मंडी रेट",
+        "agra potato rate",
+        "आगरा आलू भाव"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "potato" },
+      "response_template": {
+        "en": "🥔 **Potato Price Today**\n\n📍 Major Mandis:\n• Agra (UP): ₹{price}/quintal\n• Farrukhabad: ₹{price}/quintal\n• Indore (MP): ₹{price}/quintal\n\n📈 Trend: {trend}\n\n💡 Cold storage potatoes available year-round\n⚠️ Fresh harvest: Feb-March (lower prices)",
+        "hi": "🥔 **आलू का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• आगरा (UP): ₹{price}/क्विंटल\n• फर्रुखाबाद: ₹{price}/क्विंटल\n• इंदौर (MP): ₹{price}/क्विंटल\n\n📈 रुझान: {trend}\n\n💡 कोल्ड स्टोरेज आलू साल भर उपलब्ध"
+      }
+    },
+    {
+      "variations": [
+        "soybean price",
+        "soybean ka bhav",
+        "सोयाबीन का भाव",
+        "soybean rate indore",
+        "सोयाबीन रेट",
+        "soya ka daam",
+        "soybean mandi price mp",
+        "मध्य प्रदेश सोयाबीन भाव",
+        "indore soybean rate",
+        "सोयाबीन इंदौर मंडी"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "soybean" },
+      "response_template": {
+        "en": "🫘 **Soybean Price Today**\n\n📍 Major Mandis:\n• Indore (MP): ₹{price}/quintal\n• Ujjain: ₹{price}/quintal\n• Dewas: ₹{price}/quintal\n\n📋 MSP 2024-25: ₹4,892/quintal\n📈 Trend: {trend}",
+        "hi": "🫘 **सोयाबीन का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• इंदौर (MP): ₹{price}/क्विंटल\n• उज्जैन: ₹{price}/क्विंटल\n• देवास: ₹{price}/क्विंटल\n\n📋 MSP 2024-25: ₹4,892/क्विंटल"
+      }
+    },
+    {
+      "variations": [
+        "cotton price",
+        "kapas ka bhav",
+        "कपास का भाव",
+        "cotton rate gujarat",
+        "कपास का दाम",
+        "narma ka rate",
+        "cotton mandi price",
+        "कपास मंडी रेट",
+        "kapas kitne ka hai",
+        "rajkot cotton rate"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "cotton" },
+      "response_template": {
+        "en": "🧵 **Cotton Price Today**\n\n📍 Major Mandis:\n• Rajkot (Gujarat): ₹{price}/quintal\n• Gondal: ₹{price}/quintal\n• Sirsa (Haryana): ₹{price}/quintal\n\n📋 MSP 2024-25: ₹7,121/quintal (medium staple)\n📈 Trend: {trend}",
+        "hi": "🧵 **कपास/नरमा का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• राजकोट (गुजरात): ₹{price}/क्विंटल\n• गोंडल: ₹{price}/क्विंटल\n• सिरसा (हरियाणा): ₹{price}/क्विंटल\n\n📋 MSP 2024-25: ₹7,121/क्विंटल"
+      }
+    },
+    {
+      "variations": [
+        "mustard price",
+        "sarson ka bhav",
+        "सरसों का भाव",
+        "mustard rate rajasthan",
+        "सरसों का दाम",
+        "sarson ki kimat",
+        "mustard mandi price",
+        "सरसों मंडी रेट",
+        "alwar mustard rate",
+        "सरसों अलवर मंडी"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "mustard" },
+      "response_template": {
+        "en": "🌻 **Mustard Price Today**\n\n📍 Major Mandis:\n• Alwar (Rajasthan): ₹{price}/quintal\n• Kota: ₹{price}/quintal\n• Gwalior (MP): ₹{price}/quintal\n\n📋 MSP 2024-25: ₹5,650/quintal\n📈 Trend: {trend}",
+        "hi": "🌻 **सरसों का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• अलवर (राजस्थान): ₹{price}/क्विंटल\n• कोटा: ₹{price}/क्विंटल\n• ग्वालियर (MP): ₹{price}/क्विंटल\n\n📋 MSP 2024-25: ₹5,650/क्विंटल"
+      }
+    },
+    {
+      "variations": [
+        "chana price",
+        "chana ka bhav",
+        "चना का भाव",
+        "gram rate",
+        "चने का दाम",
+        "chana ki kimat",
+        "gram mandi price",
+        "चना मंडी रेट",
+        "indore chana rate",
+        "चना इंदौर मंडी"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "gram" },
+      "response_template": {
+        "en": "🫛 **Gram (Chana) Price Today**\n\n📍 Major Mandis:\n• Indore (MP): ₹{price}/quintal\n• Bikaner (Rajasthan): ₹{price}/quintal\n• Latur (Maharashtra): ₹{price}/quintal\n\n📋 MSP 2024-25: ₹5,440/quintal\n📈 Trend: {trend}",
+        "hi": "🫛 **चने का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• इंदौर (MP): ₹{price}/क्विंटल\n• बीकानेर (राजस्थान): ₹{price}/क्विंटल\n• लातूर (महाराष्ट्र): ₹{price}/क्विंटल\n\n📋 MSP 2024-25: ₹5,440/क्विंटल"
+      }
+    },
+    {
+      "variations": [
+        "maize price",
+        "makka ka bhav",
+        "मक्का का भाव",
+        "corn rate",
+        "मक्के का दाम",
+        "makka ki kimat",
+        "maize mandi price",
+        "मक्का मंडी रेट",
+        "davangere maize rate",
+        "मक्का कर्नाटक भाव"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "maize" },
+      "response_template": {
+        "en": "🌽 **Maize Price Today**\n\n📍 Major Mandis:\n• Davangere (Karnataka): ₹{price}/quintal\n• Nizamabad (Telangana): ₹{price}/quintal\n• Gulbarga: ₹{price}/quintal\n\n📋 MSP 2024-25: ₹2,225/quintal\n📈 Trend: {trend}",
+        "hi": "🌽 **मक्के का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• दावणगेरे (कर्नाटक): ₹{price}/क्विंटल\n• निज़ामाबाद (तेलंगाना): ₹{price}/क्विंटल\n• गुलबर्गा: ₹{price}/क्विंटल\n\n📋 MSP 2024-25: ₹2,225/क्विंटल"
+      }
+    },
+    {
+      "variations": [
+        "groundnut price",
+        "moongfali ka bhav",
+        "मूंगफली का भाव",
+        "peanut rate",
+        "मूंगफली का दाम",
+        "groundnut mandi price",
+        "मूंगफली मंडी रेट",
+        "rajkot groundnut rate",
+        "मूंगफली गुजरात भाव"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "groundnut" },
+      "response_template": {
+        "en": "🥜 **Groundnut Price Today**\n\n📍 Major Mandis:\n• Rajkot (Gujarat): ₹{price}/quintal\n• Gondal: ₹{price}/quintal\n• Junagadh: ₹{price}/quintal\n\n📋 MSP 2024-25: ₹6,783/quintal\n📈 Trend: {trend}",
+        "hi": "🥜 **मूंगफली का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• राजकोट (गुजरात): ₹{price}/क्विंटल\n• गोंडल: ₹{price}/क्विंटल\n• जूनागढ़: ₹{price}/क्विंटल\n\n📋 MSP 2024-25: ₹6,783/क्विंटल"
+      }
+    },
+    {
+      "variations": [
+        "tur dal price",
+        "arhar ka bhav",
+        "अरहर का भाव",
+        "pigeon pea rate",
+        "तूर दाल का दाम",
+        "arhar dal ki kimat",
+        "tur mandi price",
+        "अरहर मंडी रेट",
+        "latur arhar rate"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "tur" },
+      "response_template": {
+        "en": "🫘 **Tur/Arhar (Pigeon Pea) Price Today**\n\n📍 Major Mandis:\n• Latur (Maharashtra): ₹{price}/quintal\n• Gulbarga (Karnataka): ₹{price}/quintal\n• Akola: ₹{price}/quintal\n\n📋 MSP 2024-25: ₹7,550/quintal\n📈 Trend: {trend}",
+        "hi": "🫘 **अरहर/तूर का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• लातूर (महाराष्ट्र): ₹{price}/क्विंटल\n• गुलबर्गा (कर्नाटक): ₹{price}/क्विंटल\n• अकोला: ₹{price}/क्विंटल\n\n📋 MSP 2024-25: ₹7,550/क्विंटल"
+      }
+    },
+    {
+      "variations": [
+        "moong price",
+        "moong ka bhav",
+        "मूंग का भाव",
+        "green gram rate",
+        "मूंग का दाम",
+        "moong dal ki kimat",
+        "moong mandi price",
+        "मूंग मंडी रेट"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "moong" },
+      "response_template": {
+        "en": "🫛 **Moong (Green Gram) Price Today**\n\n📍 Major Mandis:\n• Bikaner (Rajasthan): ₹{price}/quintal\n• Jodhpur: ₹{price}/quintal\n• Indore (MP): ₹{price}/quintal\n\n📋 MSP 2024-25: ₹8,682/quintal\n📈 Trend: {trend}",
+        "hi": "🫛 **मूंग का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• बीकानेर (राजस्थान): ₹{price}/क्विंटल\n• जोधपुर: ₹{price}/क्विंटल\n• इंदौर (MP): ₹{price}/क्विंटल\n\n📋 MSP 2024-25: ₹8,682/क्विंटल"
+      }
+    },
+    {
+      "variations": [
+        "urad price",
+        "urad ka bhav",
+        "उड़द का भाव",
+        "black gram rate",
+        "उड़द का दाम",
+        "urad dal ki kimat",
+        "urad mandi price",
+        "उड़द मंडी रेट"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "urad" },
+      "response_template": {
+        "en": "🫘 **Urad (Black Gram) Price Today**\n\n📍 Major Mandis:\n• Indore (MP): ₹{price}/quintal\n• Akola (Maharashtra): ₹{price}/quintal\n\n📋 MSP 2024-25: ₹7,400/quintal\n📈 Trend: {trend}",
+        "hi": "🫘 **उड़द का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• इंदौर (MP): ₹{price}/क्विंटल\n• अकोला (महाराष्ट्र): ₹{price}/क्विंटल\n\n📋 MSP 2024-25: ₹7,400/क्विंटल"
+      }
+    },
+    {
+      "variations": [
+        "sugarcane price",
+        "ganna ka bhav",
+        "गन्ने का भाव",
+        "sugarcane rate",
+        "गन्ना का दाम",
+        "ganne ki kimat",
+        "sugarcane frp",
+        "गन्ना FRP"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "sugarcane" },
+      "response_template": {
+        "en": "🎋 **Sugarcane Price Today**\n\n📋 FRP 2024-25: ₹315/quintal\n\n📍 State Advised Prices (SAP):\n• UP: ₹340-360/quintal\n• Maharashtra: ₹320-340/quintal\n• Karnataka: ₹330/quintal\n\n💡 Payment based on sugar recovery %",
+        "hi": "🎋 **गन्ने का भाव (आज)**\n\n📋 FRP 2024-25: ₹315/क्विंटल\n\n📍 राज्य निर्धारित मूल्य (SAP):\n• UP: ₹340-360/क्विंटल\n• महाराष्ट्र: ₹320-340/क्विंटल\n• कर्नाटक: ₹330/क्विंटल\n\n💡 भुगतान चीनी रिकवरी % पर निर्भर"
+      }
+    },
+    {
+      "variations": [
+        "garlic price",
+        "lehsun ka bhav",
+        "लहसुन का भाव",
+        "garlic rate",
+        "लहसुन का दाम",
+        "lehsun ki kimat",
+        "garlic mandi price",
+        "लहसुन मंडी रेट",
+        "neemuch garlic rate"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "garlic" },
+      "response_template": {
+        "en": "🧄 **Garlic Price Today**\n\n📍 Major Mandis:\n• Neemuch (MP): ₹{price}/quintal\n• Mandsaur: ₹{price}/quintal\n• Rajkot (Gujarat): ₹{price}/quintal\n\n📈 Trend: {trend}\n⚠️ *Prices vary by size and quality*",
+        "hi": "🧄 **लहसुन का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• नीमच (MP): ₹{price}/क्विंटल\n• मंदसौर: ₹{price}/क्विंटल\n• राजकोट (गुजरात): ₹{price}/क्विंटल\n\n📈 रुझान: {trend}"
+      }
+    },
+    {
+      "variations": [
+        "ginger price",
+        "adrak ka bhav",
+        "अदरक का भाव",
+        "ginger rate",
+        "अदरक का दाम",
+        "adrak ki kimat",
+        "ginger mandi price",
+        "अदरक मंडी रेट"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "ginger" },
+      "response_template": {
+        "en": "🫚 **Ginger Price Today**\n\n📍 Major Mandis:\n• Cochin (Kerala): ₹{price}/quintal\n• Siliguri (WB): ₹{price}/quintal\n• Dehradun: ₹{price}/quintal\n\n📈 Trend: {trend}",
+        "hi": "🫚 **अदरक का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• कोचीन (केरल): ₹{price}/क्विंटल\n• सिलीगुड़ी (WB): ₹{price}/क्विंटल\n• देहरादून: ₹{price}/क्विंटल"
+      }
+    },
+    {
+      "variations": [
+        "turmeric price",
+        "haldi ka bhav",
+        "हल्दी का भाव",
+        "turmeric rate",
+        "हल्दी का दाम",
+        "haldi ki kimat",
+        "turmeric mandi price",
+        "हल्दी मंडी रेट",
+        "sangli turmeric rate",
+        "erode turmeric price"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "turmeric" },
+      "response_template": {
+        "en": "🟡 **Turmeric Price Today**\n\n📍 Major Mandis:\n• Sangli (Maharashtra): ₹{price}/quintal\n• Erode (Tamil Nadu): ₹{price}/quintal\n• Nizamabad (Telangana): ₹{price}/quintal\n\n📈 Trend: {trend}",
+        "hi": "🟡 **हल्दी का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• सांगली (महाराष्ट्र): ₹{price}/क्विंटल\n• ईरोड (तमिलनाडु): ₹{price}/क्विंटल\n• निज़ामाबाद (तेलंगाना): ₹{price}/क्विंटल"
+      }
+    },
+    {
+      "variations": [
+        "cumin price",
+        "jeera ka bhav",
+        "जीरा का भाव",
+        "cumin rate",
+        "जीरे का दाम",
+        "jeera ki kimat",
+        "cumin mandi price",
+        "जीरा मंडी रेट",
+        "unjha jeera rate"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "cumin" },
+      "response_template": {
+        "en": "🤎 **Cumin (Jeera) Price Today**\n\n📍 Major Mandis:\n• Unjha (Gujarat): ₹{price}/quintal\n• Jodhpur (Rajasthan): ₹{price}/quintal\n\n📈 Trend: {trend}\n💡 *Unjha is Asia's largest cumin market*",
+        "hi": "🤎 **जीरे का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• ऊंझा (गुजरात): ₹{price}/क्विंटल\n• जोधपुर (राजस्थान): ₹{price}/क्विंटल\n\n📈 रुझान: {trend}\n💡 *ऊंझा एशिया का सबसे बड़ा जीरा बाजार*"
+      }
+    },
+    {
+      "variations": [
+        "banana price",
+        "kela ka bhav",
+        "केला का भाव",
+        "banana rate",
+        "केले का दाम",
+        "kela ki kimat",
+        "banana mandi price",
+        "केला मंडी रेट"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "banana" },
+      "response_template": {
+        "en": "🍌 **Banana Price Today**\n\n📍 Major Mandis:\n• Jalgaon (Maharashtra): ₹{price}/quintal\n• Madurai (TN): ₹{price}/quintal\n• Hajipur (Bihar): ₹{price}/quintal\n\n📈 Trend: {trend}",
+        "hi": "🍌 **केले का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• जलगांव (महाराष्ट्र): ₹{price}/क्विंटल\n• मदुरै (TN): ₹{price}/क्विंटल\n• हाजीपुर (बिहार): ₹{price}/क्विंटल"
+      }
+    },
+    {
+      "variations": [
+        "apple price",
+        "seb ka bhav",
+        "सेब का भाव",
+        "apple rate shimla",
+        "सेब का दाम",
+        "seb ki kimat",
+        "apple mandi price",
+        "सेब मंडी रेट",
+        "himachal apple rate"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "apple" },
+      "response_template": {
+        "en": "🍎 **Apple Price Today**\n\n📍 Major Mandis:\n• Shimla (HP): ₹{price}/box (20kg)\n• Srinagar (J&K): ₹{price}/box\n• Azadpur (Delhi): ₹{price}/box\n\n📈 Trend: {trend}\n💡 *Peak season: Aug-Nov*",
+        "hi": "🍎 **सेब का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• शिमला (HP): ₹{price}/पेटी (20kg)\n• श्रीनगर (J&K): ₹{price}/पेटी\n• आजादपुर (दिल्ली): ₹{price}/पेटी\n\n💡 *सीजन: अगस्त-नवंबर*"
+      }
+    },
+    {
+      "variations": [
+        "mango price",
+        "aam ka bhav",
+        "आम का भाव",
+        "mango rate",
+        "आम का दाम",
+        "aam ki kimat",
+        "mango mandi price",
+        "आम मंडी रेट",
+        "alphonso mango rate"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "mango" },
+      "response_template": {
+        "en": "🥭 **Mango Price Today**\n\n📍 Major Mandis:\n• Ratnagiri (Alphonso): ₹{price}/dozen\n• Malihabad (Dasheri): ₹{price}/dozen\n• Bangalore: ₹{price}/kg\n\n💡 *Season: April-July*\n⚠️ *Prices vary greatly by variety*",
+        "hi": "🥭 **आम का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• रत्नागिरी (अल्फांसो): ₹{price}/दर्जन\n• मलीहाबाद (दशहरी): ₹{price}/दर्जन\n• बैंगलोर: ₹{price}/किलो\n\n💡 *सीजन: अप्रैल-जुलाई*"
+      }
+    },
+    {
+      "variations": [
+        "green chilli price",
+        "hari mirch ka bhav",
+        "हरी मिर्च का भाव",
+        "chilli rate",
+        "मिर्च का दाम",
+        "mirch ki kimat",
+        "chilli mandi price",
+        "मिर्च मंडी रेट"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "green_chilli" },
+      "response_template": {
+        "en": "🌶️ **Green Chilli Price Today**\n\n📍 Major Mandis:\n• Guntur (AP): ₹{price}/quintal\n• Azadpur (Delhi): ₹{price}/quintal\n\n📈 Trend: {trend}\n⚠️ *Highly volatile prices*",
+        "hi": "🌶️ **हरी मिर्च का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• गुंटूर (AP): ₹{price}/क्विंटल\n• आजादपुर (दिल्ली): ₹{price}/क्विंटल\n\n📈 रुझान: {trend}"
+      }
+    },
+    {
+      "variations": [
+        "cauliflower price",
+        "phool gobhi ka bhav",
+        "फूल गोभी का भाव",
+        "cauliflower rate",
+        "गोभी का दाम",
+        "gobhi ki kimat",
+        "cauliflower mandi price",
+        "गोभी मंडी रेट"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "cauliflower" },
+      "response_template": {
+        "en": "🥦 **Cauliflower Price Today**\n\n📍 Major Mandis:\n• Azadpur (Delhi): ₹{price}/quintal\n• Pune: ₹{price}/quintal\n\n📈 Trend: {trend}\n💡 *Peak season: Nov-Feb*",
+        "hi": "🥦 **फूल गोभी का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• आजादपुर (दिल्ली): ₹{price}/क्विंटल\n• पुणे: ₹{price}/क्विंटल\n\n💡 *सीजन: नवंबर-फरवरी*"
+      }
+    },
+    {
+      "variations": [
+        "cabbage price",
+        "patta gobhi ka bhav",
+        "पत्ता गोभी का भाव",
+        "cabbage rate",
+        "बंद गोभी का दाम",
+        "band gobhi ki kimat",
+        "cabbage mandi price",
+        "पत्ता गोभी मंडी रेट"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "cabbage" },
+      "response_template": {
+        "en": "🥬 **Cabbage Price Today**\n\n📍 Major Mandis:\n• Azadpur (Delhi): ₹{price}/quintal\n• Pune: ₹{price}/quintal\n\n📈 Trend: {trend}",
+        "hi": "🥬 **पत्ता गोभी का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• आजादपुर (दिल्ली): ₹{price}/क्विंटल\n• पुणे: ₹{price}/क्विंटल"
+      }
+    },
+    {
+      "variations": [
+        "carrot price",
+        "gajar ka bhav",
+        "गाजर का भाव",
+        "carrot rate",
+        "गाजर का दाम",
+        "gajar ki kimat",
+        "carrot mandi price",
+        "गाजर मंडी रेट"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "carrot" },
+      "response_template": {
+        "en": "🥕 **Carrot Price Today**\n\n📍 Major Mandis:\n• Azadpur (Delhi): ₹{price}/quintal\n• Pune: ₹{price}/quintal\n\n📈 Trend: {trend}\n💡 *Peak season: Dec-Feb*",
+        "hi": "🥕 **गाजर का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• आजादपुर (दिल्ली): ₹{price}/क्विंटल\n• पुणे: ₹{price}/क्विंटल\n\n💡 *सीजन: दिसंबर-फरवरी*"
+      }
+    },
+    {
+      "variations": [
+        "brinjal price",
+        "baingan ka bhav",
+        "बैंगन का भाव",
+        "eggplant rate",
+        "बैंगन का दाम",
+        "baingan ki kimat",
+        "brinjal mandi price",
+        "बैंगन मंडी रेट"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "brinjal" },
+      "response_template": {
+        "en": "🍆 **Brinjal Price Today**\n\n📍 Major Mandis:\n• Azadpur (Delhi): ₹{price}/quintal\n• Pune: ₹{price}/quintal\n\n📈 Trend: {trend}",
+        "hi": "🍆 **बैंगन का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• आजादपुर (दिल्ली): ₹{price}/क्विंटल\n• पुणे: ₹{price}/क्विंटल"
+      }
+    },
+    {
+      "variations": [
+        "peas price",
+        "matar ka bhav",
+        "मटर का भाव",
+        "green peas rate",
+        "मटर का दाम",
+        "matar ki kimat",
+        "peas mandi price",
+        "मटर मंडी रेट"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "peas" },
+      "response_template": {
+        "en": "🫛 **Green Peas Price Today**\n\n📍 Major Mandis:\n• Azadpur (Delhi): ₹{price}/quintal\n• Shimla: ₹{price}/quintal\n\n📈 Trend: {trend}\n💡 *Peak season: Dec-Feb*",
+        "hi": "🫛 **मटर का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• आजादपुर (दिल्ली): ₹{price}/क्विंटल\n• शिमला: ₹{price}/क्विंटल\n\n💡 *सीजन: दिसंबर-फरवरी*"
+      }
+    },
+    {
+      "variations": [
+        "bajra price",
+        "bajra ka bhav",
+        "बाजरा का भाव",
+        "pearl millet rate",
+        "बाजरे का दाम",
+        "bajra ki kimat",
+        "bajra mandi price",
+        "बाजरा मंडी रेट"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "bajra" },
+      "response_template": {
+        "en": "🌾 **Bajra (Pearl Millet) Price Today**\n\n📍 Major Mandis:\n• Hisar (Haryana): ₹{price}/quintal\n• Jodhpur (Rajasthan): ₹{price}/quintal\n\n📋 MSP 2024-25: ₹2,625/quintal\n📈 Trend: {trend}",
+        "hi": "🌾 **बाजरे का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• हिसार (हरियाणा): ₹{price}/क्विंटल\n• जोधपुर (राजस्थान): ₹{price}/क्विंटल\n\n📋 MSP 2024-25: ₹2,625/क्विंटल"
+      }
+    },
+    {
+      "variations": [
+        "jowar price",
+        "jowar ka bhav",
+        "ज्वार का भाव",
+        "sorghum rate",
+        "ज्वार का दाम",
+        "jowar ki kimat",
+        "jowar mandi price",
+        "ज्वार मंडी रेट"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "crop": "jowar" },
+      "response_template": {
+        "en": "🌾 **Jowar (Sorghum) Price Today**\n\n📍 Major Mandis:\n• Solapur (Maharashtra): ₹{price}/quintal\n• Gulbarga (Karnataka): ₹{price}/quintal\n\n📋 MSP 2024-25: ₹3,371/quintal\n📈 Trend: {trend}",
+        "hi": "🌾 **ज्वार का भाव (आज)**\n\n📍 प्रमुख मंडियां:\n• सोलापुर (महाराष्ट्र): ₹{price}/क्विंटल\n• गुलबर्गा (कर्नाटक): ₹{price}/क्विंटल\n\n📋 MSP 2024-25: ₹3,371/क्विंटल"
+      }
+    }
+  ],
+
+  "location_based_queries": [
+    {
+      "variations": [
+        "mandi bhav punjab",
+        "punjab mandi rate",
+        "पंजाब मंडी भाव",
+        "punjab market prices",
+        "पंजाब में आज का भाव"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "location": "punjab" }
+    },
+    {
+      "variations": [
+        "haryana mandi bhav",
+        "haryana market rate",
+        "हरियाणा मंडी भाव",
+        "karnal mandi price",
+        "करनाल मंडी भाव"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "location": "haryana" }
+    },
+    {
+      "variations": [
+        "up mandi bhav",
+        "uttar pradesh mandi rate",
+        "यूपी मंडी भाव",
+        "agra mandi price",
+        "आगरा मंडी भाव"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "location": "uttar pradesh" }
+    },
+    {
+      "variations": [
+        "mp mandi bhav",
+        "madhya pradesh mandi rate",
+        "मध्य प्रदेश मंडी भाव",
+        "indore mandi price",
+        "इंदौर मंडी भाव"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "location": "madhya pradesh" }
+    },
+    {
+      "variations": [
+        "maharashtra mandi bhav",
+        "maharashtra market rate",
+        "महाराष्ट्र मंडी भाव",
+        "nashik mandi price",
+        "नासिक मंडी भाव"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "location": "maharashtra" }
+    },
+    {
+      "variations": [
+        "rajasthan mandi bhav",
+        "rajasthan market rate",
+        "राजस्थान मंडी भाव",
+        "jaipur mandi price",
+        "जयपुर मंडी भाव"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "location": "rajasthan" }
+    },
+    {
+      "variations": [
+        "gujarat mandi bhav",
+        "gujarat market rate",
+        "गुजरात मंडी भाव",
+        "rajkot mandi price",
+        "राजकोट मंडी भाव"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "location": "gujarat" }
+    },
+    {
+      "variations": [
+        "bihar mandi bhav",
+        "bihar market rate",
+        "बिहार मंडी भाव",
+        "patna mandi price",
+        "पटना मंडी भाव"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "location": "bihar" }
+    },
+    {
+      "variations": [
+        "karnataka mandi bhav",
+        "karnataka market rate",
+        "कर्नाटक मंडी भाव",
+        "hubli mandi price",
+        "हुबली मंडी भाव"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "location": "karnataka" }
+    },
+    {
+      "variations": [
+        "telangana mandi bhav",
+        "telangana market rate",
+        "तेलंगाना मंडी भाव",
+        "hyderabad mandi price",
+        "हैदराबाद मंडी भाव"
+      ],
+      "intent": "MANDI_PRICE",
+      "entities": { "location": "telangana" }
+    }
+  ],
+
+  "msp_queries": [
+    {
+      "variations": [
+        "what is msp",
+        "msp kya hai",
+        "MSP क्या है",
+        "minimum support price",
+        "न्यूनतम समर्थन मूल्य",
+        "msp meaning",
+        "MSP का मतलब"
+      ],
+      "intent": "MSP_INFO",
+      "response": {
+        "en": "📋 **What is MSP (Minimum Support Price)?**\n\nMSP is the price at which Government purchases crops from farmers, regardless of market price.\n\n🎯 **Purpose:**\n• Protects farmers from price crashes\n• Ensures fair returns on crops\n• Announced before sowing season\n\n📊 **MSP 2024-25 for Major Crops:**\n• Wheat: ₹2,275/quintal\n• Paddy: ₹2,300/quintal\n• Maize: ₹2,225/quintal\n• Cotton: ₹7,121/quintal\n• Soybean: ₹4,892/quintal\n\n🏛️ **Where to sell at MSP:**\n• Government procurement centers\n• APMC mandis during procurement season",
+        "hi": "📋 **MSP (न्यूनतम समर्थन मूल्य) क्या है?**\n\nMSP वह मूल्य है जिस पर सरकार किसानों से फसल खरीदती है, बाजार भाव चाहे कुछ भी हो।\n\n🎯 **उद्देश्य:**\n• किसानों को भाव गिरने से बचाना\n• फसल पर उचित मूल्य सुनिश्चित करना\n• बुवाई से पहले घोषित\n\n📊 **MSP 2024-25 प्रमुख फसलें:**\n• गेहूं: ₹2,275/क्विंटल\n• धान: ₹2,300/क्विंटल\n• मक्का: ₹2,225/क्विंटल\n• कपास: ₹7,121/क्विंटल\n• सोयाबीन: ₹4,892/क्विंटल\n\n🏛️ **MSP पर कहां बेचें:**\n• सरकारी खरीद केंद्र\n• खरीद सीजन में APMC मंडी"
+      }
+    },
+    {
+      "variations": [
+        "wheat msp",
+        "gehun ka msp",
+        "गेहूं का MSP",
+        "wheat minimum support price",
+        "गेहूं न्यूनतम समर्थन मूल्य"
+      ],
+      "intent": "MSP_INFO",
+      "entities": { "crop": "wheat" },
+      "response": {
+        "en": "🌾 **Wheat MSP 2024-25: ₹2,275/quintal**\n\n📈 Year-wise MSP:\n• 2024-25: ₹2,275\n• 2023-24: ₹2,125\n• 2022-23: ₹2,015\n• 2021-22: ₹1,975\n\n📅 **Procurement Season:** April-May\n\n🏛️ **Where to sell:**\n• Government procurement centers\n• FCI purchase points",
+        "hi": "🌾 **गेहूं MSP 2024-25: ₹2,275/क्विंटल**\n\n📈 वर्षवार MSP:\n• 2024-25: ₹2,275\n• 2023-24: ₹2,125\n• 2022-23: ₹2,015\n• 2021-22: ₹1,975\n\n📅 **खरीद सीजन:** अप्रैल-मई\n\n🏛️ **कहां बेचें:**\n• सरकारी खरीद केंद्र\n• FCI खरीद केंद्र"
+      }
+    },
+    {
+      "variations": [
+        "rice msp",
+        "dhan ka msp",
+        "धान का MSP",
+        "paddy minimum support price",
+        "धान न्यूनतम समर्थन मूल्य"
+      ],
+      "intent": "MSP_INFO",
+      "entities": { "crop": "rice" },
+      "response": {
+        "en": "🍚 **Paddy/Rice MSP 2024-25:**\n• Common grade: ₹2,300/quintal\n• Grade A: ₹2,320/quintal\n\n📈 Year-wise MSP:\n• 2024-25: ₹2,300\n• 2023-24: ₹2,183\n• 2022-23: ₹2,040\n\n📅 **Procurement Season:** Oct-Jan\n\n🏛️ **Where to sell:**\n• Rice mills registered with govt\n• Procurement centers",
+        "hi": "🍚 **धान MSP 2024-25:**\n• साधारण: ₹2,300/क्विंटल\n• ग्रेड A: ₹2,320/क्विंटल\n\n📈 वर्षवार MSP:\n• 2024-25: ₹2,300\n• 2023-24: ₹2,183\n• 2022-23: ₹2,040\n\n📅 **खरीद सीजन:** अक्टूबर-जनवरी"
+      }
+    }
+  ]
+}

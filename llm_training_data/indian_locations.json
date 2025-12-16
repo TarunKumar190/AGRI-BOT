@@ -1,0 +1,333 @@
+{
+  "metadata": {
+    "description": "Indian Districts and Cities for Location Detection",
+    "source": "KrishiMitra Agri-Bot",
+    "purpose": "Geocoding and location extraction from user queries"
+  },
+  "states": {
+    "uttarakhand": {
+      "code": "UK",
+      "hindi_name": "उत्तराखंड",
+      "districts": [
+        {"name": "Almora", "hindi": "अल्मोड़ा"},
+        {"name": "Bageshwar", "hindi": "बागेश्वर"},
+        {"name": "Chamoli", "hindi": "चमोली"},
+        {"name": "Champawat", "hindi": "चम्पावत"},
+        {"name": "Dehradun", "hindi": "देहरादून"},
+        {"name": "Haridwar", "hindi": "हरिद्वार"},
+        {"name": "Nainital", "hindi": "नैनीताल"},
+        {"name": "Pauri Garhwal", "hindi": "पौड़ी गढ़वाल"},
+        {"name": "Pithoragarh", "hindi": "पिथौरागढ़"},
+        {"name": "Rudraprayag", "hindi": "रुद्रप्रयाग"},
+        {"name": "Tehri Garhwal", "hindi": "टिहरी गढ़वाल"},
+        {"name": "Udham Singh Nagar", "hindi": "ऊधम सिंह नगर"},
+        {"name": "Uttarkashi", "hindi": "उत्तरकाशी"}
+      ],
+      "major_cities": ["Dehradun", "Haridwar", "Rishikesh", "Haldwani", "Roorkee", "Kashipur"]
+    },
+    "uttar_pradesh": {
+      "code": "UP",
+      "hindi_name": "उत्तर प्रदेश",
+      "districts": [
+        {"name": "Lucknow", "hindi": "लखनऊ"},
+        {"name": "Kanpur Nagar", "hindi": "कानपुर नगर"},
+        {"name": "Agra", "hindi": "आगरा"},
+        {"name": "Varanasi", "hindi": "वाराणसी"},
+        {"name": "Prayagraj", "hindi": "प्रयागराज"},
+        {"name": "Ghaziabad", "hindi": "गाज़ियाबाद"},
+        {"name": "Noida", "hindi": "नोएडा"},
+        {"name": "Meerut", "hindi": "मेरठ"},
+        {"name": "Moradabad", "hindi": "मुरादाबाद"},
+        {"name": "Bareilly", "hindi": "बरेली"},
+        {"name": "Aligarh", "hindi": "अलीगढ़"},
+        {"name": "Mathura", "hindi": "मथुरा"},
+        {"name": "Gorakhpur", "hindi": "गोरखपुर"},
+        {"name": "Jhansi", "hindi": "झांसी"},
+        {"name": "Saharanpur", "hindi": "सहारनपुर"},
+        {"name": "Muzaffarnagar", "hindi": "मुज़फ्फरनगर"},
+        {"name": "Bijnor", "hindi": "बिजनौर"},
+        {"name": "Rampur", "hindi": "रामपुर"},
+        {"name": "Shahjahanpur", "hindi": "शाहजहांपुर"},
+        {"name": "Budaun", "hindi": "बदायूं"},
+        {"name": "Firozabad", "hindi": "फिरोज़ाबाद"},
+        {"name": "Mainpuri", "hindi": "मैनपुरी"},
+        {"name": "Etah", "hindi": "एटा"},
+        {"name": "Farrukhabad", "hindi": "फर्रुखाबाद"},
+        {"name": "Hardoi", "hindi": "हरदोई"},
+        {"name": "Unnao", "hindi": "उन्नाव"},
+        {"name": "Rae Bareli", "hindi": "रायबरेली"},
+        {"name": "Sitapur", "hindi": "सीतापुर"},
+        {"name": "Lakhimpur Kheri", "hindi": "लखीमपुर खीरी"},
+        {"name": "Bahraich", "hindi": "बहराइच"},
+        {"name": "Gonda", "hindi": "गोंडा"},
+        {"name": "Basti", "hindi": "बस्ती"},
+        {"name": "Deoria", "hindi": "देवरिया"},
+        {"name": "Azamgarh", "hindi": "आज़मगढ़"},
+        {"name": "Jaunpur", "hindi": "जौनपुर"},
+        {"name": "Ghazipur", "hindi": "ग़ाज़ीपुर"},
+        {"name": "Mirzapur", "hindi": "मिर्ज़ापुर"},
+        {"name": "Sultanpur", "hindi": "सुल्तानपुर"},
+        {"name": "Pratapgarh", "hindi": "प्रतापगढ़"},
+        {"name": "Fatehpur", "hindi": "फतेहपुर"},
+        {"name": "Banda", "hindi": "बांदा"},
+        {"name": "Etawah", "hindi": "इटावा"},
+        {"name": "Kannauj", "hindi": "कन्नौज"}
+      ]
+    },
+    "punjab": {
+      "code": "PB",
+      "hindi_name": "पंजाब",
+      "districts": [
+        {"name": "Amritsar", "hindi": "अमृतसर"},
+        {"name": "Ludhiana", "hindi": "लुधियाना"},
+        {"name": "Jalandhar", "hindi": "जालंधर"},
+        {"name": "Patiala", "hindi": "पटियाला"},
+        {"name": "Bathinda", "hindi": "बठिंडा"},
+        {"name": "Mohali", "hindi": "मोहाली"},
+        {"name": "Pathankot", "hindi": "पठानकोट"},
+        {"name": "Hoshiarpur", "hindi": "होशियारपुर"},
+        {"name": "Gurdaspur", "hindi": "गुरदासपुर"},
+        {"name": "Ferozepur", "hindi": "फिरोज़पुर"},
+        {"name": "Sangrur", "hindi": "संगरूर"},
+        {"name": "Moga", "hindi": "मोगा"},
+        {"name": "Barnala", "hindi": "बरनाला"},
+        {"name": "Faridkot", "hindi": "फरीदकोट"},
+        {"name": "Muktsar", "hindi": "मुक्तसर"},
+        {"name": "Mansa", "hindi": "मानसा"},
+        {"name": "Kapurthala", "hindi": "कपूरथला"},
+        {"name": "Rupnagar", "hindi": "रूपनगर"},
+        {"name": "Fatehgarh Sahib", "hindi": "फतेहगढ़ साहिब"}
+      ],
+      "major_mandis": ["Khanna", "Ludhiana", "Amritsar", "Jalandhar", "Patiala", "Bathinda"]
+    },
+    "haryana": {
+      "code": "HR",
+      "hindi_name": "हरियाणा",
+      "districts": [
+        {"name": "Gurugram", "hindi": "गुरुग्राम"},
+        {"name": "Faridabad", "hindi": "फरीदाबाद"},
+        {"name": "Karnal", "hindi": "करनाल"},
+        {"name": "Hisar", "hindi": "हिसार"},
+        {"name": "Rohtak", "hindi": "रोहतक"},
+        {"name": "Panipat", "hindi": "पानीपत"},
+        {"name": "Ambala", "hindi": "अंबाला"},
+        {"name": "Yamunanagar", "hindi": "यमुनानगर"},
+        {"name": "Sonipat", "hindi": "सोनीपत"},
+        {"name": "Jhajjar", "hindi": "झज्जर"},
+        {"name": "Rewari", "hindi": "रेवाड़ी"},
+        {"name": "Bhiwani", "hindi": "भिवानी"},
+        {"name": "Jind", "hindi": "जींद"},
+        {"name": "Kaithal", "hindi": "कैथल"},
+        {"name": "Kurukshetra", "hindi": "कुरुक्षेत्र"},
+        {"name": "Sirsa", "hindi": "सिरसा"},
+        {"name": "Fatehabad", "hindi": "फतेहाबाद"}
+      ],
+      "major_mandis": ["Karnal", "Hisar", "Sirsa", "Rohtak", "Sonipat", "Panipat"]
+    },
+    "madhya_pradesh": {
+      "code": "MP",
+      "hindi_name": "मध्य प्रदेश",
+      "districts": [
+        {"name": "Indore", "hindi": "इंदौर"},
+        {"name": "Bhopal", "hindi": "भोपाल"},
+        {"name": "Jabalpur", "hindi": "जबलपुर"},
+        {"name": "Gwalior", "hindi": "ग्वालियर"},
+        {"name": "Ujjain", "hindi": "उज्जैन"},
+        {"name": "Sagar", "hindi": "सागर"},
+        {"name": "Rewa", "hindi": "रीवा"},
+        {"name": "Satna", "hindi": "सतना"},
+        {"name": "Dewas", "hindi": "देवास"},
+        {"name": "Ratlam", "hindi": "रतलाम"},
+        {"name": "Chhindwara", "hindi": "छिंदवाड़ा"},
+        {"name": "Vidisha", "hindi": "विदिशा"},
+        {"name": "Hoshangabad", "hindi": "होशंगाबाद"},
+        {"name": "Khandwa", "hindi": "खंडवा"},
+        {"name": "Shivpuri", "hindi": "शिवपुरी"}
+      ]
+    },
+    "rajasthan": {
+      "code": "RJ",
+      "hindi_name": "राजस्थान",
+      "districts": [
+        {"name": "Jaipur", "hindi": "जयपुर"},
+        {"name": "Jodhpur", "hindi": "जोधपुर"},
+        {"name": "Udaipur", "hindi": "उदयपुर"},
+        {"name": "Kota", "hindi": "कोटा"},
+        {"name": "Ajmer", "hindi": "अजमेर"},
+        {"name": "Bikaner", "hindi": "बीकानेर"},
+        {"name": "Alwar", "hindi": "अलवर"},
+        {"name": "Bharatpur", "hindi": "भरतपुर"},
+        {"name": "Sikar", "hindi": "सीकर"},
+        {"name": "Pali", "hindi": "पाली"},
+        {"name": "Nagaur", "hindi": "नागौर"},
+        {"name": "Sri Ganganagar", "hindi": "श्री गंगानगर"},
+        {"name": "Jaisalmer", "hindi": "जैसलमेर"},
+        {"name": "Chittorgarh", "hindi": "चित्तौड़गढ़"},
+        {"name": "Bhilwara", "hindi": "भीलवाड़ा"}
+      ]
+    },
+    "maharashtra": {
+      "code": "MH",
+      "hindi_name": "महाराष्ट्र",
+      "districts": [
+        {"name": "Mumbai", "hindi": "मुंबई"},
+        {"name": "Pune", "hindi": "पुणे"},
+        {"name": "Nagpur", "hindi": "नागपुर"},
+        {"name": "Nashik", "hindi": "नासिक"},
+        {"name": "Aurangabad", "hindi": "औरंगाबाद"},
+        {"name": "Solapur", "hindi": "सोलापुर"},
+        {"name": "Kolhapur", "hindi": "कोल्हापुर"},
+        {"name": "Sangli", "hindi": "सांगली"},
+        {"name": "Latur", "hindi": "लातूर"},
+        {"name": "Ahmednagar", "hindi": "अहमदनगर"},
+        {"name": "Satara", "hindi": "सातारा"},
+        {"name": "Jalgaon", "hindi": "जलगांव"},
+        {"name": "Amravati", "hindi": "अमरावती"},
+        {"name": "Akola", "hindi": "अकोला"},
+        {"name": "Chandrapur", "hindi": "चंद्रपुर"}
+      ],
+      "major_mandis": ["Mumbai (Vashi)", "Pune", "Nagpur", "Nashik", "Latur", "Solapur"]
+    },
+    "gujarat": {
+      "code": "GJ",
+      "hindi_name": "गुजरात",
+      "districts": [
+        {"name": "Ahmedabad", "hindi": "अहमदाबाद"},
+        {"name": "Surat", "hindi": "सूरत"},
+        {"name": "Vadodara", "hindi": "वडोदरा"},
+        {"name": "Rajkot", "hindi": "राजकोट"},
+        {"name": "Bhavnagar", "hindi": "भावनगर"},
+        {"name": "Jamnagar", "hindi": "जामनगर"},
+        {"name": "Junagadh", "hindi": "जूनागढ़"},
+        {"name": "Gandhinagar", "hindi": "गांधीनगर"},
+        {"name": "Kutch", "hindi": "कच्छ"},
+        {"name": "Mehsana", "hindi": "मेहसाणा"}
+      ]
+    },
+    "bihar": {
+      "code": "BR",
+      "hindi_name": "बिहार",
+      "districts": [
+        {"name": "Patna", "hindi": "पटना"},
+        {"name": "Gaya", "hindi": "गया"},
+        {"name": "Muzaffarpur", "hindi": "मुज़फ्फरपुर"},
+        {"name": "Bhagalpur", "hindi": "भागलपुर"},
+        {"name": "Darbhanga", "hindi": "दरभंगा"},
+        {"name": "Purnia", "hindi": "पूर्णिया"},
+        {"name": "Begusarai", "hindi": "बेगूसराय"},
+        {"name": "Katihar", "hindi": "कटिहार"},
+        {"name": "Samastipur", "hindi": "समस्तीपुर"},
+        {"name": "Vaishali", "hindi": "वैशाली"},
+        {"name": "Nalanda", "hindi": "नालंदा"},
+        {"name": "Saran", "hindi": "सारण"}
+      ]
+    },
+    "karnataka": {
+      "code": "KA",
+      "hindi_name": "कर्नाटक",
+      "districts": [
+        {"name": "Bengaluru", "hindi": "बैंगलोर"},
+        {"name": "Mysuru", "hindi": "मैसूर"},
+        {"name": "Hubli-Dharwad", "hindi": "हुबली"},
+        {"name": "Mangaluru", "hindi": "मंगलुरु"},
+        {"name": "Belgaum", "hindi": "बेलगाम"},
+        {"name": "Gulbarga", "hindi": "गुलबर्गा"},
+        {"name": "Davangere", "hindi": "दावणगेरे"},
+        {"name": "Bellary", "hindi": "बेल्लारी"},
+        {"name": "Shimoga", "hindi": "शिमोगा"},
+        {"name": "Tumkur", "hindi": "तुमकुर"}
+      ]
+    },
+    "andhra_pradesh": {
+      "code": "AP",
+      "hindi_name": "आंध्र प्रदेश",
+      "telugu_name": "ఆంధ్ర ప్రదేశ్",
+      "districts": [
+        {"name": "Vijayawada", "hindi": "विजयवाड़ा", "telugu": "విజయవాడ"},
+        {"name": "Visakhapatnam", "hindi": "विशाखापट्टनम", "telugu": "విశాఖపట్నం"},
+        {"name": "Guntur", "hindi": "गुंटूर", "telugu": "గుంటూరు"},
+        {"name": "Kurnool", "hindi": "कुर्नूल", "telugu": "కర్నూలు"},
+        {"name": "Nellore", "hindi": "नेल्लोर", "telugu": "నెల్లూరు"},
+        {"name": "Tirupati", "hindi": "तिरुपति", "telugu": "తిరుపతి"},
+        {"name": "Kadapa", "hindi": "कडप्पा", "telugu": "కడప"},
+        {"name": "Anantapur", "hindi": "अनंतपुर", "telugu": "అనంతపురం"},
+        {"name": "Rajahmundry", "hindi": "राजमुंदरी", "telugu": "రాజమండ్రి"},
+        {"name": "Kakinada", "hindi": "काकीनाडा", "telugu": "కాకినాడ"}
+      ]
+    },
+    "telangana": {
+      "code": "TS",
+      "hindi_name": "तेलंगाना",
+      "telugu_name": "తెలంగాణ",
+      "districts": [
+        {"name": "Hyderabad", "hindi": "हैदराबाद", "telugu": "హైదరాబాద్"},
+        {"name": "Warangal", "hindi": "वारंगल", "telugu": "వరంగల్"},
+        {"name": "Karimnagar", "hindi": "करीमनगर", "telugu": "కరీంనగర్"},
+        {"name": "Nizamabad", "hindi": "निज़ामाबाद", "telugu": "నిజామాబాద్"},
+        {"name": "Khammam", "hindi": "खम्मम", "telugu": "ఖమ్మం"},
+        {"name": "Nalgonda", "hindi": "नलगोंडा", "telugu": "నల్గొండ"},
+        {"name": "Mahbubnagar", "hindi": "महबूबनगर", "telugu": "మహబూబ్‌నగర్"},
+        {"name": "Rangareddy", "hindi": "रंगारेड्डी", "telugu": "రంగారెడ్డి"},
+        {"name": "Medak", "hindi": "मेदक", "telugu": "మెదక్"},
+        {"name": "Adilabad", "hindi": "आदिलाबाद", "telugu": "ఆదిలాబాద్"}
+      ]
+    },
+    "tamil_nadu": {
+      "code": "TN",
+      "hindi_name": "तमिलनाडु",
+      "districts": [
+        {"name": "Chennai", "hindi": "चेन्नई"},
+        {"name": "Coimbatore", "hindi": "कोयंबटूर"},
+        {"name": "Madurai", "hindi": "मदुरई"},
+        {"name": "Salem", "hindi": "सेलम"},
+        {"name": "Tiruchirappalli", "hindi": "तिरुचिरापल्ली"},
+        {"name": "Tirunelveli", "hindi": "तिरुनेलवेली"},
+        {"name": "Erode", "hindi": "इरोड"},
+        {"name": "Vellore", "hindi": "वेल्लोर"},
+        {"name": "Thanjavur", "hindi": "तंजावुर"},
+        {"name": "Dindigul", "hindi": "डिंडीगुल"}
+      ]
+    },
+    "west_bengal": {
+      "code": "WB",
+      "hindi_name": "पश्चिम बंगाल",
+      "districts": [
+        {"name": "Kolkata", "hindi": "कोलकाता"},
+        {"name": "Howrah", "hindi": "हावड़ा"},
+        {"name": "Darjeeling", "hindi": "दार्जिलिंग"},
+        {"name": "Siliguri", "hindi": "सिलीगुड़ी"},
+        {"name": "Asansol", "hindi": "आसनसोल"},
+        {"name": "Durgapur", "hindi": "दुर्गापुर"},
+        {"name": "Bardhaman", "hindi": "बर्धमान"},
+        {"name": "Malda", "hindi": "मालदा"},
+        {"name": "Murshidabad", "hindi": "मुर्शिदाबाद"},
+        {"name": "Nadia", "hindi": "नदिया"}
+      ]
+    },
+    "himachal_pradesh": {
+      "code": "HP",
+      "hindi_name": "हिमाचल प्रदेश",
+      "districts": [
+        {"name": "Shimla", "hindi": "शिमला"},
+        {"name": "Kullu", "hindi": "कुल्लू"},
+        {"name": "Manali", "hindi": "मनाली"},
+        {"name": "Kangra", "hindi": "कांगड़ा"},
+        {"name": "Mandi", "hindi": "मंडी"},
+        {"name": "Solan", "hindi": "सोलन"},
+        {"name": "Sirmaur", "hindi": "सिरमौर"},
+        {"name": "Una", "hindi": "ऊना"},
+        {"name": "Bilaspur", "hindi": "बिलासपुर"},
+        {"name": "Hamirpur", "hindi": "हमीरपुर"},
+        {"name": "Chamba", "hindi": "चंबा"},
+        {"name": "Kinnaur", "hindi": "किन्नौर"},
+        {"name": "Lahaul Spiti", "hindi": "लाहौल स्पिति"}
+      ]
+    }
+  },
+  "major_mandis_all_india": [
+    "Azadpur (Delhi)", "Khanna (Punjab)", "Karnal (Haryana)", "Vashi (Mumbai)",
+    "Indore (MP)", "Nagpur (Maharashtra)", "Unjha (Gujarat)", "Kota (Rajasthan)",
+    "Hapur (UP)", "Jalandhar (Punjab)", "Sirsa (Haryana)", "Nashik (Maharashtra)",
+    "Solapur (Maharashtra)", "Latur (Maharashtra)", "Neemuch (MP)", "Mandsaur (MP)"
+  ]
+}

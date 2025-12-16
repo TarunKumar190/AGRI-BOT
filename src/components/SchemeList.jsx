@@ -225,15 +225,29 @@ const SchemeList = () => {
                   </div>
                 )}
 
+                {scheme.portal && (
+                  <div className="detail-section portal-section">
+                    <h4>🌐 {language === 'hi' ? 'आधिकारिक पोर्टल' : 'Official Portal'}</h4>
+                    <a 
+                      href={scheme.portal} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="portal-url"
+                    >
+                      {scheme.portal}
+                    </a>
+                  </div>
+                )}
+
                 <div className="card-actions">
                   {scheme.portal && (
                     <a 
                       href={scheme.portal} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="btn btn-primary"
+                      className="btn btn-primary apply-btn"
                     >
-                      {t('schemes.apply')} →
+                      <span>🚀</span> {language === 'hi' ? 'आवेदन करें' : 'Apply Now'} →
                     </a>
                   )}
                   <button className="btn btn-secondary">

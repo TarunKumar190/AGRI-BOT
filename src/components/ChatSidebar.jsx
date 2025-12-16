@@ -2,6 +2,70 @@ import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import './ChatSidebar.css';
 
+// Direct function to stop all audio - guaranteed to work
+const forceStopAllAudio = () => {
+  console.log('[ChatSidebar] 🛑 FORCE STOPPING ALL AUDIO');
+  
+  if (typeof window === 'undefined') return;
+  
+  // Set stop flags FIRST
+  window.ttsShouldStop = true;
+  window.currentTTSSession = null;
+  
+  // Clear ALL timeouts
+  if (window.ttsTimeoutId) {
+    clearTimeout(window.ttsTimeoutId);
+    window.ttsTimeoutId = null;
+  }
+  
+  // Stop ALL tracked audio instances
+  if (window.ttsAudioInstances && Array.isArray(window.ttsAudioInstances)) {
+    console.log('[ChatSidebar] Stopping', window.ttsAudioInstances.length, 'tracked audio instances');
+    window.ttsAudioInstances.forEach((audio, i) => {
+      try {
+        audio.pause();
+        audio.src = '';
+        audio.load(); // Force reload to release resources
+        console.log('[ChatSidebar] Stopped audio instance', i);
+      } catch(e) { console.log('Error stopping audio', i, e); }
+    });
+    window.ttsAudioInstances = [];
+  }
+  
+  // Stop current audio
+  if (window.currentTTSAudio) {
+    try {
+      window.currentTTSAudio.pause();
+      window.currentTTSAudio.src = '';
+      window.currentTTSAudio.load();
+      window.currentTTSAudio = null;
+    } catch(e) {}
+  }
+  
+  // Stop browser speech synthesis
+  if (window.speechSynthesis) {
+    window.speechSynthesis.cancel();
+  }
+  
+  // Stop ALL audio elements on the entire page
+  const allAudios = document.querySelectorAll('audio');
+  console.log('[ChatSidebar] Found', allAudios.length, 'audio elements on page');
+  allAudios.forEach((audio, i) => {
+    try {
+      audio.pause();
+      audio.src = '';
+      audio.load();
+    } catch(e) {}
+  });
+  
+  // Call global stop if exists
+  if (window.stopAllTTS) {
+    window.stopAllTTS();
+  }
+  
+  console.log('[ChatSidebar] ✅ All audio stopped');
+};
+
 const LANGUAGES = [
   { code: 'en', name: 'English', flag: '🇬🇧' },
   { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' },
@@ -96,14 +160,18 @@ const ChatSidebar = ({
                 <div 
                   key={conv.id}
                   className={`conv-item ${activeConversation === conv.id ? 'active' : ''}`}
-                  onClick={() => onSelectConversation(conv.id)}
+                  onClick={() => { forceStopAllAudio(); onSelectConversation(conv.id); }}
                   onMouseEnter={() => setHoveredConv(conv.id)}
                   onMouseLeave={() => setHoveredConv(null)}
                 >
                   <span className="conv-icon">💬</span>
                   <span className="conv-title">{conv.title || 'New Chat'}</span>
                   {(activeConversation === conv.id || hoveredConv === conv.id) && (
-                    <button className="delete-btn" onClick={(e) => { e.stopPropagation(); onDeleteConversation(conv.id); }}>🗑️</button>
+                    <button className="delete-btn" onClick={(e) => { 
+                      e.stopPropagation(); 
+                      forceStopAllAudio(); // Stop audio FIRST
+                      onDeleteConversation(conv.id); 
+                    }}>🗑️</button>
                   )}
                 </div>
               ))}
@@ -117,7 +185,7 @@ const ChatSidebar = ({
                 <div 
                   key={conv.id}
                   className={`conv-item ${activeConversation === conv.id ? 'active' : ''}`}
-                  onClick={() => onSelectConversation(conv.id)}
+                  onClick={() => { forceStopAllAudio(); onSelectConversation(conv.id); }}
                 >
                   <span className="conv-icon">💬</span>
                   <span className="conv-title">{conv.title || 'Chat'}</span>
@@ -133,7 +201,7 @@ const ChatSidebar = ({
                 <div 
                   key={conv.id}
                   className={`conv-item ${activeConversation === conv.id ? 'active' : ''}`}
-                  onClick={() => onSelectConversation(conv.id)}
+                  onClick={() => { forceStopAllAudio(); onSelectConversation(conv.id); }}
                 >
                   <span className="conv-icon">💬</span>
                   <span className="conv-title">{conv.title || 'Chat'}</span>

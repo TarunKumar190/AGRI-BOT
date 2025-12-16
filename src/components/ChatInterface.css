@@ -620,6 +620,44 @@
   font-weight: 600;
 }
 
+/* Clickable links in chat messages */
+.message-text .chat-link,
+.message-text a {
+  color: #22c55e;
+  text-decoration: none;
+  font-weight: 500;
+  word-break: break-all;
+  transition: color 0.2s, text-decoration 0.2s;
+}
+
+.message-text .chat-link:hover,
+.message-text a:hover {
+  color: #4ade80;
+  text-decoration: underline;
+}
+
+/* Official portal/website button style */
+.portal-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #fff !important;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none !important;
+  margin: 8px 0;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.portal-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+  color: #fff !important;
+}
+
 .message-actions {
   display: flex;
   gap: 8px;
@@ -679,6 +717,36 @@
 @keyframes typing {
   0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
   30% { transform: translateY(-6px); opacity: 1; }
+}
+
+/* Loading Message Animation */
+.message.assistant .message-text {
+  position: relative;
+}
+
+.message.assistant[data-loading="true"] .message-text {
+  animation: loadingPulse 2s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+/* Progress bar styling in loading messages */
+.message-text strong {
+  color: #10b981;
+}
+
+/* Loading status icon pulse */
+.loading-status-icon {
+  display: inline-block;
+  animation: iconPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
 }
 
 /* Input Container */

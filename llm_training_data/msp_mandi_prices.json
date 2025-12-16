@@ -1,0 +1,323 @@
+{
+  "metadata": {
+    "description": "Minimum Support Prices (MSP) and Market Data for Indian Agricultural Commodities",
+    "source": "Government of India - Ministry of Agriculture & Farmers Welfare",
+    "year": "2024-25 (Kharif & Rabi)",
+    "currency": "INR (₹) per Quintal"
+  },
+  "msp_rates_2024_25": {
+    "kharif_crops": {
+      "paddy_common": {
+        "crop_name": "Paddy (Common)",
+        "hindi_name": "धान (साधारण)",
+        "msp": 2300,
+        "unit": "per quintal",
+        "season": "Kharif",
+        "sowing_time": "June-July",
+        "harvest_time": "October-November"
+      },
+      "paddy_grade_a": {
+        "crop_name": "Paddy (Grade A)",
+        "hindi_name": "धान (ग्रेड ए)",
+        "msp": 2320,
+        "unit": "per quintal",
+        "season": "Kharif"
+      },
+      "jowar_hybrid": {
+        "crop_name": "Jowar (Hybrid)",
+        "hindi_name": "ज्वार (संकर)",
+        "msp": 3371,
+        "unit": "per quintal",
+        "season": "Kharif"
+      },
+      "jowar_maldandi": {
+        "crop_name": "Jowar (Maldandi)",
+        "hindi_name": "ज्वार (मालदंडी)",
+        "msp": 3421,
+        "unit": "per quintal",
+        "season": "Kharif"
+      },
+      "bajra": {
+        "crop_name": "Bajra (Pearl Millet)",
+        "hindi_name": "बाजरा",
+        "msp": 2625,
+        "unit": "per quintal",
+        "season": "Kharif",
+        "sowing_time": "June-July",
+        "harvest_time": "September-October"
+      },
+      "ragi": {
+        "crop_name": "Ragi (Finger Millet)",
+        "hindi_name": "रागी / मंडुआ",
+        "msp": 4290,
+        "unit": "per quintal",
+        "season": "Kharif"
+      },
+      "maize": {
+        "crop_name": "Maize",
+        "hindi_name": "मक्का",
+        "msp": 2225,
+        "unit": "per quintal",
+        "season": "Kharif",
+        "sowing_time": "June-July",
+        "harvest_time": "September-October"
+      },
+      "tur_arhar": {
+        "crop_name": "Tur (Arhar)",
+        "hindi_name": "अरहर / तूर",
+        "msp": 7550,
+        "unit": "per quintal",
+        "season": "Kharif"
+      },
+      "moong": {
+        "crop_name": "Moong (Green Gram)",
+        "hindi_name": "मूंग",
+        "msp": 8682,
+        "unit": "per quintal",
+        "season": "Kharif"
+      },
+      "urad": {
+        "crop_name": "Urad (Black Gram)",
+        "hindi_name": "उड़द",
+        "msp": 7400,
+        "unit": "per quintal",
+        "season": "Kharif"
+      },
+      "groundnut": {
+        "crop_name": "Groundnut",
+        "hindi_name": "मूंगफली",
+        "msp": 6783,
+        "unit": "per quintal",
+        "season": "Kharif"
+      },
+      "sunflower": {
+        "crop_name": "Sunflower Seed",
+        "hindi_name": "सूरजमुखी",
+        "msp": 7280,
+        "unit": "per quintal",
+        "season": "Kharif"
+      },
+      "soybean_yellow": {
+        "crop_name": "Soybean (Yellow)",
+        "hindi_name": "सोयाबीन",
+        "msp": 4892,
+        "unit": "per quintal",
+        "season": "Kharif"
+      },
+      "sesamum": {
+        "crop_name": "Sesamum (Til)",
+        "hindi_name": "तिल",
+        "msp": 9267,
+        "unit": "per quintal",
+        "season": "Kharif"
+      },
+      "nigerseed": {
+        "crop_name": "Nigerseed",
+        "hindi_name": "रामतिल",
+        "msp": 8717,
+        "unit": "per quintal",
+        "season": "Kharif"
+      },
+      "cotton_medium": {
+        "crop_name": "Cotton (Medium Staple)",
+        "hindi_name": "कपास (मध्यम)",
+        "msp": 7121,
+        "unit": "per quintal",
+        "season": "Kharif"
+      },
+      "cotton_long": {
+        "crop_name": "Cotton (Long Staple)",
+        "hindi_name": "कपास (लंबा)",
+        "msp": 7521,
+        "unit": "per quintal",
+        "season": "Kharif"
+      }
+    },
+    "rabi_crops": {
+      "wheat": {
+        "crop_name": "Wheat",
+        "hindi_name": "गेहूं",
+        "msp": 2275,
+        "unit": "per quintal",
+        "season": "Rabi",
+        "sowing_time": "October-November",
+        "harvest_time": "March-April",
+        "major_states": ["Punjab", "Haryana", "Uttar Pradesh", "Madhya Pradesh", "Rajasthan"]
+      },
+      "barley": {
+        "crop_name": "Barley",
+        "hindi_name": "जौ",
+        "msp": 1850,
+        "unit": "per quintal",
+        "season": "Rabi"
+      },
+      "gram_chana": {
+        "crop_name": "Gram (Chana)",
+        "hindi_name": "चना",
+        "msp": 5440,
+        "unit": "per quintal",
+        "season": "Rabi",
+        "sowing_time": "October-November",
+        "harvest_time": "March-April"
+      },
+      "masoor_lentil": {
+        "crop_name": "Masoor (Lentil)",
+        "hindi_name": "मसूर",
+        "msp": 6425,
+        "unit": "per quintal",
+        "season": "Rabi"
+      },
+      "rapeseed_mustard": {
+        "crop_name": "Rapeseed & Mustard",
+        "hindi_name": "सरसों",
+        "msp": 5650,
+        "unit": "per quintal",
+        "season": "Rabi",
+        "sowing_time": "October-November",
+        "harvest_time": "February-March"
+      },
+      "safflower": {
+        "crop_name": "Safflower",
+        "hindi_name": "कुसुम",
+        "msp": 5800,
+        "unit": "per quintal",
+        "season": "Rabi"
+      }
+    },
+    "other_commercial_crops": {
+      "sugarcane": {
+        "crop_name": "Sugarcane",
+        "hindi_name": "गन्ना",
+        "frp": 315,
+        "unit": "per quintal (Fair & Remunerative Price)",
+        "note": "State Advised Price (SAP) varies by state. UP SAP: ₹340-355/quintal"
+      },
+      "jute": {
+        "crop_name": "Raw Jute",
+        "hindi_name": "जूट",
+        "msp": 5335,
+        "unit": "per quintal"
+      },
+      "copra_milling": {
+        "crop_name": "Copra (Milling)",
+        "hindi_name": "खोपरा",
+        "msp": 11582,
+        "unit": "per quintal"
+      },
+      "copra_ball": {
+        "crop_name": "Copra (Ball)",
+        "hindi_name": "खोपरा (गोला)",
+        "msp": 12100,
+        "unit": "per quintal"
+      }
+    }
+  },
+  "state_specific_mandis": {
+    "punjab": {
+      "major_mandis": ["Khanna", "Ludhiana", "Amritsar", "Jalandhar", "Patiala", "Bathinda"],
+      "major_crops": ["Wheat", "Paddy", "Cotton", "Maize", "Sugarcane"],
+      "crop_calendar": {
+        "wheat": {"sowing": "Nov", "harvest": "Apr"},
+        "paddy": {"sowing": "Jun", "harvest": "Oct"},
+        "cotton": {"sowing": "Apr-May", "harvest": "Oct-Dec"}
+      }
+    },
+    "haryana": {
+      "major_mandis": ["Karnal", "Hisar", "Sirsa", "Rohtak", "Sonipat", "Panipat"],
+      "major_crops": ["Wheat", "Paddy", "Mustard", "Cotton", "Bajra"],
+      "crop_calendar": {
+        "wheat": {"sowing": "Nov", "harvest": "Apr"},
+        "mustard": {"sowing": "Oct", "harvest": "Mar"}
+      }
+    },
+    "uttar_pradesh": {
+      "major_mandis": ["Lucknow", "Kanpur", "Agra", "Varanasi", "Meerut", "Moradabad", "Bareilly"],
+      "major_crops": ["Wheat", "Paddy", "Sugarcane", "Potato", "Mustard", "Maize"],
+      "crop_calendar": {
+        "wheat": {"sowing": "Oct-Nov", "harvest": "Mar-Apr"},
+        "sugarcane": {"planting": "Feb-Mar", "harvest": "Nov-Mar"},
+        "potato": {"sowing": "Oct", "harvest": "Jan-Feb"}
+      }
+    },
+    "madhya_pradesh": {
+      "major_mandis": ["Indore", "Bhopal", "Jabalpur", "Gwalior", "Ujjain"],
+      "major_crops": ["Wheat", "Soybean", "Gram", "Maize", "Cotton"],
+      "crop_calendar": {
+        "soybean": {"sowing": "Jun-Jul", "harvest": "Oct"},
+        "wheat": {"sowing": "Nov", "harvest": "Apr"}
+      }
+    },
+    "maharashtra": {
+      "major_mandis": ["Mumbai (Vashi)", "Pune", "Nagpur", "Nashik", "Latur", "Solapur"],
+      "major_crops": ["Cotton", "Soybean", "Onion", "Sugarcane", "Jowar", "Groundnut"],
+      "crop_calendar": {
+        "cotton": {"sowing": "Jun", "harvest": "Nov-Jan"},
+        "onion": {"kharif": "Jun-Oct", "rabi": "Jan-May"}
+      }
+    },
+    "rajasthan": {
+      "major_mandis": ["Jaipur", "Jodhpur", "Kota", "Bikaner", "Alwar", "Udaipur"],
+      "major_crops": ["Wheat", "Mustard", "Bajra", "Gram", "Groundnut"],
+      "crop_calendar": {
+        "mustard": {"sowing": "Oct", "harvest": "Feb-Mar"},
+        "bajra": {"sowing": "Jul", "harvest": "Oct"}
+      }
+    },
+    "gujarat": {
+      "major_mandis": ["Ahmedabad", "Rajkot", "Surat", "Vadodara", "Junagadh"],
+      "major_crops": ["Cotton", "Groundnut", "Castor", "Wheat", "Cumin"],
+      "crop_calendar": {
+        "cotton": {"sowing": "Jun", "harvest": "Nov-Jan"},
+        "groundnut": {"sowing": "Jun", "harvest": "Oct"}
+      }
+    },
+    "uttarakhand": {
+      "major_mandis": ["Dehradun", "Haridwar", "Haldwani", "Roorkee", "Rishikesh"],
+      "major_crops": ["Basmati Rice", "Wheat", "Mandua (Ragi)", "Potato", "Ginger", "Apple"],
+      "crop_calendar": {
+        "wheat": {"sowing": "Oct-Nov", "harvest": "Apr"},
+        "mandua": {"sowing": "May-Jun", "harvest": "Sep-Oct"}
+      }
+    },
+    "bihar": {
+      "major_mandis": ["Patna", "Muzaffarpur", "Gaya", "Bhagalpur", "Darbhanga"],
+      "major_crops": ["Paddy", "Wheat", "Maize", "Lentil", "Potato"],
+      "crop_calendar": {
+        "paddy": {"sowing": "Jun-Jul", "harvest": "Nov"},
+        "wheat": {"sowing": "Nov", "harvest": "Apr"}
+      }
+    }
+  },
+  "price_trends_and_factors": {
+    "factors_affecting_prices": [
+      "Government MSP announcements",
+      "Monsoon performance",
+      "International commodity prices",
+      "Export/Import policies",
+      "Buffer stock levels",
+      "Fuel prices and transportation costs",
+      "Demand from processing industries"
+    ],
+    "peak_arrival_months": {
+      "wheat": "April-May",
+      "paddy": "October-November",
+      "soybean": "October-November",
+      "cotton": "November-January",
+      "mustard": "March-April",
+      "onion": "December-January (Rabi)",
+      "potato": "January-February"
+    },
+    "price_volatility_crops": ["Onion", "Tomato", "Potato", "Green Vegetables"],
+    "stable_price_crops": ["Wheat", "Paddy (due to MSP procurement)"]
+  },
+  "market_query_patterns": {
+    "hindi_patterns": [
+      "आज का भाव", "मंडी भाव", "गेहूं का रेट", "धान का भाव", "बाजार में कीमत",
+      "MSP क्या है", "न्यूनतम समर्थन मूल्य", "फसल बेचना", "कहां बेचें"
+    ],
+    "english_patterns": [
+      "today's price", "mandi rate", "wheat rate", "market price", "msp rate",
+      "minimum support price", "where to sell", "best price"
+    ]
+  }
+}

@@ -6,6 +6,59 @@ import Onboarding from './components/Onboarding';
 import SplashScreen from './components/SplashScreen';
 import './styles/chat-app.css';
 
+// Global TTS stop function - can be called from anywhere
+window.stopAllTTS = function() {
+  console.log('[GLOBAL] 🛑 Stopping ALL TTS');
+  
+  // Set stop flag
+  window.ttsShouldStop = true;
+  
+  // Invalidate current session to stop chunk loop
+  window.currentTTSSession = null;
+  
+  // Clear all timeouts related to TTS
+  if (window.ttsTimeoutId) {
+    clearTimeout(window.ttsTimeoutId);
+    window.ttsTimeoutId = null;
+  }
+  
+  // Stop ALL tracked audio instances
+  if (window.ttsAudioInstances && Array.isArray(window.ttsAudioInstances)) {
+    window.ttsAudioInstances.forEach(audio => {
+      try {
+        audio.pause();
+        audio.src = '';
+        audio.load();
+      } catch(e) {}
+    });
+    window.ttsAudioInstances = [];
+  }
+  
+  // Stop current TTS audio
+  if (window.currentTTSAudio) {
+    try {
+      window.currentTTSAudio.pause();
+      window.currentTTSAudio.src = '';
+      window.currentTTSAudio.load();
+      window.currentTTSAudio = null;
+    } catch(e) {}
+  }
+  
+  // Stop browser speech synthesis
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.cancel();
+  }
+  
+  // Stop ALL audio elements on page
+  document.querySelectorAll('audio').forEach(audio => {
+    try {
+      audio.pause();
+      audio.src = '';
+      audio.load();
+    } catch(e) {}
+  });
+};
+
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [showOnboarding, setShowOnboarding] = useState(false);
@@ -65,11 +118,15 @@ function App() {
   };
 
   const handleSelectConversation = (convId) => {
+    // Cancel any ongoing speech when switching conversations
+    window.stopAllTTS();
     setActiveConversation(convId);
     if (window.innerWidth < 768) setSidebarOpen(false);
   };
 
   const handleDeleteConversation = (convId) => {
+    // Cancel any ongoing speech when deleting a conversation
+    window.stopAllTTS();
     const updated = conversations.filter(c => c.id !== convId);
     setConversations(updated);
     saveConversations(updated);

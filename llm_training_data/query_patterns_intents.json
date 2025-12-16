@@ -1,0 +1,234 @@
+{
+  "metadata": {
+    "description": "Query patterns and intents for agricultural chatbot training",
+    "source": "KrishiMitra Agri-Bot",
+    "purpose": "Intent classification and query understanding for LLM training",
+    "languages": ["Hindi", "English"]
+  },
+  "intent_categories": {
+    "market_price": {
+      "description": "User asking about mandi prices, rates, MSP, where to sell crops",
+      "keywords_hindi": [
+        "भाव", "मंडी", "दाम", "कीमत", "रेट", "बेचना", "बेच", "बाजार", "बाजारभाव",
+        "आज का भाव", "गेहूं का भाव", "धान का रेट", "MSP", "न्यूनतम समर्थन मूल्य",
+        "कहां बेचूं", "मंडी में भाव", "क्या रेट मिलेगा"
+      ],
+      "keywords_english": [
+        "price", "rate", "mandi", "market", "sell", "msp", "bazaar", "bhav",
+        "today's price", "wheat rate", "where to sell", "best price",
+        "minimum support price", "market price"
+      ],
+      "sample_queries": [
+        {"query": "गेहूं का आज क्या भाव है?", "language": "hi", "intent": "market_price", "crop": "wheat"},
+        {"query": "पंजाब में धान का रेट बताओ", "language": "hi", "intent": "market_price", "crop": "rice", "location": "Punjab"},
+        {"query": "What is the wheat price in Karnal mandi?", "language": "en", "intent": "market_price", "crop": "wheat", "location": "Karnal"},
+        {"query": "मक्का कहां बेचूं अच्छा दाम मिले?", "language": "hi", "intent": "market_price", "crop": "maize"},
+        {"query": "सोयाबीन का MSP क्या है?", "language": "hi", "intent": "market_price", "crop": "soybean"},
+        {"query": "Today's tomato rate in Delhi", "language": "en", "intent": "market_price", "crop": "tomato", "location": "Delhi"},
+        {"query": "प्याज का भाव कम क्यों है?", "language": "hi", "intent": "market_price", "crop": "onion"},
+        {"query": "मंडी में आज के भाव", "language": "hi", "intent": "market_price"}
+      ]
+    },
+    "crop_advisory": {
+      "description": "User asking about farming advice, how to grow crops, weather-based recommendations",
+      "keywords_hindi": [
+        "खेती", "उगाना", "उगाई", "बुवाई", "बोना", "लगाना", "फसल", "कृषि",
+        "सलाह", "जानकारी", "कैसे करें", "कब करें", "क्या करें", "तरीका", "विधि",
+        "सिंचाई", "खाद", "उर्वरक", "बीज", "पैदावार", "उत्पादन"
+      ],
+      "keywords_english": [
+        "farming", "grow", "cultivation", "sowing", "planting", "crop",
+        "advice", "how to", "when to", "method", "technique",
+        "irrigation", "fertilizer", "seed", "yield", "production"
+      ],
+      "patterns_hindi": [
+        "में.*खेती", "की खेती", "का उत्पादन", "की पैदावार", "की बुवाई",
+        "कैसे उगाएं", "कब बोएं", "कितनी खाद", "सिंचाई कब"
+      ],
+      "sample_queries": [
+        {"query": "मुरादाबाद में मक्के की खेती कैसे करें?", "language": "hi", "intent": "crop_advisory", "crop": "maize", "location": "Moradabad"},
+        {"query": "पौड़ी में मंडुआ की खेती", "language": "hi", "intent": "crop_advisory", "crop": "mandua", "location": "Pauri"},
+        {"query": "गेहूं कब बोना चाहिए?", "language": "hi", "intent": "crop_advisory", "crop": "wheat"},
+        {"query": "How to grow tomatoes in summer?", "language": "en", "intent": "crop_advisory", "crop": "tomato"},
+        {"query": "आलू में कौन सी खाद डालें?", "language": "hi", "intent": "crop_advisory", "crop": "potato"},
+        {"query": "धान की सिंचाई कब करें?", "language": "hi", "intent": "crop_advisory", "crop": "rice"},
+        {"query": "Best variety of wheat for UP", "language": "en", "intent": "crop_advisory", "crop": "wheat", "location": "Uttar Pradesh"},
+        {"query": "कपास की खेती की जानकारी दो", "language": "hi", "intent": "crop_advisory", "crop": "cotton"}
+      ]
+    },
+    "disease_pest": {
+      "description": "User asking about crop diseases, pests, and their treatment",
+      "keywords_hindi": [
+        "रोग", "बीमारी", "कीट", "कीड़ा", "माहू", "इलाज", "उपचार", "दवाई", "दवा",
+        "पत्ते पीले", "सूख रहा", "मर रहा", "धब्बे", "सड़न", "झुलसा"
+      ],
+      "keywords_english": [
+        "disease", "pest", "insect", "treatment", "cure", "medicine", "spray",
+        "yellow leaves", "dying", "spots", "rot", "blight", "wilt", "aphids"
+      ],
+      "sample_queries": [
+        {"query": "गेहूं में पीला रतुआ का इलाज", "language": "hi", "intent": "disease_pest", "crop": "wheat", "disease": "yellow_rust"},
+        {"query": "धान में झुलसा रोग कैसे रोकें?", "language": "hi", "intent": "disease_pest", "crop": "rice", "disease": "blast"},
+        {"query": "Tomato leaves turning yellow", "language": "en", "intent": "disease_pest", "crop": "tomato"},
+        {"query": "आलू में झुलसा रोग की दवाई बताओ", "language": "hi", "intent": "disease_pest", "crop": "potato", "disease": "late_blight"},
+        {"query": "सरसों में माहू का नियंत्रण", "language": "hi", "intent": "disease_pest", "crop": "mustard", "pest": "aphids"},
+        {"query": "How to control fall armyworm in maize?", "language": "en", "intent": "disease_pest", "crop": "maize", "pest": "fall_armyworm"},
+        {"query": "मेरी फसल में कीड़े लग गए", "language": "hi", "intent": "disease_pest"}
+      ]
+    },
+    "government_scheme": {
+      "description": "User asking about government schemes, subsidies, benefits for farmers",
+      "keywords_hindi": [
+        "योजना", "सरकारी", "सब्सिडी", "अनुदान", "पैसा", "लाभ", "आवेदन",
+        "पीएम किसान", "फसल बीमा", "किसान क्रेडिट कार्ड", "KCC", "PMFBY"
+      ],
+      "keywords_english": [
+        "scheme", "government", "subsidy", "benefit", "grant", "apply",
+        "pm kisan", "crop insurance", "kisan credit card", "loan", "yojana"
+      ],
+      "sample_queries": [
+        {"query": "पीएम किसान में कैसे रजिस्टर करें?", "language": "hi", "intent": "government_scheme", "scheme": "pm-kisan"},
+        {"query": "फसल बीमा की अंतिम तारीख क्या है?", "language": "hi", "intent": "government_scheme", "scheme": "pmfby"},
+        {"query": "How to get KCC loan?", "language": "en", "intent": "government_scheme", "scheme": "kcc"},
+        {"query": "किसानों के लिए कौन सी योजनाएं हैं?", "language": "hi", "intent": "government_scheme"},
+        {"query": "सोलर पंप पर सब्सिडी कैसे मिलेगी?", "language": "hi", "intent": "government_scheme", "scheme": "pmkusum"},
+        {"query": "What documents needed for PM-KISAN?", "language": "en", "intent": "government_scheme", "scheme": "pm-kisan"},
+        {"query": "मेरा पीएम किसान का पैसा नहीं आया", "language": "hi", "intent": "government_scheme", "scheme": "pm-kisan"}
+      ]
+    },
+    "weather": {
+      "description": "User asking about weather forecast, rainfall, temperature for farming",
+      "keywords_hindi": [
+        "मौसम", "बारिश", "वर्षा", "तापमान", "गर्मी", "सर्दी", "पाला", "ओले"
+      ],
+      "keywords_english": [
+        "weather", "rain", "rainfall", "temperature", "forecast", "frost", "hail"
+      ],
+      "sample_queries": [
+        {"query": "आज मौसम कैसा रहेगा?", "language": "hi", "intent": "weather"},
+        {"query": "इस हफ्ते बारिश होगी क्या?", "language": "hi", "intent": "weather"},
+        {"query": "Weather forecast for Lucknow", "language": "en", "intent": "weather", "location": "Lucknow"},
+        {"query": "क्या पाला पड़ेगा रात को?", "language": "hi", "intent": "weather"},
+        {"query": "खेती के लिए मौसम ठीक है?", "language": "hi", "intent": "weather"}
+      ]
+    },
+    "fertilizer_irrigation": {
+      "description": "Specific questions about fertilizers and irrigation",
+      "keywords_hindi": [
+        "खाद", "उर्वरक", "यूरिया", "DAP", "NPK", "सिंचाई", "पानी", "ड्रिप"
+      ],
+      "keywords_english": [
+        "fertilizer", "urea", "dap", "npk", "irrigation", "water", "drip"
+      ],
+      "sample_queries": [
+        {"query": "गेहूं में कितनी यूरिया डालें?", "language": "hi", "intent": "fertilizer_irrigation", "crop": "wheat"},
+        {"query": "धान में DAP कब डालें?", "language": "hi", "intent": "fertilizer_irrigation", "crop": "rice"},
+        {"query": "How much NPK for tomato?", "language": "en", "intent": "fertilizer_irrigation", "crop": "tomato"},
+        {"query": "ड्रिप सिंचाई कैसे करें?", "language": "hi", "intent": "fertilizer_irrigation"},
+        {"query": "पानी कितने दिन में दें?", "language": "hi", "intent": "fertilizer_irrigation"}
+      ]
+    },
+    "general_greeting": {
+      "description": "General greetings and non-specific queries",
+      "sample_queries": [
+        {"query": "नमस्ते", "language": "hi", "intent": "greeting"},
+        {"query": "Hello", "language": "en", "intent": "greeting"},
+        {"query": "धन्यवाद", "language": "hi", "intent": "thanks"},
+        {"query": "Thank you", "language": "en", "intent": "thanks"},
+        {"query": "मदद करो", "language": "hi", "intent": "help"},
+        {"query": "कृषिमित्र क्या है?", "language": "hi", "intent": "about"}
+      ]
+    }
+  },
+  "entity_extraction": {
+    "crops": {
+      "wheat": ["गेहूं", "गेहुं", "गेंहू", "wheat", "gehun"],
+      "rice": ["धान", "चावल", "rice", "paddy", "chawal"],
+      "maize": ["मक्का", "मक्के", "maize", "corn", "makka", "makke"],
+      "potato": ["आलू", "potato", "aloo", "aaloo"],
+      "tomato": ["टमाटर", "tomato", "tamatar"],
+      "onion": ["प्याज", "प्याज़", "onion", "pyaz", "pyaaz"],
+      "sugarcane": ["गन्ना", "गन्ने", "sugarcane", "ganna", "ganne"],
+      "cotton": ["कपास", "cotton", "kapas"],
+      "mustard": ["सरसों", "mustard", "sarson"],
+      "gram": ["चना", "चने", "gram", "chana", "chane"],
+      "soybean": ["सोयाबीन", "soybean", "soya"],
+      "groundnut": ["मूंगफली", "groundnut", "peanut", "moongfali"],
+      "bajra": ["बाजरा", "बाजरे", "bajra", "bajre", "pearl millet"],
+      "mandua": ["मंडुवा", "मंडुआ", "mandua", "mandwa", "ragi", "finger millet"]
+    },
+    "locations": {
+      "uttarakhand": ["उत्तराखंड", "uttarakhand", "पहाड़", "पौड़ी", "pauri", "chamoli", "dehradun", "देहरादून", "नैनीताल", "almora"],
+      "uttar_pradesh": ["उत्तर प्रदेश", "uttar pradesh", "up", "यूपी", "lucknow", "लखनऊ", "moradabad", "मुरादाबाद", "agra", "आगरा", "kanpur", "कानपुर", "varanasi", "वाराणसी"],
+      "punjab": ["पंजाब", "punjab", "ludhiana", "लुधियाना", "amritsar", "अमृतसर"],
+      "haryana": ["हरियाणा", "haryana", "karnal", "करनाल", "hisar", "हिसार"],
+      "madhya_pradesh": ["मध्य प्रदेश", "madhya pradesh", "mp", "indore", "इंदौर", "bhopal", "भोपाल"],
+      "maharashtra": ["महाराष्ट्र", "maharashtra", "pune", "पुणे", "nagpur", "नागपुर"],
+      "rajasthan": ["राजस्थान", "rajasthan", "jaipur", "जयपुर", "jodhpur", "जोधपुर"],
+      "bihar": ["बिहार", "bihar", "patna", "पटना"],
+      "gujarat": ["गुजरात", "gujarat", "ahmedabad", "अहमदाबाद"]
+    },
+    "diseases": {
+      "yellow_rust": ["पीला रतुआ", "yellow rust", "stripe rust"],
+      "brown_rust": ["भूरा रतुआ", "brown rust", "leaf rust"],
+      "blast": ["झुलसा", "blast", "ब्लास्ट"],
+      "late_blight": ["पछेता झुलसा", "late blight", "आलू का झुलसा"],
+      "bacterial_blight": ["जीवाणु झुलसा", "bacterial blight", "BLB"]
+    },
+    "pests": {
+      "aphids": ["माहू", "चेपा", "aphids", "तेला"],
+      "stem_borer": ["तना छेदक", "stem borer"],
+      "fall_armyworm": ["फॉल आर्मीवर्म", "fall armyworm", "FAW"],
+      "whitefly": ["सफेद मक्खी", "whitefly"],
+      "bollworm": ["बॉलवर्म", "bollworm", "डोडा कीट"]
+    }
+  },
+  "response_generation_templates": {
+    "market_price_response": {
+      "header": {
+        "hi": "📊 **{state} के मंडी भाव ({date})**",
+        "en": "📊 **Mandi Prices in {state} ({date})**"
+      },
+      "crop_row": {
+        "hi": "**{emoji} {crop_hi}**\n  📍 मंडी: {mandi}\n  💰 भाव: {price}\n  📋 MSP: {msp}\n  {trend}",
+        "en": "**{emoji} {crop_en}**\n  📍 Mandi: {mandi}\n  💰 Price: {price}\n  📋 MSP: {msp}\n  {trend}"
+      }
+    },
+    "crop_advisory_response": {
+      "header": {
+        "hi": "🌾 **{crop} के लिए कृषि सलाह**",
+        "en": "🌾 **Crop Advisory for {crop}**"
+      },
+      "location": {
+        "hi": "📍 **स्थान:** {location}",
+        "en": "📍 **Location:** {location}"
+      },
+      "weather": {
+        "hi": "🌡️ **मौसम जानकारी:**\n• औसत तापमान: {temp}°C\n• कुल बारिश: {rain} मिमी",
+        "en": "🌡️ **Weather Data:**\n• Average Temperature: {temp}°C\n• Total Rainfall: {rain} mm"
+      },
+      "advice": {
+        "hi": "💡 **सलाह:**",
+        "en": "💡 **Advice:**"
+      }
+    },
+    "scheme_response": {
+      "header": {
+        "hi": "🏛️ **{scheme_name}**",
+        "en": "🏛️ **{scheme_name}**"
+      },
+      "benefits": {
+        "hi": "✅ **लाभ:** {benefits}",
+        "en": "✅ **Benefits:** {benefits}"
+      },
+      "eligibility": {
+        "hi": "👤 **पात्रता:** {eligibility}",
+        "en": "👤 **Eligibility:** {eligibility}"
+      },
+      "portal": {
+        "hi": "🔗 **पोर्टल:** {portal}",
+        "en": "🔗 **Portal:** {portal}"
+      }
+    }
+  }
+}

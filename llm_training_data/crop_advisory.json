@@ -1,0 +1,636 @@
+{
+  "metadata": {
+    "description": "Crop Advisory Data for Indian Agriculture - Weather-based farming recommendations",
+    "source": "KrishiMitra Agricultural Knowledge Base",
+    "languages": ["Hindi", "English", "Telugu", "Marathi"]
+  },
+  "crops": {
+    "wheat": {
+      "english_name": "Wheat",
+      "hindi_name": "गेहूं",
+      "telugu_name": "గోధుమ",
+      "marathi_name": "गहू",
+      "scientific_name": "Triticum aestivum",
+      "season": "Rabi",
+      "optimal_conditions": {
+        "temperature": {"min": 15, "max": 25, "unit": "°C"},
+        "rainfall": {"min": 30, "max": 100, "unit": "mm/month"},
+        "soil_moisture": {"min": 20, "max": 50, "unit": "%"},
+        "soil_type": ["Loamy", "Clay Loam", "Sandy Loam"],
+        "ph_range": {"min": 6.0, "max": 7.5}
+      },
+      "sowing": {
+        "time": "October 15 - November 30",
+        "seed_rate": "100-125 kg/ha",
+        "depth": "5-7 cm",
+        "spacing": "20-22.5 cm row spacing"
+      },
+      "varieties": {
+        "irrigated": ["HD-3086", "PBW-725", "WH-1105", "DBW-187", "HD-2967"],
+        "rainfed": ["C-306", "Lok-1", "HI-1544"],
+        "late_sown": ["HD-3059", "PBW-752", "WH-1124"]
+      },
+      "fertilizer_recommendation": {
+        "npk_ratio": "120:60:40 kg/ha",
+        "urea_splits": [
+          {"timing": "Basal", "amount": "1/3 of N"},
+          {"timing": "First irrigation (21 days)", "amount": "1/3 of N"},
+          {"timing": "Second irrigation (45 days)", "amount": "1/3 of N"}
+        ],
+        "micronutrients": "Zinc sulphate 25 kg/ha if zinc deficient"
+      },
+      "irrigation": {
+        "critical_stages": [
+          {"stage": "Crown Root Initiation (CRI)", "days": 21, "priority": "Most Critical"},
+          {"stage": "Tillering", "days": 45, "priority": "Important"},
+          {"stage": "Jointing", "days": 65, "priority": "Important"},
+          {"stage": "Flowering", "days": 85, "priority": "Critical"},
+          {"stage": "Milk Stage", "days": 100, "priority": "Important"},
+          {"stage": "Grain Filling", "days": 115, "priority": "Avoid excess water"}
+        ],
+        "total_irrigations": "4-6 depending on soil type"
+      },
+      "diseases": {
+        "yellow_rust": {
+          "hindi": "पीला रतुआ",
+          "symptoms": "Yellow-orange pustules on leaves in stripes",
+          "treatment": "Propiconazole 25% EC @ 0.1% or Tebuconazole @ 0.1%",
+          "prevention": "Use resistant varieties, early sowing"
+        },
+        "brown_rust": {
+          "hindi": "भूरा रतुआ",
+          "symptoms": "Small brown pustules scattered on leaves",
+          "treatment": "Propiconazole 25% EC @ 1ml/L",
+          "prevention": "Avoid late sowing"
+        },
+        "karnal_bunt": {
+          "hindi": "करनाल बंट",
+          "symptoms": "Black powder in grains, fishy smell",
+          "treatment": "Seed treatment with Carbendazim @ 2.5g/kg",
+          "prevention": "Use certified seeds"
+        },
+        "loose_smut": {
+          "hindi": "खुला कंड",
+          "symptoms": "Black powdery mass replaces grains",
+          "treatment": "Seed treatment with Carboxin @ 2g/kg seed",
+          "prevention": "Hot water treatment of seeds at 52°C for 10 min"
+        }
+      },
+      "pests": {
+        "aphids": {
+          "hindi": "माहू / चेपा",
+          "damage": "Suck sap, causing yellowing and stunted growth",
+          "treatment": "Imidacloprid 17.8 SL @ 0.5ml/L or Dimethoate 30 EC @ 2ml/L",
+          "timing": "Spray when 10-15 aphids per ear"
+        },
+        "termites": {
+          "hindi": "दीमक",
+          "damage": "Destroy roots, plants dry up",
+          "treatment": "Chlorpyriphos 20 EC @ 4L/ha with irrigation",
+          "prevention": "Treat seed with Chlorpyriphos @ 4ml/kg seed"
+        }
+      },
+      "weather_based_advice": {
+        "high_temperature": "If temp > 25°C during grain filling: Irrigate to reduce canopy temperature, apply KCl spray 2%",
+        "frost_risk": "If temp < 2°C: Light irrigation in evening, smoke smudge pots in morning",
+        "excess_rain": "Avoid irrigation, ensure drainage, watch for rust diseases",
+        "low_humidity": "Irrigate during CRI stage, mulching helps retain moisture"
+      },
+      "harvest": {
+        "time": "When grains have 12-14% moisture, golden yellow color",
+        "method": "Combine harvester or manual cutting",
+        "yield_potential": "40-55 quintals/ha (irrigated), 20-25 quintals/ha (rainfed)"
+      }
+    },
+    "rice": {
+      "english_name": "Rice/Paddy",
+      "hindi_name": "धान / चावल",
+      "telugu_name": "వరి",
+      "marathi_name": "भात",
+      "scientific_name": "Oryza sativa",
+      "season": "Kharif (main), Summer (in some areas)",
+      "optimal_conditions": {
+        "temperature": {"min": 22, "max": 32, "unit": "°C"},
+        "rainfall": {"min": 100, "max": 200, "unit": "mm/month"},
+        "soil_moisture": {"min": 50, "max": 80, "unit": "%"},
+        "soil_type": ["Clay", "Clay Loam", "Silty Clay"],
+        "ph_range": {"min": 5.5, "max": 6.5}
+      },
+      "sowing": {
+        "nursery_time": "May-June",
+        "transplanting_time": "June-July",
+        "seed_rate": "20-25 kg/ha (for nursery)",
+        "seedling_age": "21-25 days",
+        "spacing": "20x15 cm or 20x10 cm"
+      },
+      "varieties": {
+        "long_duration": ["Pusa Basmati-1121", "Pusa Basmati-1509", "Swarna", "MTU-7029"],
+        "medium_duration": ["PR-126", "PR-127", "Pusa-44", "HKR-47"],
+        "short_duration": ["Pusa-1612", "Sahbhagi Dhan", "DRR Dhan-42"]
+      },
+      "fertilizer_recommendation": {
+        "npk_ratio": "100:50:50 kg/ha (high yielding varieties)",
+        "basmati_npk": "60:30:30 kg/ha",
+        "application": [
+          {"timing": "Basal", "fertilizer": "Full P & K, 1/3 N"},
+          {"timing": "Tillering (21 days)", "fertilizer": "1/3 N"},
+          {"timing": "Panicle Initiation (42 days)", "fertilizer": "1/3 N"}
+        ],
+        "zinc": "Zinc Sulphate 25 kg/ha as basal"
+      },
+      "water_management": {
+        "puddling": "Standing water 5-7 cm during puddling",
+        "transplanting": "2-3 cm water",
+        "vegetative_stage": "Alternate wetting and drying (AWD)",
+        "flowering": "5 cm standing water (critical)",
+        "grain_filling": "Intermittent irrigation",
+        "pre_harvest": "Drain field 10-15 days before harvest"
+      },
+      "diseases": {
+        "blast": {
+          "hindi": "झुलसा / ब्लास्ट",
+          "symptoms": "Diamond/spindle shaped spots on leaves, neck rot",
+          "treatment": "Tricyclazole 75 WP @ 0.6g/L or Isoprothiolane 40 EC @ 1.5ml/L",
+          "prevention": "Avoid excess nitrogen, use resistant varieties"
+        },
+        "bacterial_leaf_blight": {
+          "hindi": "जीवाणु झुलसा",
+          "symptoms": "Yellow to white lesions along leaf margins",
+          "treatment": "Streptocycline 250ppm + Copper Oxychloride 0.25%",
+          "prevention": "Use disease-free seeds, balanced fertilization"
+        },
+        "sheath_blight": {
+          "hindi": "आवरण झुलसा",
+          "symptoms": "Oval/irregular greenish-grey spots on sheath",
+          "treatment": "Hexaconazole 5 EC @ 2ml/L or Validamycin @ 2ml/L",
+          "prevention": "Avoid dense planting, proper spacing"
+        }
+      },
+      "pests": {
+        "stem_borer": {
+          "hindi": "तना छेदक",
+          "damage": "Dead hearts in vegetative stage, white earheads",
+          "treatment": "Cartap Hydrochloride 4G @ 25kg/ha or Chlorantraniliprole 0.4G @ 10kg/ha",
+          "prevention": "Clip tips of seedlings before transplanting"
+        },
+        "brown_planthopper": {
+          "hindi": "भूरा फुदका",
+          "damage": "Hopper burn - circular patches of dried plants",
+          "treatment": "Avoid excess N, spray Buprofezin 25 SC @ 1.6ml/L",
+          "prevention": "Drain water from fields to disrupt breeding"
+        },
+        "leaf_folder": {
+          "hindi": "पत्ती लपेटक",
+          "damage": "Folded leaves with feeding damage inside",
+          "treatment": "Chlorantraniliprole 18.5 SC @ 0.3ml/L",
+          "prevention": "Remove weeds from bunds"
+        }
+      },
+      "weather_based_advice": {
+        "drought": "Apply life-saving irrigation, spray KCl 2%, avoid fertilizer application",
+        "flood": "Drain excess water immediately, apply additional N after water recedes",
+        "high_temperature": "Maintain standing water, irrigate during flowering",
+        "cloudy_weather": "Watch for blast and BLB, reduce N application"
+      },
+      "harvest": {
+        "time": "When 80% grains are golden yellow, 20-22% moisture",
+        "method": "Combine harvester or manual",
+        "yield_potential": "50-60 quintals/ha"
+      }
+    },
+    "maize": {
+      "english_name": "Maize/Corn",
+      "hindi_name": "मक्का",
+      "telugu_name": "మొక్కజొన్న",
+      "marathi_name": "मका",
+      "scientific_name": "Zea mays",
+      "season": "Kharif (main), Rabi, Spring",
+      "optimal_conditions": {
+        "temperature": {"min": 18, "max": 32, "unit": "°C"},
+        "rainfall": {"min": 50, "max": 120, "unit": "mm/month"},
+        "soil_moisture": {"min": 30, "max": 60, "unit": "%"},
+        "soil_type": ["Sandy Loam", "Loamy", "Well-drained"],
+        "ph_range": {"min": 5.5, "max": 7.5}
+      },
+      "sowing": {
+        "kharif_time": "June-July with onset of monsoon",
+        "rabi_time": "October-November",
+        "spring_time": "January-February",
+        "seed_rate": "20-25 kg/ha",
+        "spacing": "60-75 cm x 20-25 cm"
+      },
+      "varieties": {
+        "hybrid": ["HQPM-1", "DHM-117", "DHM-121", "Bio-9681", "Pioneer-3396"],
+        "composite": ["Navjot", "Parbhat", "Amber"],
+        "sweet_corn": ["Sugar-75", "Madhuri", "Win Orange"]
+      },
+      "fertilizer_recommendation": {
+        "npk_ratio": "120:60:40 kg/ha",
+        "application": [
+          {"timing": "Basal", "fertilizer": "Full P & K, 1/3 N"},
+          {"timing": "Knee high stage (25-30 days)", "fertilizer": "1/3 N"},
+          {"timing": "Tasseling (45-50 days)", "fertilizer": "1/3 N"}
+        ]
+      },
+      "diseases": {
+        "turcicum_leaf_blight": {
+          "hindi": "टर्सिकम झुलसा",
+          "symptoms": "Long elliptical greyish-green lesions on leaves",
+          "treatment": "Mancozeb 75 WP @ 2.5g/L or Zineb 75 WP @ 2g/L",
+          "prevention": "Use resistant hybrids, crop rotation"
+        },
+        "maydis_leaf_blight": {
+          "hindi": "मेडिस झुलसा",
+          "symptoms": "Small diamond-shaped tan lesions",
+          "treatment": "Propiconazole 25 EC @ 1ml/L",
+          "prevention": "Remove crop debris"
+        }
+      },
+      "pests": {
+        "fall_armyworm": {
+          "hindi": "फॉल आर्मीवर्म",
+          "damage": "Ragged feeding on leaves, whorl damage",
+          "treatment": "Spinetoram 11.7 SC @ 0.5ml/L or Chlorantraniliprole 18.5 SC @ 0.4ml/L",
+          "prevention": "Early sowing, pheromone traps"
+        },
+        "stem_borer": {
+          "hindi": "तना छेदक",
+          "damage": "Dead hearts, boring in stem",
+          "treatment": "Carbofuran 3G @ 20kg/ha in whorls"
+        }
+      },
+      "weather_based_advice": {
+        "drought": "Irrigate at tasseling and silking (critical stages), mulching",
+        "waterlogging": "Ensure drainage, earthing up for root support",
+        "high_temperature": "Irrigate to maintain soil moisture, avoid water stress during pollination"
+      },
+      "harvest": {
+        "time": "When husks turn brown and dry, black layer at grain base",
+        "grain_moisture": "20-25%",
+        "yield_potential": "60-80 quintals/ha (hybrid), 30-40 quintals/ha (composite)"
+      }
+    },
+    "potato": {
+      "english_name": "Potato",
+      "hindi_name": "आलू",
+      "telugu_name": "బంగాళాదుంప",
+      "marathi_name": "बटाटा",
+      "scientific_name": "Solanum tuberosum",
+      "season": "Rabi (main crop in North India)",
+      "optimal_conditions": {
+        "temperature": {"min": 15, "max": 22, "unit": "°C"},
+        "night_temp": {"max": 18, "note": "Higher night temp reduces tuber formation"},
+        "rainfall": {"min": 40, "max": 80, "unit": "mm/month"},
+        "soil_moisture": {"min": 30, "max": 50, "unit": "%"},
+        "soil_type": ["Sandy Loam", "Loam", "Well-drained"],
+        "ph_range": {"min": 5.5, "max": 6.5}
+      },
+      "sowing": {
+        "north_india": "October 15 - November 15",
+        "hills": "February-March",
+        "seed_rate": "25-30 quintals/ha (whole tubers), 15-20 quintals/ha (cut tubers)",
+        "tuber_size": "30-40g seed tubers",
+        "spacing": "60 cm x 20 cm"
+      },
+      "varieties": {
+        "early": ["Kufri Ashoka", "Kufri Pukhraj", "Kufri Surya"],
+        "medium": ["Kufri Bahar", "Kufri Jyoti", "Kufri Badshah"],
+        "late": ["Kufri Sindhuri", "Kufri Dewa"],
+        "processing": ["Kufri Chipsona-1", "Kufri Chipsona-3", "Kufri Frysona"]
+      },
+      "fertilizer_recommendation": {
+        "npk_ratio": "180:80:100 kg/ha",
+        "application": [
+          {"timing": "Basal", "fertilizer": "Full P & K, Half N"},
+          {"timing": "Earthing up (30-35 days)", "fertilizer": "Remaining N"}
+        ],
+        "micronutrients": "Zinc Sulphate 25 kg/ha"
+      },
+      "diseases": {
+        "late_blight": {
+          "hindi": "पछेता झुलसा / अगेती झुलसा",
+          "critical_disease": true,
+          "symptoms": "Water-soaked lesions on leaves, white fungal growth, rapid spread",
+          "treatment": [
+            "Mancozeb 75 WP @ 2g/L (preventive)",
+            "Cymoxanil + Mancozeb (Curzate M-8) @ 3g/L",
+            "Metalaxyl + Mancozeb (Ridomil MZ) @ 2.5g/L"
+          ],
+          "prevention": "Use certified disease-free seed, remove infected plants",
+          "weather_trigger": "High humidity (>80%), temperature 15-20°C"
+        },
+        "early_blight": {
+          "hindi": "अगेती झुलसा",
+          "symptoms": "Concentric ring spots (target board) on lower leaves",
+          "treatment": "Mancozeb 75 WP @ 2g/L or Chlorothalonil @ 2g/L"
+        }
+      },
+      "pests": {
+        "cutworm": {
+          "hindi": "कटवर्म",
+          "damage": "Cuts seedlings at ground level",
+          "treatment": "Chlorpyriphos 20 EC @ 2.5L/ha with irrigation"
+        },
+        "aphids": {
+          "hindi": "माहू",
+          "damage": "Transmit viruses, cause leaf curling",
+          "treatment": "Imidacloprid 17.8 SL @ 0.3ml/L"
+        },
+        "tuber_moth": {
+          "hindi": "आलू का शलभ",
+          "damage": "Tunnels in tubers during storage",
+          "treatment": "Store at <10°C, CIPC treatment"
+        }
+      },
+      "weather_based_advice": {
+        "high_temperature": "Temperature >25°C reduces tuber formation. Irrigate frequently, mulching with straw",
+        "frost_risk": "Light irrigation before frost, earthing up for protection",
+        "high_humidity": "Watch for late blight, preventive fungicide sprays mandatory",
+        "excess_rain": "Improve drainage, risk of tuber rot"
+      },
+      "harvest": {
+        "time": "When leaves turn yellow and dry (75-120 days depending on variety)",
+        "pre_harvest": "Stop irrigation 10-15 days before harvest",
+        "curing": "Leave tubers in shade for 10-15 days for skin hardening",
+        "yield_potential": "250-300 quintals/ha (irrigated)"
+      }
+    },
+    "sugarcane": {
+      "english_name": "Sugarcane",
+      "hindi_name": "गन्ना",
+      "telugu_name": "చెరకు",
+      "marathi_name": "ऊस",
+      "scientific_name": "Saccharum officinarum",
+      "season": "Annual crop (planted Oct-March, harvested after 10-12 months)",
+      "optimal_conditions": {
+        "temperature": {"min": 20, "max": 35, "unit": "°C"},
+        "rainfall": {"min": 75, "max": 150, "unit": "cm/year"},
+        "soil_moisture": {"min": 40, "max": 65, "unit": "%"},
+        "soil_type": ["Deep Loamy", "Clay Loam", "Well-drained"],
+        "ph_range": {"min": 6.0, "max": 8.0}
+      },
+      "planting": {
+        "autumn": "October-November",
+        "spring": "February-March",
+        "seed_rate": "40,000-45,000 3-bud setts/ha",
+        "spacing": "75-90 cm row spacing"
+      },
+      "varieties": {
+        "early_maturing": ["CoJ-64", "Co-0238", "CoS-767"],
+        "mid_late": ["Co-0239", "CoLk-94184", "CoS-8436"],
+        "high_sugar": ["Co-0238", "CoJ-85", "CoLk-9709"]
+      },
+      "fertilizer_recommendation": {
+        "npk_ratio": "150:60:60 kg/ha (plant crop), 250:60:60 kg/ha (ratoon)",
+        "application": [
+          {"timing": "Basal", "fertilizer": "Full P & K, 1/3 N"},
+          {"timing": "45 days", "fertilizer": "1/3 N"},
+          {"timing": "90 days", "fertilizer": "1/3 N with earthing up"}
+        ]
+      },
+      "diseases": {
+        "red_rot": {
+          "hindi": "लाल सड़न",
+          "symptoms": "Red discoloration inside cane, white patches, alcoholic smell",
+          "treatment": "No chemical control. Remove infected clumps, use disease-free seed",
+          "prevention": "Hot water treatment of setts at 50°C for 2 hours"
+        },
+        "smut": {
+          "hindi": "कंड / कोंड",
+          "symptoms": "Black whip-like structure from growing point",
+          "treatment": "Remove and burn infected plants",
+          "prevention": "Treat setts with Carbendazim 0.1%"
+        }
+      },
+      "pests": {
+        "early_shoot_borer": {
+          "hindi": "अगेती तना छेदक",
+          "damage": "Dead hearts in young shoots",
+          "treatment": "Chlorantraniliprole 0.4G @ 20kg/ha or Carbofuran 3G"
+        },
+        "top_borer": {
+          "hindi": "शीर्ष छेदक",
+          "damage": "Bunchy top, side shoots",
+          "treatment": "Remove affected shoots, release Trichogramma"
+        },
+        "woolly_aphid": {
+          "hindi": "रूई जैसी मोहू",
+          "damage": "White cottony mass under leaves",
+          "treatment": "Release Dipha aphidivora (natural predator), spray Chlorpyriphos if severe"
+        }
+      },
+      "harvest": {
+        "time": "10-12 months after planting when Brix >18%",
+        "yield_potential": "800-1000 quintals/ha",
+        "ratoon": "Can take 2-3 ratoon crops"
+      }
+    },
+    "mandua": {
+      "english_name": "Finger Millet (Ragi)",
+      "hindi_name": "मंडुवा / मंडुआ / रागी",
+      "telugu_name": "రాగి",
+      "marathi_name": "नाचणी",
+      "scientific_name": "Eleusine coracana",
+      "season": "Kharif",
+      "region": "Uttarakhand hills, Karnataka, Tamil Nadu, Andhra Pradesh",
+      "optimal_conditions": {
+        "temperature": {"min": 20, "max": 30, "unit": "°C"},
+        "rainfall": {"min": 50, "max": 150, "unit": "mm/month"},
+        "soil_moisture": {"min": 25, "max": 60, "unit": "%"},
+        "soil_type": ["Sandy Loam", "Red Soil", "Well-drained"],
+        "altitude": "Up to 2300m in hills"
+      },
+      "sowing": {
+        "time": "May-June (with onset of monsoon)",
+        "seed_rate": "10 kg/ha (transplanting), 8 kg/ha (direct seeding)",
+        "spacing": "22.5 cm x 10 cm (transplanting)",
+        "seedling_age": "21-25 days for transplanting"
+      },
+      "varieties": {
+        "hills": ["VL-149", "VL-315", "VL-324", "VL-352"],
+        "plains": ["GPU-28", "GPU-67", "MR-1", "PR-202"]
+      },
+      "fertilizer_recommendation": {
+        "npk_ratio": "40:20:20 kg/ha",
+        "organic": "Well-decomposed FYM 10-12 tonnes/ha"
+      },
+      "diseases": {
+        "blast": {
+          "hindi": "झुलसा",
+          "symptoms": "Diamond-shaped spots on leaves, neck and finger blast",
+          "treatment": "Tricyclazole 75 WP @ 0.6g/L",
+          "prevention": "Use resistant varieties, avoid excess N"
+        }
+      },
+      "weather_based_advice": {
+        "low_rainfall": "मंडुवा सूखा सहनशील है लेकिन बुवाई के समय नमी जरूरी है। हल्की सिंचाई करें।",
+        "high_temperature": "तापमान 30°C से अधिक होने पर सुबह की सिंचाई करें।",
+        "excess_rain": "जल निकासी सुनिश्चित करें, ब्लास्ट रोग की निगरानी करें।",
+        "favorable": "मौसम मंडुवा के लिए अनुकूल है।"
+      },
+      "harvest": {
+        "time": "When fingers turn brown (100-130 days)",
+        "yield_potential": "15-20 quintals/ha (improved varieties)"
+      },
+      "nutritional_value": {
+        "calcium": "344 mg/100g (highest among cereals)",
+        "iron": "3.9 mg/100g",
+        "protein": "7.3%",
+        "fiber": "3.6%"
+      }
+    },
+    "cotton": {
+      "english_name": "Cotton",
+      "hindi_name": "कपास",
+      "telugu_name": "పత్తి",
+      "marathi_name": "कापूस",
+      "scientific_name": "Gossypium spp.",
+      "season": "Kharif",
+      "optimal_conditions": {
+        "temperature": {"min": 21, "max": 35, "unit": "°C"},
+        "rainfall": {"min": 50, "max": 100, "unit": "cm"},
+        "soil_type": ["Black Cotton Soil", "Deep Loamy"],
+        "ph_range": {"min": 6.0, "max": 8.0}
+      },
+      "sowing": {
+        "time": "April-May (with pre-monsoon showers) or June",
+        "seed_rate": "2.5 kg/ha (Bt hybrid)",
+        "spacing": "90-120 cm x 60-90 cm"
+      },
+      "varieties": {
+        "bt_hybrid": ["Bollgard-II varieties", "RCH-2", "RCH-659", "JKCH-1947"],
+        "desi": ["LRA-5166", "LD-694", "G.Cot-21"]
+      },
+      "pests": {
+        "bollworm": {
+          "hindi": "बॉलवर्म / डोडा कीट",
+          "types": ["American Bollworm", "Pink Bollworm", "Spotted Bollworm"],
+          "treatment": "Profenophos 50 EC @ 2ml/L, Emamectin Benzoate 5 SG @ 0.4g/L"
+        },
+        "whitefly": {
+          "hindi": "सफेद मक्खी",
+          "damage": "Leaf curl virus transmission, honeydew",
+          "treatment": "Pyriproxyfen 10 EC @ 1ml/L, Spiromesifen 22.9 SC @ 0.5ml/L"
+        },
+        "sucking_pests": {
+          "includes": ["Aphids", "Jassids", "Thrips"],
+          "treatment": "Flonicamid 50 WG @ 0.3g/L, Acetamiprid 20 SP @ 0.2g/L"
+        }
+      },
+      "diseases": {
+        "bacterial_blight": {
+          "hindi": "जीवाणु अंगमारी",
+          "symptoms": "Angular leaf spots, black arm on bolls",
+          "treatment": "Copper Oxychloride 50 WP @ 2.5g/L + Streptocycline 200ppm"
+        },
+        "root_rot": {
+          "hindi": "जड़ गलन",
+          "symptoms": "Wilting, root discoloration",
+          "treatment": "Seed treatment with Trichoderma viride @ 10g/kg"
+        }
+      },
+      "harvest": {
+        "pickings": "3-4 pickings at 15-20 day intervals",
+        "time": "When bolls burst open and kapas is fluffy",
+        "yield_potential": "15-20 quintals/ha (Bt hybrid)"
+      }
+    },
+    "mustard": {
+      "english_name": "Mustard/Rapeseed",
+      "hindi_name": "सरसों",
+      "telugu_name": "ఆవాలు",
+      "marathi_name": "मोहरी",
+      "scientific_name": "Brassica juncea",
+      "season": "Rabi",
+      "optimal_conditions": {
+        "temperature": {"min": 10, "max": 25, "unit": "°C"},
+        "rainfall": {"min": 25, "max": 50, "unit": "cm"},
+        "soil_type": ["Sandy Loam", "Loamy"],
+        "ph_range": {"min": 6.0, "max": 7.5}
+      },
+      "sowing": {
+        "time": "October 15 - November 10",
+        "seed_rate": "4-5 kg/ha",
+        "spacing": "45 cm x 15 cm"
+      },
+      "varieties": {
+        "high_yielding": ["Pusa Bold", "Pusa Mustard-28", "NRCHB-101", "PM-30", "RH-749"],
+        "early": ["Pusa Tarak", "PM-26"]
+      },
+      "diseases": {
+        "white_rust": {
+          "hindi": "सफेद रतुआ",
+          "symptoms": "White pustules on leaves, stagheads on flowers",
+          "treatment": "Mancozeb 75 WP @ 2g/L, Metalaxyl MZ @ 2g/L"
+        },
+        "alternaria_blight": {
+          "hindi": "झुलसा",
+          "symptoms": "Concentric ring spots on leaves and pods",
+          "treatment": "Iprodione 50 WP @ 2g/L, Mancozeb @ 2.5g/L"
+        },
+        "sclerotinia_rot": {
+          "hindi": "तना गलन",
+          "symptoms": "White cottony growth on stem, plant lodging",
+          "treatment": "Carbendazim 50 WP @ 1g/L"
+        }
+      },
+      "pests": {
+        "aphids": {
+          "hindi": "माहू",
+          "damage": "Major pest, causes 50-90% yield loss",
+          "treatment": "Dimethoate 30 EC @ 1ml/L, Imidacloprid 17.8 SL @ 0.3ml/L",
+          "spray_time": "When 10-15 aphids per plant observed"
+        },
+        "painted_bug": {
+          "hindi": "चित्रित बग",
+          "damage": "Sucks sap from pods",
+          "treatment": "Malathion 50 EC @ 2ml/L"
+        }
+      },
+      "harvest": {
+        "time": "When 75% pods turn yellowish-brown (130-150 days)",
+        "moisture": "Harvest early morning to avoid shattering",
+        "yield_potential": "15-20 quintals/ha"
+      }
+    }
+  },
+  "general_pest_management": {
+    "ipm_principles": [
+      "Use resistant varieties",
+      "Follow crop rotation",
+      "Deep summer ploughing",
+      "Seed treatment before sowing",
+      "Use biological control agents (Trichogramma, NPV)",
+      "Install pheromone traps for monitoring",
+      "Chemical control as last resort"
+    ],
+    "beneficial_insects": ["Ladybird beetles", "Lacewings", "Parasitic wasps", "Spiders"],
+    "biological_controls": {
+      "trichogramma": "For bollworms, stem borers - 1.5 lakh eggs/ha",
+      "npv": "For Helicoverpa - 250 LE/ha",
+      "trichoderma": "For soil-borne diseases - 2.5 kg/ha with FYM"
+    }
+  },
+  "general_fertilizer_guidelines": {
+    "soil_testing": "Get soil tested every 2-3 years for NPK and micronutrients",
+    "organic_matter": "Apply 10-12 tonnes FYM or 5 tonnes vermicompost per hectare",
+    "green_manuring": "Grow Dhaincha/Sunhemp and incorporate before sowing",
+    "micronutrients": {
+      "zinc_deficiency": "Zinc Sulphate 25 kg/ha",
+      "boron_deficiency": "Borax 10 kg/ha",
+      "iron_deficiency": "Ferrous Sulphate 50 kg/ha"
+    }
+  },
+  "query_patterns": {
+    "crop_advisory_hindi": [
+      "खेती कैसे करें", "फसल की जानकारी", "कब बुवाई करें", "कौन सा बीज", "खाद कितनी डालें",
+      "सिंचाई कब करें", "रोग का इलाज", "कीट नियंत्रण", "पैदावार कैसे बढ़ाएं",
+      "मौसम के हिसाब से सलाह", "फसल सुरक्षा"
+    ],
+    "crop_advisory_english": [
+      "how to grow", "farming advice", "sowing time", "best variety", "fertilizer dose",
+      "irrigation schedule", "disease control", "pest management", "increase yield",
+      "weather based advice", "crop protection"
+    ]
+  }
+}

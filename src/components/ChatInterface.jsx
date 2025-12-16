@@ -4,8 +4,9 @@ import useLocation from '../hooks/useLocation';
 import './ChatInterface.css';
 
 const API_BASE = 'http://localhost:4000';
-// Disease detection - Direct call to Render API (works better than proxy)
-const DISEASE_API_URL = 'https://plant-disease-api-yt7l.onrender.com';
+// Disease detection - Using server-side proxy (server keeps API warm)
+// No more direct Render API calls from frontend - server handles keep-alive
+const DISEASE_API_TIMEOUT = 120000; // 2 minute timeout (server manages warming)
 
 // Treatment recommendations for common diseases (for chat response)
 const TREATMENT_DATA = {
@@ -87,18 +88,22 @@ const ChatInterface = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [showImageUpload, setShowImageUpload] = useState(false);
+  // Dynamic loading message for disease detection
+  const [loadingMessageId, setLoadingMessageId] = useState(null);
+  const [loadingStep, setLoadingStep] = useState(0);
   const [weather, setWeather] = useState(null);
   const [weatherLoading, setWeatherLoading] = useState(true);
   const [showLocationPicker, setShowLocationPicker] = useState(false);
   // Pending query to send after new chat is created (for quick chat buttons)
   const [pendingQueryAfterNewChat, setPendingQueryAfterNewChat] = useState(null);
   // Talkback (text-to-speech) toggle - persisted in localStorage
+  // TTS is manual only - user clicks speaker button to hear messages
   const [talkbackEnabled, setTalkbackEnabled] = useState(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('talkbackEnabled');
-      return saved !== null ? saved === 'true' : true; // Default: enabled
+      return saved !== null ? saved === 'true' : false; // Default: disabled (manual speaker button)
     }
-    return true;
+    return false;
   });
   // Initialize selectedState from localStorage if available
   const [selectedState, setSelectedState] = useState(() => {
@@ -111,26 +116,46 @@ const ChatInterface = ({
   const [showCropSelector, setShowCropSelector] = useState(false);
   const [pendingImageFile, setPendingImageFile] = useState(null);
   const [selectedCropForAnalysis, setSelectedCropForAnalysis] = useState('');
+  const [diseaseApiStatus, setDiseaseApiStatus] = useState('unknown'); // 'unknown', 'warming', 'ready', 'slow'
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
   const fileInputRef = useRef(null);
   const recognitionRef = useRef(null);
 
-  // Warm up the disease detection API on component mount
-  // This helps reduce cold start time when user actually needs it
+  // Check disease API status from server (server manages keep-alive)
   useEffect(() => {
-    const warmupDiseaseAPI = async () => {
+    const checkApiStatus = async () => {
       try {
-        // Simple GET request to wake up the server
-        console.log('[Disease API] Warming up server...');
-        await fetch(`${API_BASE}/v1/health`, { method: 'GET' });
-        // Also try to ping the external API through our proxy health check
-        fetch('https://plant-disease-api-yt7l.onrender.com/', { method: 'GET' }).catch(() => {});
+        setDiseaseApiStatus('warming');
+        console.log('[Disease API] Checking server status...');
+        
+        const response = await fetch(`${API_BASE}/v1/disease/status`);
+        if (response.ok) {
+          const data = await response.json();
+          console.log('[Disease API] Status:', data);
+          
+          if (data.status === 'ready') {
+            setDiseaseApiStatus('ready');
+            console.log('[Disease API] Server is warm and ready!');
+          } else {
+            setDiseaseApiStatus('warming');
+            console.log('[Disease API] Server is warming up...');
+          }
+        } else {
+          setDiseaseApiStatus('slow');
+        }
       } catch (e) {
-        // Ignore errors - this is just a warmup
+        console.log('[Disease API] Could not check status:', e.message);
+        setDiseaseApiStatus('unknown');
       }
     };
-    warmupDiseaseAPI();
+    
+    checkApiStatus();
+    
+    // Re-check status every 30 seconds
+    const statusInterval = setInterval(checkApiStatus, 30000);
+    
+    return () => clearInterval(statusInterval);
   }, []);
 
   // Supported crops for disease detection - organized by category
@@ -311,12 +336,13 @@ const ChatInterface = ({
   }, []);
 
   useEffect(() => {
-    // Initialize speech recognition
+    // Initialize speech recognition with enhanced Hindi support
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       recognitionRef.current = new SpeechRecognition();
       recognitionRef.current.continuous = false;
       recognitionRef.current.interimResults = true;
+      recognitionRef.current.maxAlternatives = 3; // Get multiple alternatives for better accuracy
       
       const langMap = {
         'hi': 'hi-IN', 'en': 'en-IN', 'te': 'te-IN', 'mr': 'mr-IN',
@@ -324,15 +350,61 @@ const ChatInterface = ({
       };
       recognitionRef.current.lang = langMap[language] || 'en-IN';
 
+      // Track if we got a final result
+      let hasFinalResult = false;
+      let finalTranscript = '';
+
       recognitionRef.current.onresult = (event) => {
-        const transcript = Array.from(event.results)
-          .map(result => result[0].transcript)
-          .join('');
-        setInput(transcript);
+        let interimTranscript = '';
+        finalTranscript = '';
+        
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          const transcript = event.results[i][0].transcript;
+          if (event.results[i].isFinal) {
+            finalTranscript += transcript;
+            hasFinalResult = true;
+          } else {
+            interimTranscript += transcript;
+          }
+        }
+        
+        // Show transcript in input (final or interim)
+        setInput(finalTranscript || interimTranscript);
+        
+        console.log('[Voice] Transcript:', finalTranscript || interimTranscript, '| Final:', hasFinalResult);
       };
 
-      recognitionRef.current.onend = () => setIsListening(false);
-      recognitionRef.current.onerror = () => setIsListening(false);
+      recognitionRef.current.onend = () => {
+        console.log('[Voice] Recognition ended. Final transcript:', finalTranscript);
+        setIsListening(false);
+        
+        // Auto-submit if we have a final result (farmer doesn't need to click send)
+        if (hasFinalResult && finalTranscript.trim()) {
+          console.log('[Voice] Auto-submitting voice query:', finalTranscript);
+          // Small delay to ensure state is updated
+          setTimeout(() => {
+            sendMessage(finalTranscript.trim());
+          }, 300);
+        }
+        
+        // Reset for next recognition
+        hasFinalResult = false;
+        finalTranscript = '';
+      };
+      
+      recognitionRef.current.onerror = (event) => {
+        console.error('[Voice] Recognition error:', event.error);
+        setIsListening(false);
+        
+        // Show error message for common errors
+        if (event.error === 'no-speech') {
+          // Don't show error, just silently stop
+        } else if (event.error === 'not-allowed') {
+          alert(language === 'hi' 
+            ? 'माइक्रोफोन की अनुमति दें' 
+            : 'Please allow microphone access');
+        }
+      };
     }
   }, [language]);
 
@@ -341,13 +413,20 @@ const ChatInterface = ({
   };
 
   const toggleListening = () => {
-    if (!recognitionRef.current) return;
+    if (!recognitionRef.current) {
+      alert(language === 'hi' 
+        ? 'आपका ब्राउज़र वॉइस इनपुट सपोर्ट नहीं करता' 
+        : 'Your browser does not support voice input');
+      return;
+    }
     
     if (isListening) {
       recognitionRef.current.stop();
     } else {
+      // Start listening
       recognitionRef.current.start();
       setIsListening(true);
+      // No auto voice prompt - just visual indication that mic is active
     }
   };
 
@@ -371,6 +450,8 @@ const ChatInterface = ({
       .replace(/[\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]|[\u{1F600}-\u{1F64F}]|[\u{1F680}-\u{1F6FF}]/gu, '')
       // Remove arrows and special characters (but keep Hindi/Devanagari)
       .replace(/[→↑↓←]/g, '')
+      // Remove progress bar characters
+      .replace(/[▓░]/g, '')
       // Clean up multiple spaces and newlines
       .replace(/\n\n+/g, '. ')
       .replace(/\n/g, '. ')
@@ -394,6 +475,8 @@ const ChatInterface = ({
         .replace(/\bPrice\b/gi, 'भाव')
         .replace(/\bper\b/gi, 'प्रति')
         .replace(/\bkg\b/gi, 'किलो')
+        // Convert percentages
+        .replace(/(\d+)%/g, '$1 प्रतिशत')
         // Clean up extra spaces
         .replace(/\s+/g, ' ')
         .trim();
@@ -410,8 +493,9 @@ const ChatInterface = ({
 
   // Stop any ongoing speech
   const stopSpeech = () => {
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
+    // Use global stop function
+    if (window.stopAllTTS) {
+      window.stopAllTTS();
     }
   };
 
@@ -456,82 +540,343 @@ const ChatInterface = ({
       return;
     }
     
-    if (!('speechSynthesis' in window)) {
-      console.log('[Speech] Speech synthesis not supported');
+    // Clean the text before speaking (pass language for proper conversion)
+    const isIndic = ['hi', 'te', 'mr'].includes(language); // Hindi, Telugu, Marathi
+    const cleanText = cleanTextForSpeech(text, isIndic);
+    
+    console.log('[Speech] ========== TTS DEBUG ==========');
+    console.log('[Speech] Language:', language, '| Is Indic:', isIndic);
+    console.log('[Speech] Text length:', cleanText.length);
+    
+    if (!cleanText || cleanText.trim().length === 0) {
+      console.log('[Speech] Empty text, skipping');
       return;
     }
     
+    // For Indic languages (Hindi, Telugu, Marathi): Use server proxy for Google TTS
+    if (isIndic) {
+      console.log('[Speech] 🎯 Using Server TTS Proxy for', language);
+      speakWithServerTTS(cleanText, language);
+      return;
+    }
+    
+    // For English: Use browser TTS
+    speakWithBrowserTTS(cleanText, language);
+  };
+  
+  // Server-proxied TTS - works for Hindi via our backend
+  const speakWithServerTTS = (text, lang) => {
+    // Initialize audio tracking array if not exists
+    if (!window.ttsAudioInstances) {
+      window.ttsAudioInstances = [];
+    }
+    
+    // Stop ALL previous audio instances
+    window.ttsAudioInstances.forEach(audio => {
+      try {
+        audio.pause();
+        audio.src = '';
+      } catch(e) {}
+    });
+    window.ttsAudioInstances = [];
+    
+    // Stop any previous audio
+    if (window.currentTTSAudio) {
+      window.currentTTSAudio.pause();
+      window.currentTTSAudio.src = '';
+      window.currentTTSAudio = null;
+    }
+    
+    // Google TTS has a character limit (~200), so split long text
+    const maxLength = 150;
+    const chunks = [];
+    
+    // Split into sentences first
+    const sentences = text.split(/(?<=[।.!?])\s*/).filter(s => s.trim());
+    
+    let currentChunk = '';
+    for (const sentence of sentences) {
+      if ((currentChunk + ' ' + sentence).length > maxLength) {
+        if (currentChunk) chunks.push(currentChunk.trim());
+        currentChunk = sentence;
+      } else {
+        currentChunk = currentChunk ? currentChunk + ' ' + sentence : sentence;
+      }
+    }
+    if (currentChunk) chunks.push(currentChunk.trim());
+    
+    console.log('[Speech] Split into', chunks.length, 'chunks');
+    
+    // Clear any existing timeouts
+    if (window.ttsTimeoutId) {
+      clearTimeout(window.ttsTimeoutId);
+      window.ttsTimeoutId = null;
+    }
+    
+    // Reset stop flag for new playback
+    window.ttsShouldStop = false;
+    
+    // Create a unique session ID for this TTS session
+    const sessionId = Date.now();
+    window.currentTTSSession = sessionId;
+    
+    // Play chunks sequentially
+    let currentIndex = 0;
+    
+    const playNextChunk = () => {
+      // Check if we should stop OR if session changed
+      if (window.ttsShouldStop || window.currentTTSSession !== sessionId) {
+        console.log('[Speech] 🛑 Stopping playback');
+        if (window.currentTTSAudio) {
+          window.currentTTSAudio.pause();
+          window.currentTTSAudio.src = '';
+          window.currentTTSAudio = null;
+        }
+        return;
+      }
+      
+      if (currentIndex >= chunks.length) {
+        console.log('[Speech] ✅ All chunks finished');
+        window.currentTTSAudio = null;
+        return;
+      }
+      
+      const chunk = chunks[currentIndex];
+      console.log('[Speech] ▶️ Chunk', currentIndex + 1, '/', chunks.length);
+      
+      // Use our server proxy
+      const audioUrl = `${API_BASE}/v1/tts?text=${encodeURIComponent(chunk)}&lang=${lang}`;
+      
+      const audio = new Audio(audioUrl);
+      window.currentTTSAudio = audio;
+      // Track this audio instance for cleanup
+      window.ttsAudioInstances.push(audio);
+      
+      audio.onended = () => {
+        if (window.ttsShouldStop || window.currentTTSSession !== sessionId) return;
+        currentIndex++;
+        window.ttsTimeoutId = setTimeout(playNextChunk, 150);
+      };
+      
+      audio.onerror = (e) => {
+        console.error('[Speech] ❌ Audio error, trying next chunk');
+        if (window.ttsShouldStop || window.currentTTSSession !== sessionId) return;
+        currentIndex++;
+        window.ttsTimeoutId = setTimeout(playNextChunk, 150);
+      };
+      
+      audio.play().then(() => {
+        console.log('[Speech] 🔊 Playing...');
+      }).catch(err => {
+        console.error('[Speech] Play failed:', err.message);
+        if (window.ttsShouldStop) return;
+        currentIndex++;
+        window.ttsTimeoutId = setTimeout(playNextChunk, 150);
+      });
+    };
+    
+    playNextChunk();
+  };
+  
+  // Browser's native TTS - robust implementation
+  const speakWithBrowserTTS = (cleanText, langCode) => {
+    console.log('[Speech] Starting browser TTS, language:', langCode);
+    
+    // Reset stop flag for new speech
+    window.ttsShouldStop = false;
+    
+    // Map language codes to TTS locale codes
+    const langMap = {
+      'en': 'en-IN',
+      'hi': 'hi-IN',
+      'te': 'te-IN',
+      'mr': 'mr-IN'
+    };
+    const ttsLang = langMap[langCode] || 'en-IN';
+    const isIndic = ['hi', 'te', 'mr'].includes(langCode);
+    
+    if (!('speechSynthesis' in window)) {
+      console.error('[Speech] ❌ Speech synthesis not supported in this browser');
+      return;
+    }
+    
+    // Cancel any ongoing speech first
     window.speechSynthesis.cancel();
     
-    // Clean the text before speaking (pass language for proper conversion)
-    const isHindi = language === 'hi';
-    const cleanText = cleanTextForSpeech(text, isHindi);
-    
-    console.log('[Speech] Language:', language, 'Is Hindi:', isHindi);
-    console.log('[Speech] Clean text to speak:', cleanText.substring(0, 300));
-    
-    const utterance = new SpeechSynthesisUtterance(cleanText);
-    const langMap = { 'hi': 'hi-IN', 'en': 'en-IN', 'te': 'te-IN', 'mr': 'mr-IN' };
-    const targetLang = langMap[language] || 'en-IN';
-    utterance.lang = targetLang;
-    utterance.rate = 0.85;
-    
-    // Get available voices
-    const voices = window.speechSynthesis.getVoices();
-    console.log('[Speech] Total voices available:', voices.length);
-    
-    // Find a voice for the target language
-    let selectedVoice = null;
-    
-    if (isHindi) {
-      // Priority order for Hindi voices
-      selectedVoice = voices.find(v => v.lang === 'hi-IN') ||
-                      voices.find(v => v.lang.startsWith('hi')) ||
-                      voices.find(v => v.name.toLowerCase().includes('hindi')) ||
-                      voices.find(v => v.lang.includes('hi'));
+    // Chrome has a bug where getVoices() returns empty array initially
+    // We need to wait for voices to load
+    const attemptSpeak = () => {
+      // CHECK STOP FLAG
+      if (window.ttsShouldStop) {
+        console.log('[Speech] 🛑 STOPPED before speaking');
+        return;
+      }
       
-      // If no Hindi voice found, try Google voices (available in Chrome)
-      if (!selectedVoice) {
-        selectedVoice = voices.find(v => 
-          v.name.toLowerCase().includes('google') && v.lang.includes('hi')
-        ) || voices.find(v => 
-          v.name.toLowerCase().includes('microsoft') && v.name.toLowerCase().includes('hindi')
+      const voices = window.speechSynthesis.getVoices();
+      console.log('[Speech] Available voices:', voices.length);
+      
+      if (voices.length === 0) {
+        console.log('[Speech] No voices loaded yet, retrying in 100ms...');
+        setTimeout(attemptSpeak, 100);
+        return;
+      }
+      
+      // Find the best voice for the language
+      let selectedVoice = null;
+      
+      if (isIndic) {
+        // Find voice for Indic languages
+        const langPrefix = langCode;
+        const indicVoices = voices.filter(v => 
+          v.lang.includes(langPrefix) || 
+          v.lang.startsWith(langPrefix)
         );
+        console.log('[Speech]', langCode, 'voices found:', indicVoices.length);
+        indicVoices.forEach(v => console.log('[Speech]   -', v.name, v.lang));
+        
+        selectedVoice = 
+          voices.find(v => v.lang === ttsLang) ||
+          voices.find(v => v.lang === langCode) ||
+          voices.find(v => v.lang.toLowerCase().startsWith(langCode));
+        
+        if (selectedVoice) {
+          console.log('[Speech] ✅ Selected', langCode, 'voice:', selectedVoice.name, selectedVoice.lang);
+        } else {
+          console.log('[Speech] ⚠️ No', langCode, 'voice found, using default with', ttsLang, 'lang tag');
+        }
+      } else {
+        // For English - prefer Indian English
+        selectedVoice = 
+          voices.find(v => v.lang === 'en-IN') ||
+          voices.find(v => v.lang === 'en-US') ||
+          voices.find(v => v.lang.startsWith('en'));
+        
+        if (selectedVoice) {
+          console.log('[Speech] Selected English voice:', selectedVoice.name, selectedVoice.lang);
+        }
       }
       
-      // FALLBACK: If still no Hindi voice, use English voice for all text
-      // This ensures the user at least hears something
-      if (!selectedVoice) {
-        console.log('[Speech] No Hindi voice found - falling back to English voice for Hindi text');
-        selectedVoice = voices.find(v => v.lang === 'en-IN') ||
-                        voices.find(v => v.lang.startsWith('en'));
-        // Don't change utterance.lang - let it try with Hindi setting first
+      // For better handling, split into chunks but not too small
+      // Use a single utterance for short text, sentences for longer
+      const maxChunkLength = 200;
+      
+      // CHECK STOP FLAG AGAIN before speaking
+      if (window.ttsShouldStop) {
+        console.log('[Speech] 🛑 STOPPED before starting utterance');
+        return;
       }
-    } else {
-      // For English or other languages
-      selectedVoice = voices.find(v => v.lang === targetLang) ||
-                      voices.find(v => v.lang.startsWith(language));
-    }
-    
-    if (selectedVoice) {
-      utterance.voice = selectedVoice;
-      console.log('[Speech] Using voice:', selectedVoice.name, selectedVoice.lang);
-    } else {
-      console.log('[Speech] No matching voice found for:', targetLang);
-      console.log('[Speech] Available voices:', voices.map(v => `${v.name}(${v.lang})`).join(', '));
-    }
-    
-    // Add error handling
-    utterance.onerror = (event) => {
-      console.error('[Speech] Error:', event.error);
+      
+      if (cleanText.length <= maxChunkLength) {
+        // Short text - speak directly
+        speakSingleUtterance(cleanText, selectedVoice, ttsLang);
+      } else {
+        // Long text - split into sentences (handle both Devanagari and English punctuation)
+        const sentences = cleanText
+          .split(/(?<=[।.!?])\s*/)
+          .filter(s => s.trim().length > 0);
+        
+        console.log('[Speech] Long text, split into', sentences.length, 'chunks');
+        speakSentencesSequentially(sentences, selectedVoice, ttsLang, 0);
+      }
     };
     
-    utterance.onstart = () => {
-      console.log('[Speech] Started speaking');
-    };
+    // Start the speaking attempt
+    attemptSpeak();
+  };
+  
+  // Helper: Speak a single utterance
+  const speakSingleUtterance = (text, voice, ttsLang) => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    const isIndic = ttsLang !== 'en-IN';
+    
+    // ALWAYS set language
+    utterance.lang = ttsLang;
+    
+    // Set voice if available
+    if (voice) {
+      utterance.voice = voice;
+    }
+    
+    // Speech settings - slower for Indic languages
+    utterance.rate = isIndic ? 0.85 : 0.9;
+    utterance.pitch = 1.0;
+    utterance.volume = 1.0;
+    
+    utterance.onstart = () => console.log('[Speech] ▶️ Started speaking');
+    utterance.onend = () => console.log('[Speech] ✅ Finished speaking');
+    utterance.onerror = (e) => console.error('[Speech] ❌ Error:', e.error);
+    
+    console.log('[Speech] Speaking:', text.substring(0, 100) + (text.length > 100 ? '...' : ''));
+    window.speechSynthesis.speak(utterance);
+  };
+  
+  // Helper: Speak multiple sentences sequentially
+  const speakSentencesSequentially = (sentences, voice, ttsLang, index) => {
+    const isIndic = ttsLang !== 'en-IN';
+    
+    // CHECK STOP FLAG FIRST
+    if (window.ttsShouldStop) {
+      console.log('[Speech] 🛑 STOPPED - ttsShouldStop flag is set at index', index);
+      window.speechSynthesis.cancel();
+      return;
+    }
+    
+    if (index >= sentences.length) {
+      console.log('[Speech] ✅ All sentences completed');
+      return;
+    }
+    
+    const text = sentences[index];
+    console.log('[Speech] Sentence', index + 1, '/', sentences.length, ':', text.substring(0, 50));
+    
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = ttsLang;
+    
+    if (voice) {
+      utterance.voice = voice;
+    }
+    
+    utterance.rate = isIndic ? 0.85 : 0.9;
+    utterance.pitch = 1.0;
+    utterance.volume = 1.0;
+    
+    // Store current utterance for potential cancellation
+    window.currentUtterance = utterance;
     
     utterance.onend = () => {
-      console.log('[Speech] Finished speaking');
+      console.log('[Speech] ✅ Sentence', index + 1, 'ended');
+      // CHECK STOP FLAG BEFORE CONTINUING
+      if (window.ttsShouldStop) {
+        console.log('[Speech] 🛑 STOPPED after sentence', index + 1, 'end - NOT continuing');
+        window.currentUtterance = null;
+        return;
+      }
+      // Continue with next sentence after a small pause
+      window.ttsTimeoutId = setTimeout(() => {
+        // Double-check stop flag in timeout
+        if (window.ttsShouldStop) {
+          console.log('[Speech] 🛑 STOPPED in timeout before sentence', index + 2);
+          return;
+        }
+        speakSentencesSequentially(sentences, voice, ttsLang, index + 1);
+      }, 150);
+    };
+    
+    utterance.onerror = (e) => {
+      console.error('[Speech] Sentence error:', e.error, '- continuing...');
+      // CHECK STOP FLAG BEFORE CONTINUING
+      if (window.ttsShouldStop) {
+        console.log('[Speech] 🛑 STOPPED after error');
+        window.currentUtterance = null;
+        return;
+      }
+      window.ttsTimeoutId = setTimeout(() => {
+        if (window.ttsShouldStop) {
+          console.log('[Speech] 🛑 STOPPED in error timeout');
+          return;
+        }
+        speakSentencesSequentially(sentences, voice, ttsLang, index + 1);
+      }, 150);
     };
     
     window.speechSynthesis.speak(utterance);
@@ -679,8 +1024,7 @@ const ChatInterface = ({
 
       onUpdateConversation(conversation.id, [...newMessages, assistantMessage], title);
       
-      // Auto-speak response if talkback is enabled
-      if (data.response && talkbackEnabled) speakText(data.response);
+      // TTS disabled for auto-speak - user can click speaker button to hear response
 
     } catch (error) {
       console.error('Chat error:', error);
@@ -733,7 +1077,7 @@ const ChatInterface = ({
     setShowImageUpload(false);
   };
 
-  // Step 2: User selects crop -> Analyze image
+  // Step 2: User selects crop -> Analyze image using SERVER PROXY (no local fallback)
   const analyzeWithCrop = async (cropType) => {
     if (!pendingImageFile) return;
 
@@ -754,106 +1098,167 @@ const ChatInterface = ({
     onUpdateConversation(conversation.id, newMessages);
     setIsLoading(true);
 
-    // Add analyzing message with better explanation about wait time
+    // Dynamic loading messages for better UX
+    const loadingMessages = language === 'hi' ? [
+      { icon: '🚀', text: 'AI इंजन शुरू हो रहा है...', subtext: 'कृपया प्रतीक्षा करें' },
+      { icon: '🔌', text: 'सर्वर से कनेक्ट हो रहा है...', subtext: 'न्यूरल नेटवर्क सक्रिय हो रहा है' },
+      { icon: '📤', text: 'छवि अपलोड हो रही है...', subtext: 'आपकी फसल की तस्वीर भेजी जा रही है' },
+      { icon: '🔬', text: 'AI विश्लेषण जारी है...', subtext: 'मशीन लर्निंग मॉडल काम कर रहा है' },
+      { icon: '🧠', text: 'रोग पहचान जारी है...', subtext: 'डीप लर्निंग से जांच हो रही है' },
+      { icon: '📊', text: 'परिणाम तैयार हो रहे हैं...', subtext: 'बस कुछ ही सेकंड और...' },
+    ] : [
+      { icon: '🚀', text: 'Starting AI Engine...', subtext: 'Please wait' },
+      { icon: '🔌', text: 'Connecting to server...', subtext: 'Activating neural network' },
+      { icon: '📤', text: 'Uploading image...', subtext: 'Sending your crop photo' },
+      { icon: '🔬', text: 'AI Analysis in progress...', subtext: 'Machine learning model working' },
+      { icon: '🧠', text: 'Detecting disease patterns...', subtext: 'Deep learning scan active' },
+      { icon: '📊', text: 'Preparing results...', subtext: 'Almost there...' },
+    ];
+
+    const loadingMsgId = Date.now() + 1;
+    setLoadingMessageId(loadingMsgId);
+    setLoadingStep(0);
+
+    // Initial loading message
+    const initialLoadingContent = `${loadingMessages[0].icon} **${loadingMessages[0].text}**\n\n_${loadingMessages[0].subtext}_`;
     const analyzingMessage = {
-      id: Date.now() + 1,
+      id: loadingMsgId,
       role: 'assistant',
-      content: language === 'hi' 
-        ? `🔬 **${cropType} की छवि का विश्लेषण हो रहा है...**\n\n⏳ कृपया प्रतीक्षा करें (30 सेकंड से 2 मिनट लग सकते हैं)\n\n_AI मॉडल लोड हो रहा है..._` 
-        : `🔬 **Analyzing ${cropType} image...**\n\n⏳ Please wait (may take 30 seconds to 2 minutes)\n\n_AI model is loading..._`,
+      content: initialLoadingContent,
       timestamp: new Date().toISOString(),
       isLoading: true
     };
     onUpdateConversation(conversation.id, [...newMessages, analyzingMessage]);
 
+    // Animate through loading steps
+    let stepIndex = 0;
+    const loadingInterval = setInterval(() => {
+      stepIndex = (stepIndex + 1) % loadingMessages.length;
+      setLoadingStep(stepIndex);
+      const step = loadingMessages[stepIndex];
+      const updatedContent = `${step.icon} **${step.text}**\n\n_${step.subtext}_\n\n${'▓'.repeat(stepIndex + 1)}${'░'.repeat(loadingMessages.length - stepIndex - 1)} ${Math.round(((stepIndex + 1) / loadingMessages.length) * 100)}%`;
+      
+      const updatedLoadingMsg = {
+        id: loadingMsgId,
+        role: 'assistant',
+        content: updatedContent,
+        timestamp: new Date().toISOString(),
+        isLoading: true
+      };
+      onUpdateConversation(conversation.id, [...newMessages, updatedLoadingMsg]);
+    }, 3000); // Update every 3 seconds
+
+    let apiSuccess = false;
+    let apiData = null;
+    let errorMessage = null;
+
+    // Use server proxy (server keeps API warm with keep-alive system)
     try {
-      // Call Disease Detection API with selected crop
-      // Direct call to Render API - /predict endpoint
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), DISEASE_API_TIMEOUT);
+
       const formData = new FormData();
-      // Try 'image' field name (common in ML APIs) - change to 'file' if needed
-      formData.append('image', file);
+      formData.append('file', file); // Must be 'file' to match server multer config
       formData.append('crop', cropType);
 
-      console.log('[Disease] Sending request to:', `${DISEASE_API_URL}/predict`);
-      console.log('[Disease] File:', file.name, file.type, file.size, 'bytes');
-      console.log('[Disease] Crop:', cropType);
-
-      const response = await fetch(`${DISEASE_API_URL}/predict`, {
+      console.log('[Disease] Sending to server proxy (2 min timeout)...');
+      
+      // Use server proxy endpoint instead of direct Render call
+      const response = await fetch(`${API_BASE}/v1/disease/detect`, {
         method: 'POST',
         body: formData,
+        signal: controller.signal
       });
 
-      console.log('[Disease] Response status:', response.status);
+      clearTimeout(timeoutId);
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('[Disease] Error response:', errorText);
-        throw new Error(`API returned ${response.status}: ${errorText}`);
+      if (response.ok) {
+        apiData = await response.json();
+        if (apiData && apiData.class && !apiData.error) {
+          apiSuccess = true;
+          console.log('[Disease] Server proxy success:', apiData.class);
+        } else if (apiData.error) {
+          errorMessage = apiData.error;
+        }
+      } else if (response.status === 503) {
+        // Service temporarily unavailable
+        const errData = await response.json().catch(() => ({}));
+        errorMessage = errData.error || 'AI server is temporarily busy';
+      } else {
+        errorMessage = `Server error: ${response.status}`;
       }
-
-      const apiData = await response.json();
-      console.log('[Disease] API Response:', apiData);
-      
-      // Check if we got a fallback/error response
-      if (apiData.fallback || apiData.error) {
-        throw new Error(apiData.error || 'Disease detection service unavailable');
+    } catch (error) {
+      console.log('[Disease] Request failed:', error.message);
+      if (error.name === 'AbortError') {
+        errorMessage = language === 'hi' 
+          ? 'अनुरोध का समय समाप्त हो गया। कृपया पुनः प्रयास करें।'
+          : 'Request timed out. Please try again.';
+      } else {
+        errorMessage = error.message;
       }
+    }
 
-      // Get treatment data
+    // Generate response
+    let responseContent;
+    
+    if (apiSuccess && apiData) {
+      // External API succeeded - use its results
       const diseaseClass = apiData.class;
       const isHealthy = diseaseClass.toLowerCase().includes('healthy');
       const treatmentInfo = TREATMENT_DATA[diseaseClass] || TREATMENT_DATA['default'];
       const confidence = (apiData.confidence * 100).toFixed(1);
       const diseaseName = diseaseClass.replace(/_+/g, ' ').replace(/\s+/g, ' ').trim();
 
-      let responseContent;
       if (isHealthy) {
         responseContent = language === 'hi'
-          ? `✅ **अच्छी खबर!**\n\nआपका पौधा स्वस्थ है!\n\n**विश्वास स्तर:** ${confidence}%\n\n**सुझाव:**\n• नियमित निगरानी जारी रखें\n• उचित पोषण बनाए रखें\n• अच्छी स्वच्छता का अभ्यास करें`
-          : `✅ **Good News!**\n\nYour plant is healthy!\n\n**Confidence:** ${confidence}%\n\n**Tips:**\n• Continue regular monitoring\n• Maintain proper nutrition\n• Practice good hygiene`;
+          ? `✅ **अच्छी खबर!**\n\nआपका ${cropType} पौधा स्वस्थ है!\n\n**विश्वास स्तर:** ${confidence}%\n\n**सुझाव:**\n• नियमित निगरानी जारी रखें\n• उचित पोषण बनाए रखें\n• अच्छी स्वच्छता का अभ्यास करें`
+          : `✅ **Good News!**\n\nYour ${cropType} plant is healthy!\n\n**Confidence:** ${confidence}%\n\n**Tips:**\n• Continue regular monitoring\n• Maintain proper nutrition\n• Practice good hygiene`;
       } else {
         const treatment = language === 'hi' ? treatmentInfo.treatmentHi : treatmentInfo.treatment;
         const prevention = language === 'hi' ? treatmentInfo.preventionHi : treatmentInfo.prevention;
         
         responseContent = language === 'hi'
-          ? `🔬 **रोग पहचान परिणाम**\n\n**रोग:** ${diseaseName}\n**फसल:** ${apiData.crop || 'Unknown'}\n**गंभीरता:** ${treatmentInfo.severity}\n**विश्वास:** ${confidence}%\n\n**उपचार:**\n${treatment.map(t => `• ${t}`).join('\n')}\n\n**रोकथाम:**\n${prevention.map(p => `• ${p}`).join('\n')}`
-          : `🔬 **Disease Detection Result**\n\n**Disease:** ${diseaseName}\n**Crop:** ${apiData.crop || 'Unknown'}\n**Severity:** ${treatmentInfo.severity}\n**Confidence:** ${confidence}%\n\n**Treatment:**\n${treatment.map(t => `• ${t}`).join('\n')}\n\n**Prevention:**\n${prevention.map(p => `• ${p}`).join('\n')}`;
+          ? `🔬 **रोग पहचान परिणाम**\n\n**रोग:** ${diseaseName}\n**फसल:** ${cropType}\n**गंभीरता:** ${treatmentInfo.severity === 'severe' ? '⚠️ गंभीर' : '⚡ मध्यम'}\n**विश्वास:** ${confidence}%\n\n**🩺 उपचार:**\n${treatment.map(t => `• ${t}`).join('\n')}\n\n**🛡️ रोकथाम:**\n${prevention.map(p => `• ${p}`).join('\n')}`
+          : `🔬 **Disease Detection Result**\n\n**Disease:** ${diseaseName}\n**Crop:** ${cropType}\n**Severity:** ${treatmentInfo.severity === 'severe' ? '⚠️ Severe' : '⚡ Moderate'}\n**Confidence:** ${confidence}%\n\n**🩺 Treatment:**\n${treatment.map(t => `• ${t}`).join('\n')}\n\n**🛡️ Prevention:**\n${prevention.map(p => `• ${p}`).join('\n')}`;
       }
-
-      const assistantMessage = {
-        id: Date.now() + 2,
-        role: 'assistant',
-        content: responseContent,
-        timestamp: new Date().toISOString(),
-        diseaseData: {
-          disease: diseaseName,
-          crop: apiData.crop,
-          severity: treatmentInfo.severity,
-          confidence: confidence,
-          isHealthy: isHealthy
-        }
-      };
-
-      onUpdateConversation(conversation.id, [...newMessages, assistantMessage]);
-      speakText(assistantMessage.content);
-    } catch (error) {
-      console.error('Disease detection error:', error);
+    } else {
+      // API failed - show error with retry option (NO LOCAL FALLBACK)
+      console.log('[Disease] API failed, showing error to user');
       
-      // Error message with retry suggestion
-      const errorMessage = {
-        id: Date.now() + 2,
-        role: 'assistant',
-        content: language === 'hi'
-          ? `⚠️ **विश्लेषण विफल**\n\nAI सर्वर लोड हो रहा है (पहली बार 1-2 मिनट लग सकते हैं)।\n\n🔄 **कृपया 1 मिनट बाद फिर से कोशिश करें।**\n\n💡 **सुझाव:** तस्वीर फिर से अपलोड करें - दूसरी बार तेज़ होगा!`
-          : `⚠️ **Analysis Failed**\n\nAI server is loading (first time may take 1-2 minutes).\n\n🔄 **Please try again after 1 minute.**\n\n💡 **Tip:** Upload the image again - it will be faster the second time!`,
-        timestamp: new Date().toISOString()
-      };
-
-      onUpdateConversation(conversation.id, [...newMessages, errorMessage]);
-    } finally {
-      setIsLoading(false);
-      setPendingImageFile(null);
+      if (language === 'hi') {
+        responseContent = `❌ **विश्लेषण विफल**\n\n${errorMessage || 'AI सर्वर अस्थायी रूप से अनुपलब्ध है।'}\n\n**🔄 कृपया पुनः प्रयास करें:**\n• कुछ सेकंड बाद फिर से तस्वीर भेजें\n• सुनिश्चित करें कि इंटरनेट कनेक्शन अच्छा हो\n\n**📞 तत्काल सहायता:**\n• किसान कॉल सेंटर: **1800-180-1551** (टोल फ्री)\n• नजदीकी कृषि विज्ञान केंद्र (KVK) से संपर्क करें`;
+      } else {
+        responseContent = `❌ **Analysis Failed**\n\n${errorMessage || 'AI server is temporarily unavailable.'}\n\n**🔄 Please try again:**\n• Send the image again after a few seconds\n• Make sure you have good internet connection\n\n**📞 Need immediate help?**\n• Kisan Call Center: **1800-180-1551** (Toll Free)\n• Contact nearest Krishi Vigyan Kendra (KVK)`;
+      }
     }
+
+    // Stop the loading animation
+    clearInterval(loadingInterval);
+    setLoadingMessageId(null);
+    setLoadingStep(0);
+
+    const assistantMessage = {
+      id: loadingMsgId, // Use same ID to replace loading message
+      role: 'assistant',
+      content: responseContent,
+      timestamp: new Date().toISOString(),
+      diseaseData: apiSuccess ? {
+        disease: apiData.class,
+        crop: cropType,
+        confidence: (apiData.confidence * 100).toFixed(1),
+        isHealthy: apiData.class.toLowerCase().includes('healthy')
+      } : {
+        error: true,
+        crop: cropType
+      }
+    };
+
+    // Replace loading message with actual result
+    onUpdateConversation(conversation.id, [...newMessages, assistantMessage]);
+    // TTS disabled for auto-speak - user can click speaker button to hear response
+    
+    setIsLoading(false);
+    setPendingImageFile(null);
   };
 
   // Cancel crop selection
@@ -871,10 +1276,16 @@ const ChatInterface = ({
   };
 
   const formatMessage = (content) => {
-    // Convert markdown-style formatting
-    return content
+    // Convert markdown-style formatting and make URLs clickable
+    let formatted = content
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      // Make URLs clickable - supports http, https
+      .replace(
+        /(https?:\/\/[^\s<>"{}|\\^`\[\]]+)/gi,
+        '<a href="$1" target="_blank" rel="noopener noreferrer" class="chat-link">$1</a>'
+      )
       .replace(/\n/g, '<br/>');
+    return formatted;
   };
 
   return (

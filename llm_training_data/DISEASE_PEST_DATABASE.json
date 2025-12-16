@@ -1,0 +1,525 @@
+{
+  "metadata": {
+    "name": "Complete Disease Database for LLM Training",
+    "version": "1.0",
+    "total_diseases": 12,
+    "crops_covered": ["rice", "wheat", "cotton", "tomato", "potato", "maize", "groundnut", "sugarcane"]
+  },
+
+  "diseases": [
+    {
+      "id": "rice_blast",
+      "name_en": "Rice Blast",
+      "name_hi": "धान का झुलसा रोग",
+      "scientific_name": "Magnaporthe oryzae",
+      "crop": "Rice",
+      "severity": "high",
+      "spread_rate": "fast",
+      "economic_impact": "30-50% yield loss if untreated",
+      "symptoms": {
+        "en": [
+          "Diamond-shaped lesions on leaves",
+          "Grayish center with brown margins",
+          "Lesions may coalesce causing leaf death",
+          "Neck rot causing empty panicles"
+        ],
+        "hi": [
+          "पत्तियों पर हीरे के आकार के धब्बे",
+          "भूरे किनारों के साथ धूसर केंद्र",
+          "धब्बे मिलकर पत्ती को मार सकते हैं",
+          "गर्दन सड़न से खाली बालियां"
+        ]
+      },
+      "treatment": {
+        "en": [
+          "Apply Tricyclazole 75% WP @ 0.6g/L water",
+          "Spray Carbendazim 50% WP @ 1g/L",
+          "Use Isoprothiolane 40% EC @ 1.5ml/L",
+          "Remove and destroy infected plant debris"
+        ],
+        "hi": [
+          "ट्राइसाइक्लाजोल 75% WP @ 0.6 ग्राम/लीटर पानी में छिड़काव",
+          "कार्बेन्डाजिम 50% WP @ 1 ग्राम/लीटर छिड़काव",
+          "आइसोप्रोथियोलेन 40% EC @ 1.5 मिली/लीटर प्रयोग करें",
+          "संक्रमित पौधों के अवशेष हटाकर नष्ट करें"
+        ]
+      },
+      "prevention": {
+        "en": [
+          "Use blast-resistant varieties (Pusa Basmati 1121, PR-126)",
+          "Avoid excessive nitrogen fertilization",
+          "Maintain proper spacing (20x15 cm)",
+          "Treat seeds with fungicide before sowing"
+        ],
+        "hi": [
+          "रोग प्रतिरोधी किस्में उगाएं (पूसा बासमती 1121, PR-126)",
+          "अत्यधिक नाइट्रोजन उर्वरक से बचें",
+          "उचित दूरी रखें (20x15 सेमी)",
+          "बुवाई से पहले बीज उपचार करें"
+        ]
+      },
+      "favorable_conditions": "High humidity (>90%), temperature 20-25°C, frequent rainfall"
+    },
+    {
+      "id": "rice_brown_spot",
+      "name_en": "Brown Spot",
+      "name_hi": "भूरा धब्बा रोग",
+      "scientific_name": "Bipolaris oryzae",
+      "crop": "Rice",
+      "severity": "moderate",
+      "spread_rate": "moderate",
+      "economic_impact": "10-30% yield loss",
+      "symptoms": {
+        "en": [
+          "Oval brown spots on leaves",
+          "Spots have yellow halo",
+          "Seeds may become discolored"
+        ],
+        "hi": [
+          "पत्तियों पर अंडाकार भूरे धब्बे",
+          "धब्बों के चारों ओर पीला घेरा",
+          "दाने भी रंगहीन हो सकते हैं"
+        ]
+      },
+      "treatment": {
+        "en": [
+          "Spray Mancozeb 75% WP @ 2.5g/L",
+          "Apply Propiconazole 25% EC @ 1ml/L",
+          "Use Copper Oxychloride 50% WP @ 3g/L"
+        ],
+        "hi": [
+          "मैंकोज़ेब 75% WP @ 2.5 ग्राम/लीटर छिड़काव",
+          "प्रोपिकोनाज़ोल 25% EC @ 1 मिली/लीटर प्रयोग",
+          "कॉपर ऑक्सीक्लोराइड 50% WP @ 3 ग्राम/लीटर"
+        ]
+      },
+      "prevention": {
+        "en": [
+          "Use certified disease-free seeds",
+          "Apply balanced fertilization",
+          "Avoid water stress during crop growth"
+        ],
+        "hi": [
+          "प्रमाणित रोगमुक्त बीज का प्रयोग करें",
+          "संतुलित उर्वरक प्रयोग करें",
+          "फसल वृद्धि के दौरान पानी की कमी न होने दें"
+        ]
+      },
+      "favorable_conditions": "Nutrient deficiency, water stress, temperature 25-30°C"
+    },
+    {
+      "id": "wheat_yellow_rust",
+      "name_en": "Yellow Rust (Stripe Rust)",
+      "name_hi": "पीला रतुआ (धारीदार रतुआ)",
+      "scientific_name": "Puccinia striiformis",
+      "crop": "Wheat",
+      "severity": "high",
+      "spread_rate": "very fast",
+      "economic_impact": "40-100% loss if untreated",
+      "symptoms": {
+        "en": [
+          "Yellow-orange pustules in stripes on leaves",
+          "Pustules arranged parallel to leaf veins",
+          "Severe infection causes leaf drying"
+        ],
+        "hi": [
+          "पत्तियों पर पीले-नारंगी धारियों में फुंसियां",
+          "फुंसियां पत्ती की नसों के समानांतर",
+          "गंभीर संक्रमण से पत्तियां सूख जाती हैं"
+        ]
+      },
+      "treatment": {
+        "en": [
+          "Spray Propiconazole 25% EC @ 1ml/L immediately",
+          "Apply Tebuconazole 25.9% EC @ 1ml/L",
+          "Use Triadimefon 25% WP @ 1g/L",
+          "Repeat spray after 15 days if needed"
+        ],
+        "hi": [
+          "तुरंत प्रोपिकोनाज़ोल 25% EC @ 1 मिली/लीटर छिड़काव",
+          "टेबुकोनाज़ोल 25.9% EC @ 1 मिली/लीटर प्रयोग",
+          "ट्राइडीमेफॉन 25% WP @ 1 ग्राम/लीटर",
+          "जरूरत हो तो 15 दिन बाद दोहराएं"
+        ]
+      },
+      "prevention": {
+        "en": [
+          "Grow resistant varieties (HD-3086, PBW-725)",
+          "Avoid late sowing (after Nov 15)",
+          "Do not apply excess nitrogen",
+          "Remove volunteer wheat plants"
+        ],
+        "hi": [
+          "प्रतिरोधी किस्में उगाएं (HD-3086, PBW-725)",
+          "15 नवंबर के बाद बुवाई से बचें",
+          "अधिक नाइट्रोजन न दें",
+          "स्वयंसेवी गेहूं पौधे हटाएं"
+        ]
+      },
+      "favorable_conditions": "Cool temperature (10-15°C), high humidity, cloudy weather"
+    },
+    {
+      "id": "wheat_leaf_blight",
+      "name_en": "Leaf Blight",
+      "name_hi": "पत्ती झुलसा रोग",
+      "scientific_name": "Alternaria triticina / Bipolaris sorokiniana",
+      "crop": "Wheat",
+      "severity": "moderate",
+      "spread_rate": "moderate",
+      "economic_impact": "15-25% yield reduction",
+      "symptoms": {
+        "en": [
+          "Irregular brown lesions on leaves",
+          "Lesions may have concentric rings",
+          "Severe infection causes premature leaf senescence"
+        ],
+        "hi": [
+          "पत्तियों पर अनियमित भूरे धब्बे",
+          "धब्बों में संकेंद्रित वलय हो सकते हैं",
+          "गंभीर संक्रमण से पत्तियां जल्दी सूखती हैं"
+        ]
+      },
+      "treatment": {
+        "en": [
+          "Apply Mancozeb 75% WP @ 2.5g/L",
+          "Spray Propiconazole 25% EC @ 1ml/L",
+          "Use Tebuconazole + Trifloxystrobin (Nativo) @ 0.4g/L"
+        ],
+        "hi": [
+          "मैंकोज़ेब 75% WP @ 2.5 ग्राम/लीटर",
+          "प्रोपिकोनाज़ोल 25% EC @ 1 मिली/लीटर छिड़काव",
+          "टेबुकोनाज़ोल + ट्राइफ्लॉक्सीस्ट्रोबिन (नैटिवो) @ 0.4 ग्राम/लीटर"
+        ]
+      },
+      "prevention": {
+        "en": [
+          "Use disease-free certified seeds",
+          "Treat seeds with Carboxin + Thiram",
+          "Practice crop rotation",
+          "Remove crop residues after harvest"
+        ],
+        "hi": [
+          "प्रमाणित रोगमुक्त बीज प्रयोग करें",
+          "कार्बोक्सिन + थीरम से बीज उपचार",
+          "फसल चक्र अपनाएं",
+          "कटाई के बाद फसल अवशेष हटाएं"
+        ]
+      },
+      "favorable_conditions": "Warm humid weather (25-30°C), frequent dew"
+    },
+    {
+      "id": "cotton_leaf_curl",
+      "name_en": "Cotton Leaf Curl Virus",
+      "name_hi": "कपास पत्ती मरोड़ रोग",
+      "scientific_name": "Cotton Leaf Curl Virus (CLCuV)",
+      "crop": "Cotton",
+      "severity": "very high",
+      "spread_rate": "fast",
+      "economic_impact": "50-80% yield loss",
+      "symptoms": {
+        "en": [
+          "Upward or downward curling of leaves",
+          "Thickening of leaf veins",
+          "Enation (leaf-like outgrowths) on lower surface",
+          "Stunted plant growth"
+        ],
+        "hi": [
+          "पत्तियों का ऊपर या नीचे की ओर मुड़ना",
+          "पत्ती की नसों का मोटा होना",
+          "पत्ती की निचली सतह पर उभार",
+          "पौधे की वृद्धि रुकना"
+        ]
+      },
+      "treatment": {
+        "en": [
+          "Control whitefly vector with Imidacloprid 17.8 SL @ 0.3ml/L",
+          "Spray Thiamethoxam 25% WG @ 0.3g/L",
+          "Apply Diafenthiuron 50% WP @ 1g/L for whitefly",
+          "Uproot and destroy severely infected plants"
+        ],
+        "hi": [
+          "इमिडाक्लोप्रिड 17.8 SL @ 0.3 मिली/लीटर से सफेद मक्खी नियंत्रण",
+          "थियामेथोक्सम 25% WG @ 0.3 ग्राम/लीटर छिड़काव",
+          "डायफेंथ्यूरॉन 50% WP @ 1 ग्राम/लीटर",
+          "गंभीर रूप से संक्रमित पौधे उखाड़कर नष्ट करें"
+        ]
+      },
+      "prevention": {
+        "en": [
+          "Grow resistant varieties (Bt cotton hybrids)",
+          "Use yellow sticky traps for whitefly monitoring",
+          "Avoid ratoon cotton cultivation",
+          "Sow border crops like maize to repel whitefly"
+        ],
+        "hi": [
+          "प्रतिरोधी किस्में उगाएं (बीटी कपास संकर)",
+          "सफेद मक्खी निगरानी के लिए पीले चिपचिपे जाल",
+          "रटून कपास की खेती से बचें",
+          "सफेद मक्खी भगाने के लिए मक्का बॉर्डर लगाएं"
+        ]
+      },
+      "favorable_conditions": "High whitefly population, warm weather (25-35°C)"
+    },
+    {
+      "id": "tomato_late_blight",
+      "name_en": "Late Blight",
+      "name_hi": "झुलसा रोग (लेट ब्लाइट)",
+      "scientific_name": "Phytophthora infestans",
+      "crop": "Tomato/Potato",
+      "severity": "very high",
+      "spread_rate": "very fast",
+      "economic_impact": "Can destroy entire crop within days",
+      "symptoms": {
+        "en": [
+          "Water-soaked lesions on leaves",
+          "White fungal growth on leaf underside",
+          "Dark brown lesions on stems",
+          "Rapid plant death in humid conditions"
+        ],
+        "hi": [
+          "पत्तियों पर पानी भरे धब्बे",
+          "पत्ती के नीचे सफेद फफूंद",
+          "तनों पर गहरे भूरे धब्बे",
+          "नम मौसम में पौधे जल्दी मरते हैं"
+        ]
+      },
+      "treatment": {
+        "en": [
+          "Spray Mancozeb 75% WP @ 2.5g/L immediately",
+          "Apply Cymoxanil + Mancozeb (Curzate M8) @ 3g/L",
+          "Use Metalaxyl + Mancozeb (Ridomil Gold) @ 2.5g/L",
+          "Spray every 7 days during disease spread"
+        ],
+        "hi": [
+          "तुरंत मैंकोज़ेब 75% WP @ 2.5 ग्राम/लीटर छिड़काव",
+          "साइमोक्सानिल + मैंकोज़ेब (कर्ज़ेट M8) @ 3 ग्राम/लीटर",
+          "मेटालैक्सिल + मैंकोज़ेब (रिडोमिल गोल्ड) @ 2.5 ग्राम/लीटर",
+          "रोग फैलने पर हर 7 दिन छिड़काव"
+        ]
+      },
+      "prevention": {
+        "en": [
+          "Use disease-free seedlings",
+          "Avoid overhead irrigation",
+          "Maintain proper plant spacing for air circulation",
+          "Remove infected plant parts immediately"
+        ],
+        "hi": [
+          "रोगमुक्त पौध का प्रयोग करें",
+          "ऊपर से सिंचाई से बचें",
+          "हवा के आवागमन के लिए उचित दूरी रखें",
+          "संक्रमित भागों को तुरंत हटाएं"
+        ]
+      },
+      "favorable_conditions": "Cool wet weather (15-20°C), high humidity (>90%), frequent rain"
+    },
+    {
+      "id": "potato_early_blight",
+      "name_en": "Early Blight",
+      "name_hi": "अगेती झुलसा रोग",
+      "scientific_name": "Alternaria solani",
+      "crop": "Potato/Tomato",
+      "severity": "moderate",
+      "spread_rate": "moderate",
+      "economic_impact": "20-40% yield loss",
+      "symptoms": {
+        "en": [
+          "Concentric ring pattern lesions (target board appearance)",
+          "Lesions start on lower older leaves",
+          "Yellow halo around lesions",
+          "Premature defoliation"
+        ],
+        "hi": [
+          "संकेंद्रित वलय वाले धब्बे (निशाना जैसे)",
+          "पुरानी नीचली पत्तियों से शुरू",
+          "धब्बों के चारों ओर पीला घेरा",
+          "पत्तियों का समय से पहले गिरना"
+        ]
+      },
+      "treatment": {
+        "en": [
+          "Apply Mancozeb 75% WP @ 2.5g/L",
+          "Spray Chlorothalonil 75% WP @ 2g/L",
+          "Use Azoxystrobin 23% SC @ 1ml/L"
+        ],
+        "hi": [
+          "मैंकोज़ेब 75% WP @ 2.5 ग्राम/लीटर",
+          "क्लोरोथालोनिल 75% WP @ 2 ग्राम/लीटर छिड़काव",
+          "एज़ोक्सीस्ट्रोबिन 23% SC @ 1 मिली/लीटर"
+        ]
+      },
+      "prevention": {
+        "en": [
+          "Use certified disease-free seed tubers",
+          "Practice 2-3 year crop rotation",
+          "Remove crop debris after harvest",
+          "Balanced fertilization (avoid excess N)"
+        ],
+        "hi": [
+          "प्रमाणित रोगमुक्त बीज कंद प्रयोग करें",
+          "2-3 वर्ष का फसल चक्र अपनाएं",
+          "कटाई के बाद फसल अवशेष हटाएं",
+          "संतुलित उर्वरक (अधिक N से बचें)"
+        ]
+      },
+      "favorable_conditions": "Warm weather (24-29°C), alternating wet-dry conditions"
+    }
+  ],
+
+  "pest_database": [
+    {
+      "id": "aphid",
+      "name_en": "Aphid",
+      "name_hi": "चेपा/माहू",
+      "crops_affected": ["wheat", "mustard", "vegetables", "cotton"],
+      "identification": {
+        "en": "Small soft-bodied insects (1-3mm), green/black/yellow, found in colonies under leaves",
+        "hi": "छोटे मुलायम कीट (1-3मिमी), हरे/काले/पीले, पत्तियों के नीचे झुंड में"
+      },
+      "damage": {
+        "en": "Suck plant sap, cause leaf curling, transmit viruses, secrete honeydew",
+        "hi": "पौधे का रस चूसते हैं, पत्तियां मुड़ जाती हैं, वायरस फैलाते हैं"
+      },
+      "chemical_control": [
+        "Imidacloprid 17.8 SL @ 0.5ml/L",
+        "Thiamethoxam 25% WG @ 0.3g/L",
+        "Dimethoate 30% EC @ 1.5ml/L"
+      ],
+      "organic_control": [
+        "Neem oil 5ml/L + soap solution",
+        "Yellow sticky traps",
+        "Tobacco decoction spray",
+        "Release ladybird beetles"
+      ]
+    },
+    {
+      "id": "whitefly",
+      "name_en": "Whitefly",
+      "name_hi": "सफेद मक्खी",
+      "crops_affected": ["cotton", "tomato", "brinjal", "okra", "chilli"],
+      "identification": {
+        "en": "Tiny white moth-like insects (1-2mm), found on leaf undersides, fly when disturbed",
+        "hi": "छोटे सफेद पतंगे जैसे कीट (1-2मिमी), पत्तियों के नीचे, छूने पर उड़ते हैं"
+      },
+      "damage": {
+        "en": "Suck sap, cause leaf yellowing, transmit viruses (TYLCV, CLCuV), sooty mold",
+        "hi": "रस चूसते हैं, पत्तियां पीली, वायरस फैलाते हैं, काली फफूंद"
+      },
+      "chemical_control": [
+        "Diafenthiuron 50% WP @ 1g/L",
+        "Spiromesifen 22.9% SC @ 0.5ml/L",
+        "Pyriproxyfen 10% EC @ 1ml/L",
+        "Flonicamid 50% WG @ 0.3g/L"
+      ],
+      "organic_control": [
+        "Yellow sticky traps (20/acre)",
+        "Neem oil 5ml/L weekly spray",
+        "Border crop of maize/jowar",
+        "Release Chrysoperla (green lacewing)"
+      ]
+    },
+    {
+      "id": "stem_borer",
+      "name_en": "Stem Borer",
+      "name_hi": "तना छेदक",
+      "crops_affected": ["rice", "maize", "sugarcane"],
+      "identification": {
+        "en": "Caterpillar bores into stem, adult moth is straw-colored",
+        "hi": "सुंडी तने में छेद करती है, वयस्क पतंगा भूसे के रंग का"
+      },
+      "damage": {
+        "en": "Dead heart in vegetative stage, white head in reproductive stage",
+        "hi": "कल्ले निकलते समय मृत गाभ, बाली निकलने पर सफेद बाली"
+      },
+      "chemical_control": [
+        "Cartap hydrochloride 4G @ 20kg/ha",
+        "Fipronil 0.3G @ 20kg/ha",
+        "Chlorantraniliprole 0.4G @ 10kg/ha"
+      ],
+      "organic_control": [
+        "Trichogramma card release (50,000 eggs/ha)",
+        "Light traps for adult moths",
+        "Remove dead hearts and egg masses",
+        "Avoid late planting"
+      ]
+    }
+  ],
+
+  "fungicide_database": [
+    {
+      "name": "Mancozeb",
+      "trade_names": ["Dithane M-45", "Indofil M-45"],
+      "type": "Contact fungicide",
+      "dose": "2-2.5g/L water",
+      "target_diseases": ["Late blight", "Early blight", "Brown spot", "Leaf blight"],
+      "precautions": "Don't mix with alkaline pesticides"
+    },
+    {
+      "name": "Carbendazim",
+      "trade_names": ["Bavistin", "Derosal"],
+      "type": "Systemic fungicide",
+      "dose": "1g/L water",
+      "target_diseases": ["Rice blast", "Sheath blight", "Powdery mildew"],
+      "precautions": "Rotate with other fungicides to avoid resistance"
+    },
+    {
+      "name": "Propiconazole",
+      "trade_names": ["Tilt", "Bumper"],
+      "type": "Systemic fungicide (Triazole)",
+      "dose": "1ml/L water",
+      "target_diseases": ["Rust", "Leaf blight", "Powdery mildew"],
+      "precautions": "Best applied at early disease stage"
+    },
+    {
+      "name": "Tricyclazole",
+      "trade_names": ["Beam", "Baan"],
+      "type": "Systemic fungicide",
+      "dose": "0.6g/L water",
+      "target_diseases": ["Rice blast (specific)"],
+      "precautions": "Specific for blast, not broad spectrum"
+    },
+    {
+      "name": "Metalaxyl + Mancozeb",
+      "trade_names": ["Ridomil Gold"],
+      "type": "Systemic + Contact combination",
+      "dose": "2.5g/L water",
+      "target_diseases": ["Late blight", "Downy mildew"],
+      "precautions": "Effective against Phytophthora, Pythium"
+    }
+  ],
+
+  "insecticide_database": [
+    {
+      "name": "Imidacloprid",
+      "trade_names": ["Confidor", "Admire", "Tatamida"],
+      "type": "Systemic neonicotinoid",
+      "dose": "0.3-0.5ml/L water",
+      "target_pests": ["Aphids", "Whitefly", "Jassids", "Thrips"],
+      "precautions": "Harmful to bees, don't spray during flowering"
+    },
+    {
+      "name": "Thiamethoxam",
+      "trade_names": ["Actara", "Cruiser"],
+      "type": "Systemic neonicotinoid",
+      "dose": "0.3g/L water",
+      "target_pests": ["Aphids", "Whitefly", "Jassids"],
+      "precautions": "Systemic action, effective 14-21 days"
+    },
+    {
+      "name": "Chlorantraniliprole",
+      "trade_names": ["Coragen", "Ferterra"],
+      "type": "Anthranilic diamide",
+      "dose": "0.3ml/L water",
+      "target_pests": ["Stem borer", "Bollworm", "Fruit borer"],
+      "precautions": "Safe for beneficial insects"
+    },
+    {
+      "name": "Fipronil",
+      "trade_names": ["Regent", "Ascend"],
+      "type": "Phenylpyrazole",
+      "dose": "1.5-2ml/L water",
+      "target_pests": ["Stem borer", "Brown planthopper", "Termites"],
+      "precautions": "Highly toxic to aquatic organisms"
+    }
+  ]
+}
