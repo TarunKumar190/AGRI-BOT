@@ -220,66 +220,85 @@ const ChatInterface = ({
       const data = await response.json();
       
       if (data.ok && data.success) {
-        // Close modal and show result in chat
+        // Close modal
+        const crop = selectedForecastCrop;
+        const state = selectedForecastState;
+        const days = forecastDays;
         closePriceForecast();
         
-        // Create user message
-        const userMsg = {
-          id: Date.now(),
-          role: 'user',
-          content: language === 'hi' 
-            ? `📈 ${selectedForecastCrop} का ${forecastDays} दिन का भाव पूर्वानुमान (${selectedForecastState})`
-            : `📈 ${selectedForecastCrop} ${forecastDays}-day price forecast (${selectedForecastState})`,
-          timestamp: new Date().toISOString()
-        };
-        
-        // Format bot response
-        let botContent = language === 'hi'
+        // Format the forecast message
+        let forecastContent = language === 'hi'
           ? `📈 **${data.crop} का भाव पूर्वानुमान (${data.state})**\n\n`
           : `📈 **${data.crop} Price Forecast (${data.state})**\n\n`;
         
-        botContent += language === 'hi'
+        forecastContent += language === 'hi'
           ? `🔮 **${data.days} दिन का पूर्वानुमान:**\n`
           : `🔮 **${data.days}-Day Forecast:**\n`;
         
-        botContent += language === 'hi'
+        forecastContent += language === 'hi'
           ? `• शुरुआती भाव: ₹${data.start_price?.toFixed(2)}/क्विंटल\n`
           : `• Start Price: ₹${data.start_price?.toFixed(2)}/quintal\n`;
         
-        botContent += language === 'hi'
+        forecastContent += language === 'hi'
           ? `• अंतिम भाव: ₹${data.end_price?.toFixed(2)}/क्विंटल\n`
           : `• End Price: ₹${data.end_price?.toFixed(2)}/quintal\n`;
         
-        botContent += language === 'hi'
+        forecastContent += language === 'hi'
           ? `• बदलाव: ${data.trend_emoji} ${data.percent_change?.toFixed(2)}%\n`
           : `• Change: ${data.trend_emoji} ${data.percent_change?.toFixed(2)}%\n`;
         
-        botContent += language === 'hi'
+        forecastContent += language === 'hi'
           ? `• रुझान: ${data.trend_emoji} ${data.trend}\n\n`
           : `• Trend: ${data.trend_emoji} ${data.trend}\n\n`;
         
         if (data.daily_forecast && data.daily_forecast.length > 0) {
-          botContent += language === 'hi' ? `📅 **दैनिक भाव:**\n` : `📅 **Daily Prices:**\n`;
+          forecastContent += language === 'hi' ? `📅 **दैनिक भाव:**\n` : `📅 **Daily Prices:**\n`;
           data.daily_forecast.slice(0, 7).forEach(day => {
             const date = new Date(day.date).toLocaleDateString(language === 'hi' ? 'hi-IN' : 'en-IN', { day: 'numeric', month: 'short' });
-            botContent += `• ${date}: ₹${day.price?.toFixed(2)}\n`;
+            forecastContent += `• ${date}: ₹${day.price?.toFixed(2)}\n`;
           });
         }
         
-        botContent += language === 'hi'
+        forecastContent += language === 'hi'
           ? `\n💡 **सुझाव:** ${data.percent_change > 0 ? 'भाव बढ़ने की संभावना है, थोड़ा इंतजार करें।' : 'भाव गिर सकते हैं, जल्दी बेचना बेहतर हो सकता है।'}`
           : `\n💡 **Tip:** ${data.percent_change > 0 ? 'Prices may rise, consider waiting.' : 'Prices may fall, consider selling soon.'}`;
+        
+        // Create messages
+        const userMsg = {
+          id: Date.now(),
+          role: 'user',
+          content: language === 'hi' 
+            ? `📈 ${crop} का ${days} दिन का भाव पूर्वानुमान (${state})`
+            : `📈 ${crop} ${days}-day price forecast (${state})`,
+          timestamp: new Date().toISOString()
+        };
         
         const botMsg = {
           id: Date.now() + 1,
           role: 'assistant',
-          content: botContent,
+          content: forecastContent,
           timestamp: new Date().toISOString()
         };
         
-        // Add both messages to chat
-        const newMessages = [...messages, userMsg, botMsg];
-        onUpdateConversation(conversation.id, newMessages);
+        // Handle case when no conversation exists
+        if (!conversation?.id) {
+          // Create new conversation with these messages
+          onNewChat();
+          // Wait a bit for new chat to be created, then update
+          setTimeout(() => {
+            // The conversation should exist now after onNewChat
+            // Use a workaround - send the bot message content as a pending query
+            // Actually, let's just show it differently - store messages for when conversation is ready
+          }, 100);
+          // For now, just show an alert or store for later
+          // Actually, let's create the chat manually with messages
+          const newConvId = `conv_${Date.now()}`;
+          onUpdateConversation(newConvId, [userMsg, botMsg], crop + ' Price Forecast');
+        } else {
+          // Add both messages to existing chat
+          const newMessages = [...messages, userMsg, botMsg];
+          onUpdateConversation(conversation.id, newMessages);
+        }
         
       } else {
         setForecastResult({ error: data.error || 'Failed to get forecast' });
