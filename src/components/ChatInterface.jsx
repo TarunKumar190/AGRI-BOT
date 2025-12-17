@@ -117,7 +117,19 @@ const ChatInterface = ({
   const [pendingImageFile, setPendingImageFile] = useState(null);
   const [selectedCropForAnalysis, setSelectedCropForAnalysis] = useState('');
   const [diseaseApiStatus, setDiseaseApiStatus] = useState('unknown'); // 'unknown', 'warming', 'ready', 'slow'
+  const [isDraggingModal, setIsDraggingModal] = useState(false);
+  const [isDraggingChat, setIsDraggingChat] = useState(false);
+  // Price Forecast Modal State
+  const [showPriceForecast, setShowPriceForecast] = useState(false);
+  const [forecastCrops, setForecastCrops] = useState(['Potato', 'Onion', 'Wheat', 'Tomato', 'Rice']);
+  const [forecastStates, setForecastStates] = useState([]);
+  const [selectedForecastCrop, setSelectedForecastCrop] = useState('');
+  const [selectedForecastState, setSelectedForecastState] = useState('');
+  const [forecastResult, setForecastResult] = useState(null);
+  const [forecastLoading, setForecastLoading] = useState(false);
+  const [forecastDays, setForecastDays] = useState(7);
   const messagesEndRef = useRef(null);
+  const chatAreaRef = useRef(null);
   const inputRef = useRef(null);
   const fileInputRef = useRef(null);
   const recognitionRef = useRef(null);
@@ -157,6 +169,77 @@ const ChatInterface = ({
     
     return () => clearInterval(statusInterval);
   }, []);
+
+  // Fetch crops for price forecast when modal opens
+  useEffect(() => {
+    if (showPriceForecast) {
+      fetchForecastCrops();
+    }
+  }, [showPriceForecast]);
+
+  // Fetch states when crop is selected
+  useEffect(() => {
+    if (selectedForecastCrop) {
+      fetchForecastStates(selectedForecastCrop);
+    }
+  }, [selectedForecastCrop]);
+
+  const fetchForecastCrops = async () => {
+    try {
+      const response = await fetch(`${API_BASE}/v1/price-forecast/crops`);
+      const data = await response.json();
+      if (data.ok && data.crops) {
+        setForecastCrops(data.crops);
+      }
+    } catch (error) {
+      console.error('Error fetching forecast crops:', error);
+    }
+  };
+
+  const fetchForecastStates = async (crop) => {
+    try {
+      const response = await fetch(`${API_BASE}/v1/price-forecast/states?crop=${encodeURIComponent(crop)}`);
+      const data = await response.json();
+      if (data.ok && data.states) {
+        setForecastStates(data.states);
+      }
+    } catch (error) {
+      console.error('Error fetching forecast states:', error);
+    }
+  };
+
+  const getPriceForecast = async () => {
+    if (!selectedForecastCrop || !selectedForecastState) return;
+    
+    setForecastLoading(true);
+    setForecastResult(null);
+    
+    try {
+      const response = await fetch(
+        `${API_BASE}/v1/price-forecast/forecast?crop=${encodeURIComponent(selectedForecastCrop)}&state=${encodeURIComponent(selectedForecastState)}&days=${forecastDays}`
+      );
+      const data = await response.json();
+      
+      if (data.ok && data.success) {
+        setForecastResult(data);
+      } else {
+        setForecastResult({ error: data.error || 'Failed to get forecast' });
+      }
+    } catch (error) {
+      console.error('Error getting price forecast:', error);
+      setForecastResult({ error: 'Network error. Please try again.' });
+    } finally {
+      setForecastLoading(false);
+    }
+  };
+
+  const closePriceForecast = () => {
+    setShowPriceForecast(false);
+    setSelectedForecastCrop('');
+    setSelectedForecastState('');
+    setForecastResult(null);
+    setForecastStates([]);
+  };
 
   // Supported crops for disease detection - organized by category
   const SUPPORTED_CROPS = {
@@ -1061,6 +1144,41 @@ const ChatInterface = ({
     }
   }, [pendingMessage, conversation]);
 
+  // Handle drag & drop on chat area
+  const handleChatDragEnter = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingChat(true);
+  };
+
+  const handleChatDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // Only set false if leaving the chat area entirely
+    if (!chatAreaRef.current?.contains(e.relatedTarget)) {
+      setIsDraggingChat(false);
+    }
+  };
+
+  const handleChatDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleChatDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingChat(false);
+    
+    const files = e.dataTransfer.files;
+    if (files && files.length > 0 && files[0].type.startsWith('image/')) {
+      const file = files[0];
+      // Store the file and show crop selector for disease detection
+      setPendingImageFile(file);
+      setShowCropSelector(true);
+    }
+  };
+
   // Step 1: User selects image -> Show crop selector
   const handleImageUpload = async (e) => {
     const file = e.target.files?.[0];
@@ -1289,7 +1407,25 @@ const ChatInterface = ({
   };
 
   return (
-    <main className={`chat-interface ${sidebarOpen ? '' : 'full-width'}`}>
+    <main 
+      ref={chatAreaRef}
+      className={`chat-interface ${sidebarOpen ? '' : 'full-width'} ${isDraggingChat ? 'dragging-active' : ''}`}
+      onDragEnter={handleChatDragEnter}
+      onDragLeave={handleChatDragLeave}
+      onDragOver={handleChatDragOver}
+      onDrop={handleChatDrop}
+    >
+      {/* Drop Overlay */}
+      {isDraggingChat && (
+        <div className="chat-drop-overlay">
+          <div className="drop-content">
+            <div className="drop-icon-large">🔬</div>
+            <h3>{language === 'hi' ? 'फोटो छोड़ें' : 'Drop Photo'}</h3>
+            <p>{language === 'hi' ? 'फसल रोग पहचान के लिए' : 'for Disease Detection'}</p>
+          </div>
+        </div>
+      )}
+
       {/* Crop Selector Modal */}
       {showCropSelector && (
         <div className="location-picker-overlay" onClick={cancelCropSelection}>
@@ -1357,6 +1493,138 @@ const ChatInterface = ({
             </div>
             <button className="cancel-btn" onClick={cancelCropSelection}>
               {language === 'hi' ? '❌ रद्द करें' : '❌ Cancel'}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Price Forecast Modal */}
+      {showPriceForecast && (
+        <div className="modal-overlay" onClick={closePriceForecast}>
+          <div className="price-forecast-modal" onClick={e => e.stopPropagation()}>
+            <h3>📈 {language === 'hi' ? 'मंडी भाव पूर्वानुमान' : 'Mandi Price Forecast'}</h3>
+            <p className="forecast-subtitle">
+              {language === 'hi' ? 'AI द्वारा भविष्य के भाव की भविष्यवाणी' : 'AI-powered future price prediction'}
+            </p>
+            
+            <div className="forecast-form">
+              {/* Crop Selection */}
+              <div className="forecast-field">
+                <label>{language === 'hi' ? '🌾 फसल चुनें' : '🌾 Select Crop'}</label>
+                <select 
+                  value={selectedForecastCrop} 
+                  onChange={(e) => {
+                    setSelectedForecastCrop(e.target.value);
+                    setSelectedForecastState('');
+                    setForecastResult(null);
+                  }}
+                >
+                  <option value="">{language === 'hi' ? '-- फसल चुनें --' : '-- Select Crop --'}</option>
+                  {forecastCrops.map(crop => (
+                    <option key={crop} value={crop}>{crop}</option>
+                  ))}
+                </select>
+              </div>
+              
+              {/* State Selection */}
+              <div className="forecast-field">
+                <label>{language === 'hi' ? '📍 राज्य चुनें' : '📍 Select State'}</label>
+                <select 
+                  value={selectedForecastState} 
+                  onChange={(e) => {
+                    setSelectedForecastState(e.target.value);
+                    setForecastResult(null);
+                  }}
+                  disabled={!selectedForecastCrop || forecastStates.length === 0}
+                >
+                  <option value="">{language === 'hi' ? '-- राज्य चुनें --' : '-- Select State --'}</option>
+                  {forecastStates.map(state => (
+                    <option key={state} value={state}>{state}</option>
+                  ))}
+                </select>
+              </div>
+              
+              {/* Days Selection */}
+              <div className="forecast-field">
+                <label>{language === 'hi' ? '📅 दिन' : '📅 Days'}</label>
+                <select value={forecastDays} onChange={(e) => setForecastDays(Number(e.target.value))}>
+                  <option value={7}>7 {language === 'hi' ? 'दिन' : 'days'}</option>
+                  <option value={14}>14 {language === 'hi' ? 'दिन' : 'days'}</option>
+                  <option value={30}>30 {language === 'hi' ? 'दिन' : 'days'}</option>
+                </select>
+              </div>
+              
+              {/* Get Forecast Button */}
+              <button 
+                className="forecast-btn"
+                onClick={getPriceForecast}
+                disabled={!selectedForecastCrop || !selectedForecastState || forecastLoading}
+              >
+                {forecastLoading ? (
+                  <>{language === 'hi' ? '⏳ लोड हो रहा है...' : '⏳ Loading...'}</>
+                ) : (
+                  <>{language === 'hi' ? '🔮 पूर्वानुमान देखें' : '🔮 Get Forecast'}</>
+                )}
+              </button>
+            </div>
+            
+            {/* Forecast Results */}
+            {forecastResult && !forecastResult.error && (
+              <div className="forecast-result">
+                <div className="forecast-header">
+                  <span className="forecast-crop">{forecastResult.crop}</span>
+                  <span className="forecast-state">📍 {forecastResult.state}</span>
+                </div>
+                
+                <div className="forecast-summary">
+                  <div className="forecast-stat">
+                    <span className="stat-label">{language === 'hi' ? 'शुरुआती भाव' : 'Start Price'}</span>
+                    <span className="stat-value">₹{forecastResult.start_price?.toFixed(2)}</span>
+                  </div>
+                  <div className="forecast-stat">
+                    <span className="stat-label">{language === 'hi' ? 'अंतिम भाव' : 'End Price'}</span>
+                    <span className="stat-value">₹{forecastResult.end_price?.toFixed(2)}</span>
+                  </div>
+                  <div className="forecast-stat trend">
+                    <span className="stat-label">{language === 'hi' ? 'बदलाव' : 'Change'}</span>
+                    <span className={`stat-value ${forecastResult.percent_change >= 0 ? 'up' : 'down'}`}>
+                      {forecastResult.trend_emoji} {forecastResult.percent_change?.toFixed(2)}%
+                    </span>
+                  </div>
+                </div>
+                
+                <div className="forecast-trend-badge">
+                  <span>{forecastResult.trend_emoji} {forecastResult.trend}</span>
+                </div>
+                
+                {/* Daily Forecast List */}
+                {forecastResult.daily_forecast && (
+                  <div className="daily-forecast">
+                    <h4>{language === 'hi' ? 'दैनिक पूर्वानुमान' : 'Daily Forecast'}</h4>
+                    <div className="forecast-list">
+                      {forecastResult.daily_forecast.slice(0, 7).map((day, idx) => (
+                        <div key={idx} className="forecast-day">
+                          <span className="day-date">{new Date(day.date).toLocaleDateString(language === 'hi' ? 'hi-IN' : 'en-IN', { weekday: 'short', day: 'numeric', month: 'short' })}</span>
+                          <span className="day-price">₹{day.price?.toFixed(2)}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
+                <p className="forecast-unit">{forecastResult.unit}</p>
+              </div>
+            )}
+            
+            {/* Error State */}
+            {forecastResult?.error && (
+              <div className="forecast-error">
+                <span>❌ {forecastResult.error}</span>
+              </div>
+            )}
+            
+            <button className="close-modal" onClick={closePriceForecast}>
+              {language === 'hi' ? 'बंद करें' : 'Close'}
             </button>
           </div>
         </div>
@@ -1495,6 +1763,10 @@ const ChatInterface = ({
                 <span className="cap-icon">💰</span>
                 <span>{language === 'hi' ? 'मंडी भाव' : 'Market Prices'}</span>
               </button>
+              <button className="capability price-forecast-btn" onClick={() => setShowPriceForecast(true)}>
+                <span className="cap-icon">📈</span>
+                <span>{language === 'hi' ? 'भाव पूर्वानुमान' : 'Price Forecast'}</span>
+              </button>
               <button className="capability" onClick={() => sendMessage(language === 'hi' ? 'किसानों के लिए सरकारी योजनाएं' : 'Government schemes for farmers')}>
                 <span className="cap-icon">📋</span>
                 <span>{language === 'hi' ? 'सरकारी योजनाएं' : 'Govt Schemes'}</span>
@@ -1631,6 +1903,44 @@ const ChatInterface = ({
             <h3>{language === 'hi' ? '🔬 फसल रोग पहचान' : '🔬 Crop Disease Detection'}</h3>
             <p>{language === 'hi' ? 'अपनी फसल की फोटो अपलोड करें' : 'Upload a photo of your crop'}</p>
             
+            {/* Drag & Drop Zone */}
+            <div 
+              className={`modal-dropzone ${isDraggingModal ? 'dragging' : ''}`}
+              onDragEnter={(e) => { e.preventDefault(); e.stopPropagation(); setIsDraggingModal(true); }}
+              onDragLeave={(e) => { e.preventDefault(); e.stopPropagation(); if (!e.currentTarget.contains(e.relatedTarget)) setIsDraggingModal(false); }}
+              onDragOver={(e) => { e.preventDefault(); e.stopPropagation(); }}
+              onDrop={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setIsDraggingModal(false);
+                const files = e.dataTransfer.files;
+                if (files && files.length > 0 && files[0].type.startsWith('image/')) {
+                  // Create a synthetic event to reuse handleImageUpload
+                  const syntheticEvent = { target: { files: [files[0]] } };
+                  handleImageUpload(syntheticEvent);
+                }
+              }}
+              onClick={() => fileInputRef.current?.click()}
+            >
+              {isDraggingModal ? (
+                <>
+                  <div className="drop-icon">📥</div>
+                  <span>{language === 'hi' ? 'छवि यहाँ छोड़ें' : 'Drop image here'}</span>
+                </>
+              ) : (
+                <>
+                  <div className="dropzone-icon">
+                    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="6" y="10" width="36" height="28" rx="3" strokeDasharray="4 2"/>
+                      <path d="M24 18v12M18 24h12" strokeLinecap="round"/>
+                    </svg>
+                  </div>
+                  <span>{language === 'hi' ? 'फोटो खींचें और छोड़ें' : 'Drag & drop photo here'}</span>
+                  <span className="dropzone-hint">{language === 'hi' ? 'या नीचे क्लिक करें' : 'or click below'}</span>
+                </>
+              )}
+            </div>
+
             <div className="upload-options">
               <button onClick={() => fileInputRef.current?.click()}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

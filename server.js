@@ -1083,6 +1083,114 @@ async function start() {
     }
   });
 
+  // ============ PRICE PREDICTION API (ML Model on Render) ============
+  const PRICE_FORECAST_API = 'https://agri-price-forecast.onrender.com';
+
+  // Keep price forecast API warm
+  let priceForecastApiStatus = 'cold';
+  async function keepPriceForecastApiWarm() {
+    try {
+      const response = await fetch(`${PRICE_FORECAST_API}/api`, { timeout: 30000 });
+      if (response.ok) {
+        priceForecastApiStatus = 'ready';
+        console.log('[Price Forecast API] ✅ Server is warm');
+      }
+    } catch (error) {
+      priceForecastApiStatus = 'cold';
+      console.log('[Price Forecast API] ❄️ Server cold:', error.message);
+    }
+  }
+  // Warm up every 5 minutes
+  setInterval(keepPriceForecastApiWarm, 5 * 60 * 1000);
+  keepPriceForecastApiWarm(); // Initial warmup
+
+  // Get available crops for price prediction
+  app.get('/v1/price-forecast/crops', async (req, res) => {
+    try {
+      const response = await fetch(`${PRICE_FORECAST_API}/api/crops`);
+      const data = await response.json();
+      res.json({ ok: true, ...data });
+    } catch (error) {
+      console.error('[Price Forecast] Crops error:', error);
+      res.json({ 
+        ok: true, 
+        crops: ['Potato', 'Onion', 'Wheat', 'Tomato', 'Rice'] 
+      });
+    }
+  });
+
+  // Get available states for a crop
+  app.get('/v1/price-forecast/states', async (req, res) => {
+    try {
+      const { crop } = req.query;
+      const url = crop 
+        ? `${PRICE_FORECAST_API}/api/states?crop=${encodeURIComponent(crop)}`
+        : `${PRICE_FORECAST_API}/api/states`;
+      const response = await fetch(url);
+      const data = await response.json();
+      res.json({ ok: true, ...data });
+    } catch (error) {
+      console.error('[Price Forecast] States error:', error);
+      res.json({ 
+        ok: true, 
+        states: ['Punjab', 'Haryana', 'Uttar Pradesh', 'Maharashtra', 'West Bengal'] 
+      });
+    }
+  });
+
+  // Predict next day price
+  app.get('/v1/price-forecast/predict', async (req, res) => {
+    try {
+      const { crop, state } = req.query;
+      if (!crop || !state) {
+        return res.status(400).json({ ok: false, error: 'crop and state are required' });
+      }
+      
+      const url = `${PRICE_FORECAST_API}/api/predict?crop=${encodeURIComponent(crop)}&state=${encodeURIComponent(state)}`;
+      console.log(`[Price Forecast] Predicting: ${crop} in ${state}`);
+      
+      const response = await fetch(url, { timeout: 60000 });
+      const data = await response.json();
+      
+      res.json({ ok: true, ...data });
+    } catch (error) {
+      console.error('[Price Forecast] Predict error:', error);
+      res.status(500).json({ ok: false, error: 'Price prediction failed' });
+    }
+  });
+
+  // Forecast multiple days
+  app.get('/v1/price-forecast/forecast', async (req, res) => {
+    try {
+      const { crop, state, days = 7 } = req.query;
+      if (!crop || !state) {
+        return res.status(400).json({ ok: false, error: 'crop and state are required' });
+      }
+      
+      const url = `${PRICE_FORECAST_API}/api/forecast?crop=${encodeURIComponent(crop)}&state=${encodeURIComponent(state)}&days=${days}`;
+      console.log(`[Price Forecast] Forecasting ${days} days: ${crop} in ${state}`);
+      
+      const response = await fetch(url, { timeout: 60000 });
+      const data = await response.json();
+      
+      res.json({ ok: true, ...data });
+    } catch (error) {
+      console.error('[Price Forecast] Forecast error:', error);
+      res.status(500).json({ ok: false, error: 'Price forecast failed' });
+    }
+  });
+
+  // Price forecast API status
+  app.get('/v1/price-forecast/status', (req, res) => {
+    res.json({
+      ok: true,
+      status: priceForecastApiStatus,
+      message: priceForecastApiStatus === 'ready' 
+        ? 'Price prediction model is ready' 
+        : 'Model is warming up, may take 30-60 seconds'
+    });
+  });
+
   // Manual refresh endpoint for schemes
   app.post('/v1/refresh-schemes', requireAuth, async (req, res) => {
     try {

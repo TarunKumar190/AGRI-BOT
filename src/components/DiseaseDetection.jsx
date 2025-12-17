@@ -145,8 +145,10 @@ const DiseaseDetection = () => {
   const [result, setResult] = useState(null);
   const [selectedCrop, setSelectedCrop] = useState('rice');
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
+  const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef(null);
   const cameraInputRef = useRef(null);
+  const dropZoneRef = useRef(null);
 
   // Monitor online status
   React.useEffect(() => {
@@ -163,9 +165,54 @@ const DiseaseDetection = () => {
   const handleImageSelect = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setSelectedImage(file);
-      setPreviewUrl(URL.createObjectURL(file));
-      setResult(null);
+      processFile(file);
+    }
+  };
+
+  const processFile = (file) => {
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      alert(language === 'hi' ? 'कृपया केवल छवि फ़ाइलें अपलोड करें' : 'Please upload image files only');
+      return;
+    }
+    // Validate file size (10MB max)
+    if (file.size > 10 * 1024 * 1024) {
+      alert(language === 'hi' ? 'फ़ाइल का आकार 10MB से कम होना चाहिए' : 'File size must be less than 10MB');
+      return;
+    }
+    setSelectedImage(file);
+    setPreviewUrl(URL.createObjectURL(file));
+    setResult(null);
+  };
+
+  // Drag and Drop handlers
+  const handleDragEnter = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // Only set dragging to false if leaving the dropzone entirely
+    if (e.currentTarget.contains(e.relatedTarget)) return;
+    setIsDragging(false);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+
+    const files = e.dataTransfer.files;
+    if (files && files.length > 0) {
+      processFile(files[0]);
     }
   };
 
@@ -262,10 +309,33 @@ const DiseaseDetection = () => {
             </div>
           </div>
 
-          <div className="upload-box">
-            <div className="upload-icon">📷</div>
-            <p>{language === 'hi' ? 'प्रभावित पौधे की स्पष्ट फोटो अपलोड करें' : 'Upload a clear photo of the affected plant part'}</p>
-            <p className="upload-hint">{language === 'hi' ? 'समर्थित: JPG, PNG (अधिकतम 10MB)' : 'Supported: JPG, PNG (max 10MB)'}</p>
+          <div 
+            ref={dropZoneRef}
+            className={`upload-box ${isDragging ? 'dragging' : ''}`}
+            onDragEnter={handleDragEnter}
+            onDragLeave={handleDragLeave}
+            onDragOver={handleDragOver}
+            onDrop={handleDrop}
+            onClick={(e) => {
+              // Only trigger file input if clicking on the box itself, not buttons
+              if (e.target === e.currentTarget || e.target.closest('.drop-overlay')) {
+                fileInputRef.current?.click();
+              }
+            }}
+          >
+            {isDragging ? (
+              <div className="drop-overlay">
+                <div className="drop-icon">📥</div>
+                <p>{language === 'hi' ? 'छवि यहाँ छोड़ें' : 'Drop image here'}</p>
+              </div>
+            ) : (
+              <>
+                <div className="upload-icon">📷</div>
+                <p>{language === 'hi' ? 'प्रभावित पौधे की स्पष्ट फोटो अपलोड करें' : 'Upload a clear photo of the affected plant part'}</p>
+                <p className="drag-hint">{language === 'hi' ? '🖱️ खींचें और छोड़ें या नीचे बटन पर क्लिक करें' : '🖱️ Drag & drop or click buttons below'}</p>
+                <p className="upload-hint">{language === 'hi' ? 'समर्थित: JPG, PNG (अधिकतम 10MB)' : 'Supported: JPG, PNG (max 10MB)'}</p>
+              </>
+            )}
             
             <div className="upload-buttons">
               <button 
