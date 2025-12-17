@@ -2,6 +2,7 @@
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { LanguageProvider } from './context/LanguageContext';
+import { AuthProvider } from './context/AuthContext';
 import './styles/global.css';
 
 // Register service worker for offline support
@@ -15,8 +16,10 @@ if ('serviceWorker' in navigator) {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <LanguageProvider>
-      <App />
-    </LanguageProvider>
+    <AuthProvider>
+      <LanguageProvider>
+        <App />
+      </LanguageProvider>
+    </AuthProvider>
   </React.StrictMode>
 );

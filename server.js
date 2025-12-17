@@ -19,15 +19,20 @@ import {
   MSP_RATES 
 } from './real-data-scraper.js';
 import { startScraperScheduler } from './auto-scraper.js';
+import { getAIResponse, getAIServiceStatus } from './services/aiModelService.js';
 
 dotenv.config();
 
 // External Disease Detection API (ML Model hosted on Render)
 const DISEASE_API_URL = 'https://plant-disease-api-yt7l.onrender.com';
 
-// ============ GROK AI INTEGRATION (Temporary - Replace with custom model later) ============
-// Set USE_GROK_AI=true in .env to enable Grok for agricultural queries
-// When your custom model is ready, set USE_GROK_AI=false and implement your model endpoint
+// ============ AI MODEL CHAINING ============
+// Configure in .env:
+// - USE_GROK_AI=true/false
+// - GROK_API_KEY=your_grok_api_key  
+// - CUSTOM_MODEL_URL=your_custom_model_endpoint
+// - CUSTOM_MODEL_API_KEY=your_custom_model_api_key (optional)
+// - AI_CHAIN_STRATEGY=GROK_FIRST|CUSTOM_FIRST|PARALLEL|REFINE|ROUTE
 const USE_GROK_AI = process.env.USE_GROK_AI === 'true';
 const GROK_API_KEY = process.env.GROK_API_KEY || '';
 const GROK_API_URL = 'https://api.x.ai/v1/chat/completions';
@@ -254,6 +259,16 @@ async function start() {
   app.get('/v1/schemes/:id', async (req, res) => {
     const s = await Scheme.findById(req.params.id).lean();
     res.json(s || null);
+  });
+
+  // AI Service Status Endpoint
+  app.get('/v1/ai/status', (req, res) => {
+    const status = getAIServiceStatus();
+    res.json({
+      ok: true,
+      ...status,
+      timestamp: new Date().toISOString()
+    });
   });
 
   // public approved updates
@@ -759,22 +774,23 @@ async function start() {
         });
       }
 
-      // Default response if nothing found - Use Grok AI if enabled
+      // Default response if nothing found - Use AI Model Chaining Service
       if (!response) {
-        if (USE_GROK_AI && GROK_API_KEY) {
-          console.log('[CHATBOT] No local match found, forwarding to Grok AI...');
-          try {
-            const grokResponse = await callGrokAI(query, language, userState);
-            if (grokResponse) {
-              response = grokResponse;
-              console.log('[CHATBOT] ✅ Grok AI response received');
-            }
-          } catch (grokError) {
-            console.error('[CHATBOT] Grok AI error:', grokError.message);
+        console.log('[CHATBOT] No local match found, forwarding to AI Model Chain...');
+        try {
+          // Get conversation history from request if available
+          const conversationHistory = req.body.conversationHistory || [];
+          
+          const aiResult = await getAIResponse(query, language, userState, conversationHistory);
+          if (aiResult.ok && aiResult.response) {
+            response = aiResult.response;
+            console.log(`[CHATBOT] ✅ AI response received from: ${aiResult.model}`);
           }
+        } catch (aiError) {
+          console.error('[CHATBOT] AI Chain error:', aiError.message);
         }
         
-        // Fallback if Grok also fails or is disabled
+        // Fallback if AI also fails
         if (!response) {
           response = language === 'hi' 
             ? 'मुझे इस विषय पर विशिष्ट जानकारी नहीं मिली। कृपया अपना प्रश्न और विस्तार से पूछें या फसल का नाम बताएं।\n\nआप पूछ सकते हैं:\n• फसल रोग और उपचार\n• खाद और सिंचाई\n• सरकारी योजनाएं\n• मंडी भाव'
@@ -782,7 +798,9 @@ async function start() {
         }
       }
 
-      res.json({ ok: true, response, schemes, updates, aiPowered: USE_GROK_AI && GROK_API_KEY ? true : false });
+      // Get AI service status
+      const aiStatus = getAIServiceStatus();
+      res.json({ ok: true, response, schemes, updates, aiPowered: aiStatus.grokEnabled || aiStatus.customModelEnabled, aiModel: aiStatus.chainStrategy });
     } catch (e) {
       console.error('chatbot POST error', e);
       res.status(500).json({ error: 'internal', response: 'Sorry, something went wrong. Please try again.' });

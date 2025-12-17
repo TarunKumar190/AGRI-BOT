@@ -11,25 +11,34 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const parser = new Parser({
-  timeout: 10000,
+  timeout: 15000,
   headers: {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AgriBot-Scraper/1.0'
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'Accept': 'application/rss+xml, application/xml, text/xml, */*',
+    'Accept-Language': 'en-US,en;q=0.9,hi;q=0.8'
   }
 });
 
 // RSS Feed Sources for Government Schemes
+// Using multiple sources for better coverage
 const RSS_SOURCES = [
   {
-    name: 'PIB Agriculture',
-    url: 'https://pib.gov.in/RssMain.aspx?ModId=3&Lang=1&Regid=3',
+    name: 'India Agriculture News',
+    url: 'https://news.google.com/rss/search?q=indian+agriculture+farmer+scheme+government&hl=en-IN&gl=IN&ceid=IN:en',
     category: 'news',
     ministry: 'Agriculture'
   },
   {
-    name: 'PIB Rural Development',
-    url: 'https://pib.gov.in/RssMain.aspx?ModId=3&Lang=1&Regid=3',
+    name: 'PM-KISAN Updates',
+    url: 'https://news.google.com/rss/search?q=PM-KISAN+farmer+scheme&hl=en-IN&gl=IN&ceid=IN:en',
+    category: 'scheme',
+    ministry: 'Agriculture'
+  },
+  {
+    name: 'Farmer Scheme Hindi News',
+    url: 'https://news.google.com/rss/search?q=%E0%A4%95%E0%A4%BF%E0%A4%B8%E0%A4%BE%E0%A4%A8+%E0%A4%AF%E0%A5%8B%E0%A4%9C%E0%A4%A8%E0%A4%BE+%E0%A4%B8%E0%A4%B0%E0%A4%95%E0%A4%BE%E0%A4%B0%E0%A5%80&hl=hi&gl=IN&ceid=IN:hi',
     category: 'news',
-    ministry: 'Rural Development'
+    ministry: 'Agriculture'
   }
 ];
 

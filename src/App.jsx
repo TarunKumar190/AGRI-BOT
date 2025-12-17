@@ -1,9 +1,12 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { useLanguage } from './context/LanguageContext';
+import { useAuth } from './context/AuthContext';
 import ChatInterface from './components/ChatInterface';
 import ChatSidebar from './components/ChatSidebar';
 import Onboarding from './components/Onboarding';
 import SplashScreen from './components/SplashScreen';
+import Login from './components/Login';
+import Signup from './components/Signup';
 import './styles/chat-app.css';
 
 // Global TTS stop function - can be called from anywhere
@@ -66,40 +69,84 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [conversations, setConversations] = useState([]);
   const [activeConversation, setActiveConversation] = useState(null);
+  const [authView, setAuthView] = useState('login'); // 'login' or 'signup'
+  const [pendingMessage, setPendingMessage] = useState(null);
+  
+  // Auth context
+  const { user, isGuest, loading: authLoading, logout } = useAuth();
   
   // Safe access to language context
   const languageContext = useLanguage();
   const language = languageContext?.language || 'en';
 
+  // Helper function to get user-specific storage key
+  const getUserStorageKey = (key) => {
+    if (user?.id) {
+      return `krishimitra_${user.id}_${key}`;
+    }
+    return `krishimitra_guest_${key}`;
+  };
+
+  // Load user-specific data when user changes
   useEffect(() => {
-    const profile = localStorage.getItem('krishimitra_profile');
-    const hasOnboarded = localStorage.getItem('krishimitra_onboarded');
-    const savedConversations = localStorage.getItem('krishimitra_conversations');
+    if (authLoading) return;
+    
+    // If not authenticated, just stop loading
+    if (!user && !isGuest) {
+      setIsLoading(false);
+      return;
+    }
+    
+    // Load user-specific data
+    const profileKey = getUserStorageKey('profile');
+    const onboardedKey = getUserStorageKey('onboarded');
+    const conversationsKey = getUserStorageKey('conversations');
+    
+    const profile = localStorage.getItem(profileKey);
+    const hasOnboarded = localStorage.getItem(onboardedKey);
+    const savedConversations = localStorage.getItem(conversationsKey);
     
     setTimeout(() => {
       setIsLoading(false);
+      
       if (!hasOnboarded) {
         setShowOnboarding(true);
       } else {
-        if (profile) setUserProfile(JSON.parse(profile));
+        if (profile) {
+          setUserProfile(JSON.parse(profile));
+        }
         if (savedConversations) {
           const convs = JSON.parse(savedConversations);
           setConversations(convs);
+          // Set active conversation to the most recent one
+          if (convs.length > 0 && !activeConversation) {
+            setActiveConversation(convs[0].id);
+          }
         }
       }
-    }, 1800);
-  }, []);
+    }, 1500);
+  }, [user, isGuest, authLoading]);
+
+  // Save conversations to user-specific storage
+  const saveConversations = (convs) => {
+    const conversationsKey = getUserStorageKey('conversations');
+    localStorage.setItem(conversationsKey, JSON.stringify(convs));
+  };
 
   const handleOnboardingComplete = (profile) => {
-    localStorage.setItem('krishimitra_onboarded', 'true');
-    localStorage.setItem('krishimitra_profile', JSON.stringify(profile));
+    const profileKey = getUserStorageKey('profile');
+    const onboardedKey = getUserStorageKey('onboarded');
+    
+    localStorage.setItem(onboardedKey, 'true');
+    localStorage.setItem(profileKey, JSON.stringify(profile));
     setUserProfile(profile);
     setShowOnboarding(false);
     handleNewChat();
   };
 
   const handleSkipOnboarding = () => {
-    localStorage.setItem('krishimitra_onboarded', 'true');
+    const onboardedKey = getUserStorageKey('onboarded');
+    localStorage.setItem(onboardedKey, 'true');
     setShowOnboarding(false);
     handleNewChat();
   };
@@ -112,20 +159,19 @@ function App() {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     };
-    setConversations(prev => [newConv, ...prev]);
+    const updatedConvs = [newConv, ...conversations];
+    setConversations(updatedConvs);
     setActiveConversation(newConv.id);
-    saveConversations([newConv, ...conversations]);
+    saveConversations(updatedConvs);
   };
 
   const handleSelectConversation = (convId) => {
-    // Cancel any ongoing speech when switching conversations
     window.stopAllTTS();
     setActiveConversation(convId);
     if (window.innerWidth < 768) setSidebarOpen(false);
   };
 
   const handleDeleteConversation = (convId) => {
-    // Cancel any ongoing speech when deleting a conversation
     window.stopAllTTS();
     const updated = conversations.filter(c => c.id !== convId);
     setConversations(updated);
@@ -143,24 +189,14 @@ function App() {
     saveConversations(updated);
   };
 
-  const saveConversations = (convs) => {
-    localStorage.setItem('krishimitra_conversations', JSON.stringify(convs));
-  };
-
   const getCurrentConversation = () => conversations.find(c => c.id === activeConversation);
 
-  // State to hold pending quick action message
-  const [pendingMessage, setPendingMessage] = useState(null);
-
   const handleQuickAction = (actionId, command) => {
-    // Use existing conversation if available
     if (activeConversation && conversations.find(c => c.id === activeConversation)) {
-      // Just send the command to existing conversation
       setPendingMessage({ actionId, command });
       return;
     }
     
-    // Create new conversation for quick action
     const actionTitles = {
       disease: language === 'hi' ? 'रोग पहचान' : 'Disease Detection',
       weather: language === 'hi' ? 'मौसम जानकारी' : 'Weather Info',
@@ -181,15 +217,54 @@ function App() {
     setPendingMessage({ actionId, command });
   };
 
-  // Clear pending message after it's processed
   const clearPendingMessage = () => setPendingMessage(null);
 
-  if (isLoading) return <SplashScreen />;
+  // Handle logout - clear user-specific data from state but keep in localStorage
+  const handleLogout = () => {
+    window.stopAllTTS();
+    logout();
+    setUserProfile(null);
+    setConversations([]);
+    setActiveConversation(null);
+    setShowOnboarding(false);
+    setPendingMessage(null);
+  };
 
+  // Handle auth success
+  const handleAuthSuccess = () => {
+    // Data will be loaded by the useEffect when user changes
+    setIsLoading(true);
+  };
+
+  // Show splash screen while loading
+  if (isLoading || authLoading) {
+    return <SplashScreen />;
+  }
+
+  // Show auth screens if not logged in
+  if (!user && !isGuest) {
+    if (authView === 'signup') {
+      return (
+        <Signup 
+          onSwitchToLogin={() => setAuthView('login')} 
+          onSuccess={handleAuthSuccess}
+        />
+      );
+    }
+    return (
+      <Login 
+        onSwitchToSignup={() => setAuthView('signup')} 
+        onSuccess={handleAuthSuccess}
+      />
+    );
+  }
+
+  // Show onboarding for new users
   if (showOnboarding) {
     return <Onboarding onComplete={handleOnboardingComplete} onSkip={handleSkipOnboarding} />;
   }
 
+  // Main app
   return (
     <div className="chat-app">
       <ChatSidebar 
@@ -202,6 +277,9 @@ function App() {
         onDeleteConversation={handleDeleteConversation}
         onQuickAction={handleQuickAction}
         userProfile={userProfile}
+        user={user}
+        isGuest={isGuest}
+        onLogout={handleLogout}
       />
       <ChatInterface 
         conversation={getCurrentConversation()}
