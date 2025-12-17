@@ -212,7 +212,6 @@ const ChatInterface = ({
     if (!selectedForecastCrop || !selectedForecastState) return;
     
     setForecastLoading(true);
-    setForecastResult(null);
     
     try {
       const response = await fetch(
@@ -221,7 +220,67 @@ const ChatInterface = ({
       const data = await response.json();
       
       if (data.ok && data.success) {
-        setForecastResult(data);
+        // Close modal and show result in chat
+        closePriceForecast();
+        
+        // Create user message
+        const userMsg = {
+          id: Date.now(),
+          role: 'user',
+          content: language === 'hi' 
+            ? `📈 ${selectedForecastCrop} का ${forecastDays} दिन का भाव पूर्वानुमान (${selectedForecastState})`
+            : `📈 ${selectedForecastCrop} ${forecastDays}-day price forecast (${selectedForecastState})`,
+          timestamp: new Date().toISOString()
+        };
+        
+        // Format bot response
+        let botContent = language === 'hi'
+          ? `📈 **${data.crop} का भाव पूर्वानुमान (${data.state})**\n\n`
+          : `📈 **${data.crop} Price Forecast (${data.state})**\n\n`;
+        
+        botContent += language === 'hi'
+          ? `🔮 **${data.days} दिन का पूर्वानुमान:**\n`
+          : `🔮 **${data.days}-Day Forecast:**\n`;
+        
+        botContent += language === 'hi'
+          ? `• शुरुआती भाव: ₹${data.start_price?.toFixed(2)}/क्विंटल\n`
+          : `• Start Price: ₹${data.start_price?.toFixed(2)}/quintal\n`;
+        
+        botContent += language === 'hi'
+          ? `• अंतिम भाव: ₹${data.end_price?.toFixed(2)}/क्विंटल\n`
+          : `• End Price: ₹${data.end_price?.toFixed(2)}/quintal\n`;
+        
+        botContent += language === 'hi'
+          ? `• बदलाव: ${data.trend_emoji} ${data.percent_change?.toFixed(2)}%\n`
+          : `• Change: ${data.trend_emoji} ${data.percent_change?.toFixed(2)}%\n`;
+        
+        botContent += language === 'hi'
+          ? `• रुझान: ${data.trend_emoji} ${data.trend}\n\n`
+          : `• Trend: ${data.trend_emoji} ${data.trend}\n\n`;
+        
+        if (data.daily_forecast && data.daily_forecast.length > 0) {
+          botContent += language === 'hi' ? `📅 **दैनिक भाव:**\n` : `📅 **Daily Prices:**\n`;
+          data.daily_forecast.slice(0, 7).forEach(day => {
+            const date = new Date(day.date).toLocaleDateString(language === 'hi' ? 'hi-IN' : 'en-IN', { day: 'numeric', month: 'short' });
+            botContent += `• ${date}: ₹${day.price?.toFixed(2)}\n`;
+          });
+        }
+        
+        botContent += language === 'hi'
+          ? `\n💡 **सुझाव:** ${data.percent_change > 0 ? 'भाव बढ़ने की संभावना है, थोड़ा इंतजार करें।' : 'भाव गिर सकते हैं, जल्दी बेचना बेहतर हो सकता है।'}`
+          : `\n💡 **Tip:** ${data.percent_change > 0 ? 'Prices may rise, consider waiting.' : 'Prices may fall, consider selling soon.'}`;
+        
+        const botMsg = {
+          id: Date.now() + 1,
+          role: 'assistant',
+          content: botContent,
+          timestamp: new Date().toISOString()
+        };
+        
+        // Add both messages to chat
+        const newMessages = [...messages, userMsg, botMsg];
+        onUpdateConversation(conversation.id, newMessages);
+        
       } else {
         setForecastResult({ error: data.error || 'Failed to get forecast' });
       }
@@ -1498,7 +1557,7 @@ const ChatInterface = ({
         </div>
       )}
 
-      {/* Price Forecast Modal */}
+      {/* Price Forecast Modal - Selection Only, Results in Chat */}
       {showPriceForecast && (
         <div className="modal-overlay" onClick={closePriceForecast}>
           <div className="price-forecast-modal" onClick={e => e.stopPropagation()}>
@@ -1567,54 +1626,6 @@ const ChatInterface = ({
                 )}
               </button>
             </div>
-            
-            {/* Forecast Results */}
-            {forecastResult && !forecastResult.error && (
-              <div className="forecast-result">
-                <div className="forecast-header">
-                  <span className="forecast-crop">{forecastResult.crop}</span>
-                  <span className="forecast-state">📍 {forecastResult.state}</span>
-                </div>
-                
-                <div className="forecast-summary">
-                  <div className="forecast-stat">
-                    <span className="stat-label">{language === 'hi' ? 'शुरुआती भाव' : 'Start Price'}</span>
-                    <span className="stat-value">₹{forecastResult.start_price?.toFixed(2)}</span>
-                  </div>
-                  <div className="forecast-stat">
-                    <span className="stat-label">{language === 'hi' ? 'अंतिम भाव' : 'End Price'}</span>
-                    <span className="stat-value">₹{forecastResult.end_price?.toFixed(2)}</span>
-                  </div>
-                  <div className="forecast-stat trend">
-                    <span className="stat-label">{language === 'hi' ? 'बदलाव' : 'Change'}</span>
-                    <span className={`stat-value ${forecastResult.percent_change >= 0 ? 'up' : 'down'}`}>
-                      {forecastResult.trend_emoji} {forecastResult.percent_change?.toFixed(2)}%
-                    </span>
-                  </div>
-                </div>
-                
-                <div className="forecast-trend-badge">
-                  <span>{forecastResult.trend_emoji} {forecastResult.trend}</span>
-                </div>
-                
-                {/* Daily Forecast List */}
-                {forecastResult.daily_forecast && (
-                  <div className="daily-forecast">
-                    <h4>{language === 'hi' ? 'दैनिक पूर्वानुमान' : 'Daily Forecast'}</h4>
-                    <div className="forecast-list">
-                      {forecastResult.daily_forecast.slice(0, 7).map((day, idx) => (
-                        <div key={idx} className="forecast-day">
-                          <span className="day-date">{new Date(day.date).toLocaleDateString(language === 'hi' ? 'hi-IN' : 'en-IN', { weekday: 'short', day: 'numeric', month: 'short' })}</span>
-                          <span className="day-price">₹{day.price?.toFixed(2)}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                
-                <p className="forecast-unit">{forecastResult.unit}</p>
-              </div>
-            )}
             
             {/* Error State */}
             {forecastResult?.error && (
@@ -1763,7 +1774,7 @@ const ChatInterface = ({
                 <span className="cap-icon">💰</span>
                 <span>{language === 'hi' ? 'मंडी भाव' : 'Market Prices'}</span>
               </button>
-              <button className="capability price-forecast-btn" onClick={() => sendMessage(language === 'hi' ? 'भाव पूर्वानुमान बताएं' : 'Show price forecast')}>
+              <button className="capability price-forecast-btn" onClick={() => setShowPriceForecast(true)}>
                 <span className="cap-icon">📈</span>
                 <span>{language === 'hi' ? 'भाव पूर्वानुमान' : 'Price Forecast'}</span>
               </button>
