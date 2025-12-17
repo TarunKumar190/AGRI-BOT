@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import useLocation from '../hooks/useLocation';
 import './ChatInterface.css';
+import ChatSidebar from './ChatSidebar';
 
 const API_BASE = 'http://localhost:4000';
 // Disease detection - Using server-side proxy (server keeps API warm)
@@ -317,6 +318,22 @@ const ChatInterface = ({
     setSelectedForecastState('');
     setForecastResult(null);
     setForecastStates([]);
+  };
+
+  // Open Price Forecast - create new chat if none exists
+  const openPriceForecast = () => {
+    if (!conversation) {
+      onNewChat();
+    }
+    setShowPriceForecast(true);
+  };
+
+  // Open Disease Detection - create new chat if none exists
+  const openDiseaseDetection = () => {
+    if (!conversation) {
+      onNewChat();
+    }
+    setShowImageUpload(true);
   };
 
   // Supported crops for disease detection - organized by category
@@ -1222,6 +1239,20 @@ const ChatInterface = ({
     }
   }, [pendingMessage, conversation]);
 
+  // Handle quick actions from sidebar (disease, prices, forecast, schemes)
+  const handleQuickAction = (id, command) => {
+    if (id === 'disease') {
+      if (!conversation) onNewChat();
+      setShowImageUpload(true);
+    } else if (id === 'prices') {
+      sendMessage(language === 'hi' ? 'मंडी भाव' : 'Market prices');
+    } else if (id === 'forecast') {
+      openPriceForecast();
+    } else if (id === 'schemes') {
+      sendMessage(language === 'hi' ? 'किसानों के लिए सरकारी योजनाएं' : 'Government schemes for farmers');
+    }
+  };
+
   // Handle drag & drop on chat area
   const handleChatDragEnter = (e) => {
     e.preventDefault();
@@ -1695,6 +1726,7 @@ const ChatInterface = ({
       {/* Location Picker Modal */}
       {showLocationPicker && (
         <div className="location-picker-overlay" onClick={() => setShowLocationPicker(false)}>
+
           <div className="location-picker-modal" onClick={e => e.stopPropagation()}>
             <h3>{language === 'hi' ? '📍 अपना राज्य चुनें' : '📍 Select Your State'}</h3>
             <p className="picker-subtitle">
@@ -1781,19 +1813,15 @@ const ChatInterface = ({
             </div>
 
             <div className="capabilities">
-              <button className="capability" onClick={() => setShowImageUpload(true)}>
+              <button className="capability" onClick={openDiseaseDetection}>
                 <span className="cap-icon">🔬</span>
                 <span>{language === 'hi' ? 'रोग पहचान' : 'Disease Detection'}</span>
-              </button>
-              <button className="capability" onClick={() => sendMessage(language === 'hi' ? 'आज का मौसम कैसा रहेगा?' : 'What will the weather be like today?')}>
-                <span className="cap-icon">🌤️</span>
-                <span>{language === 'hi' ? 'मौसम पूर्वानुमान' : 'Weather Forecast'}</span>
               </button>
               <button className="capability" onClick={() => sendMessage(language === 'hi' ? 'मंडी भाव' : 'Market prices')}>
                 <span className="cap-icon">💰</span>
                 <span>{language === 'hi' ? 'मंडी भाव' : 'Market Prices'}</span>
               </button>
-              <button className="capability price-forecast-btn" onClick={() => setShowPriceForecast(true)}>
+              <button className="capability price-forecast-btn" onClick={openPriceForecast}>
                 <span className="cap-icon">📈</span>
                 <span>{language === 'hi' ? 'भाव पूर्वानुमान' : 'Price Forecast'}</span>
               </button>
