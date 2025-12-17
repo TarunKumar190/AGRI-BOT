@@ -26,6 +26,9 @@ dotenv.config();
 // External Disease Detection API (ML Model hosted on Render)
 const DISEASE_API_URL = 'https://plant-disease-api-yt7l.onrender.com';
 
+// External Price Forecast API (ML Model hosted on Render)
+const PRICE_FORECAST_API = 'https://agri-price-forecast.onrender.com';
+
 // ============ AI MODEL CHAINING ============
 // Configure in .env:
 // - USE_GROK_AI=true/false
@@ -431,6 +434,94 @@ async function start() {
       console.log(`[CHATBOT] Query: "${query}" | State: ${userState} | Lat: ${lat} | Lng: ${lng}`);
 
       const queryLower = query.toLowerCase();
+      
+      // ============ PRICE FORECAST/PREDICTION DETECTION ============
+      const forecastKeywords = ['forecast', 'prediction', 'predict', 'पूर्वानुमान', 'भविष्य', 'अगले', 'कल का भाव', 'आने वाले', 'future price', 'tomorrow price', 'next week', 'अगले हफ्ते'];
+      const isForecastQuery = forecastKeywords.some(kw => queryLower.includes(kw)) && 
+                              (queryLower.includes('price') || queryLower.includes('भाव') || queryLower.includes('rate') || queryLower.includes('दाम'));
+      
+      if (isForecastQuery) {
+        console.log(`[CHATBOT] Detected PRICE FORECAST query`);
+        
+        // Extract crop from query
+        const cropMap = {
+          'potato': 'Potato', 'आलू': 'Potato', 'aloo': 'Potato',
+          'onion': 'Onion', 'प्याज': 'Onion', 'pyaj': 'Onion',
+          'tomato': 'Tomato', 'टमाटर': 'Tomato', 'tamatar': 'Tomato',
+          'wheat': 'Wheat', 'गेहूं': 'Wheat', 'gehun': 'Wheat',
+          'rice': 'Rice', 'चावल': 'Rice', 'धान': 'Rice', 'chawal': 'Rice'
+        };
+        
+        let detectedCrop = null;
+        for (const [key, value] of Object.entries(cropMap)) {
+          if (queryLower.includes(key)) {
+            detectedCrop = value;
+            break;
+          }
+        }
+        
+        // Get state
+        let state = userState || 'Punjab';
+        
+        if (detectedCrop) {
+          try {
+            const forecastUrl = `${PRICE_FORECAST_API}/api/forecast?crop=${encodeURIComponent(detectedCrop)}&state=${encodeURIComponent(state)}&days=7`;
+            console.log(`[CHATBOT] Fetching forecast: ${forecastUrl}`);
+            
+            const forecastResponse = await fetch(forecastUrl, { timeout: 60000 });
+            const forecastData = await forecastResponse.json();
+            
+            if (forecastData.success) {
+              let response = language === 'hi'
+                ? `📈 **${detectedCrop} का भाव पूर्वानुमान (${state})**\n\n`
+                : `📈 **${detectedCrop} Price Forecast (${state})**\n\n`;
+              
+              response += language === 'hi'
+                ? `🔮 **7 दिन का पूर्वानुमान:**\n`
+                : `🔮 **7-Day Forecast:**\n`;
+              
+              response += language === 'hi'
+                ? `• शुरुआती भाव: ₹${forecastData.start_price?.toFixed(2)}/क्विंटल\n`
+                : `• Start Price: ₹${forecastData.start_price?.toFixed(2)}/quintal\n`;
+              
+              response += language === 'hi'
+                ? `• अंतिम भाव: ₹${forecastData.end_price?.toFixed(2)}/क्विंटल\n`
+                : `• End Price: ₹${forecastData.end_price?.toFixed(2)}/quintal\n`;
+              
+              response += language === 'hi'
+                ? `• बदलाव: ${forecastData.trend_emoji} ${forecastData.percent_change?.toFixed(2)}%\n`
+                : `• Change: ${forecastData.trend_emoji} ${forecastData.percent_change?.toFixed(2)}%\n`;
+              
+              response += language === 'hi'
+                ? `• रुझान: ${forecastData.trend_emoji} ${forecastData.trend}\n\n`
+                : `• Trend: ${forecastData.trend_emoji} ${forecastData.trend}\n\n`;
+              
+              if (forecastData.daily_forecast && forecastData.daily_forecast.length > 0) {
+                response += language === 'hi' ? `📅 **दैनिक भाव:**\n` : `📅 **Daily Prices:**\n`;
+                forecastData.daily_forecast.slice(0, 5).forEach(day => {
+                  const date = new Date(day.date).toLocaleDateString(language === 'hi' ? 'hi-IN' : 'en-IN', { day: 'numeric', month: 'short' });
+                  response += `• ${date}: ₹${day.price?.toFixed(2)}\n`;
+                });
+              }
+              
+              response += language === 'hi'
+                ? `\n💡 **सुझाव:** ${forecastData.percent_change > 0 ? 'भाव बढ़ने की संभावना है, थोड़ा इंतजार करें।' : 'भाव गिर सकते हैं, जल्दी बेचना बेहतर हो सकता है।'}`
+                : `\n💡 **Tip:** ${forecastData.percent_change > 0 ? 'Prices may rise, consider waiting.' : 'Prices may fall, consider selling soon.'}`;
+              
+              return res.json({ response });
+            }
+          } catch (err) {
+            console.error('[CHATBOT] Forecast API error:', err.message);
+          }
+        }
+        
+        // If no crop detected or API failed, suggest using the modal
+        const response = language === 'hi'
+          ? `📈 **भाव पूर्वानुमान के लिए:**\n\n"भाव पूर्वानुमान" बटन पर क्लिक करें और:\n1. फसल चुनें (आलू, प्याज, गेहूं, टमाटर, चावल)\n2. राज्य चुनें\n3. दिनों की संख्या चुनें\n\n🔮 AI आधारित पूर्वानुमान देखें!\n\nया टाइप करें: "आलू का भाव पूर्वानुमान" / "प्याज का भविष्य भाव"`
+          : `📈 **For Price Forecast:**\n\nClick the "Price Forecast" button and:\n1. Select crop (Potato, Onion, Wheat, Tomato, Rice)\n2. Select state\n3. Choose number of days\n\n🔮 Get AI-powered predictions!\n\nOr type: "potato price forecast" / "onion future price"`;
+        
+        return res.json({ response });
+      }
       
       // ============ MARKET PRICE DETECTION (CHECK FIRST!) ============
       // Check if user is asking about market prices/mandi rates FIRST before crop advisory
