@@ -1763,7 +1763,7 @@ const ChatInterface = ({
                 <span className="cap-icon">💰</span>
                 <span>{language === 'hi' ? 'मंडी भाव' : 'Market Prices'}</span>
               </button>
-              <button className="capability price-forecast-btn" onClick={() => setShowPriceForecast(true)}>
+              <button className="capability price-forecast-btn" onClick={() => sendMessage(language === 'hi' ? 'भाव पूर्वानुमान बताएं' : 'Show price forecast')}>
                 <span className="cap-icon">📈</span>
                 <span>{language === 'hi' ? 'भाव पूर्वानुमान' : 'Price Forecast'}</span>
               </button>
